@@ -1,37 +1,27 @@
 # Session Continuity & Handoff Log — NIE Idea Vault
 
 ## Session Information
-- **Date & Time**: 2026-11-22T21:55:00+05:30
+- **Date & Time**: 2026-11-22T22:10:00+05:30
 - **Active Branch**: `main`
 - **Primary Upstream Remote**: `https://github.com/Anushaoli19/Idea-Vault.git` (upstream)
 - **Origin Remote**: `https://github.com/Ramcharan77587/idea-vault.git` (origin)
-- **Current Phase**: Phase 6 — Stitch Screens Standalone Expansion & Central Directory
+- **Current Phase**: Phase 7 — Clean Full-Stack Integration & Residue Cleanup
 
 ## 1. Summary of Completed Work
-1. **Resolution of Screens 7 through 13**:
-   - Downloaded and archived the exact raw Google Stitch HTML for all 13 screens in `frontend/stitch/`.
-   - Generated 13 dedicated standalone files in `frontend/`:
-     - `screen_01_post_idea.html` (and alias `screen_1.html`)
-     - `screen_02_profile_settings.html` (and alias `screen_2.html`)
-     - `screen_03_notification_center.html` (and alias `screen_3.html`)
-     - `screen_04_teammates.html` (and alias `screen_4.html`)
-     - `screen_05_leaderboard.html` (and alias `screen_5.html`)
-     - `screen_06_duplicate_warning.html` (and alias `screen_6.html`)
-     - `screen_07_idea_detail.html` (and alias `screen_7.html`)
-     - `screen_08_submissions.html` (and alias `screen_8.html`)
-     - `screen_09_settings_security.html` (and alias `screen_9.html`)
-     - `screen_10_energy_grid.html` (and alias `screen_10.html`)
-     - `screen_11_profile_drawer.html` (and alias `screen_11.html`)
-     - `screen_12_home_idea_board.html` (and alias `screen_12.html`)
-     - `screen_13_loading_skeleton.html` (and alias `screen_13.html`)
-   - Built the master **Stitch Screen Directory** (`frontend/screens.html` / `/screens`) with card previews, search, category filters, and 1-click links to standalone screens, production app views, and raw Stitch designs.
-   - Added `Screens (13)` link into the main navigation header across all 9 primary application views.
-   - Updated Flask routing in `backend/app.py` to serve `/screens`, `/screen/<int:num>`, and all `screen_*.html` endpoints.
-2. **Comprehensive Verification**:
-   - Expanded automated test suite in `backend/test_e2e.py` verifying `/screens`, `/screen/<num>`, and all 13 screen routes return HTTP 200 OK.
-   - Ran full test suite: 25/25 tests passing in 0.929s with 0 errors.
-   - 24 automated unit and integration tests passing (`python -m unittest backend/test_backend.py backend/test_e2e.py`).
-   - Clean resource cleanup with zero warnings.
+1. **Clean Architecture & Residue Elimination**:
+   - Consolidated the 13 dedicated standalone screen files into `frontend/screens/` with relative intra-screen and app links.
+   - Preserved all 13 raw Stitch HTML files in `frontend/stitch/`.
+   - Removed all 26 loose screen files (`screen_1.html`..`screen_13.html` and `screen_01_*.html`..`screen_13_*.html`) from `frontend/` root, leaving only the 10 core views (`index.html`, `post.html`, `idea.html`, `submissions.html`, `leaderboard.html`, `teammates.html`, `notifications.html`, `profile.html`, `settings.html`, `screens.html`), `app.js`, and `styles.css`.
+   - Deleted stale leftover database `backend/idea_vault.db` (53 KB), keeping single source of truth at root `idea_vault.db`.
+   - Removed duplicate `backend/API_DOCUMENTATION.md` and `backend/requirements.txt`, consolidating full dependencies (`flask-cors>=4.0.0` included) into root `requirements.txt`.
+   - Updated root runner `app.py` and `README.md` for seamless single-command execution (`python app.py`).
+2. **Unified Cascading Static Router in `backend/app.py`**:
+   - Initialized `Flask(__name__, static_folder=None)` to prevent built-in Flask static router from short-circuiting subdirectory checks.
+   - Cascading fallback route serves `frontend/`, `frontend/screens/`, and `frontend/stitch/` in priority order.
+   - Handled `/screens`, `/screen/<int:num>`, `/screen_<int:num>.html`, and `/screens/<filename>` seamlessly.
+3. **Comprehensive Verification**:
+   - Ran automated test suite (`python -m unittest backend/test_backend.py backend/test_e2e.py`): 25/25 tests passing in 0.175s with zero failures.
+   - Verified that all core application views, API endpoints, duplicate detection, and all 13 screens resolve with HTTP 200 OK.
 
 ## 1. Summary of Completed Work
 1. **Frontend Implementation (All 13 Stitch Screens)**:

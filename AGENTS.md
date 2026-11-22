@@ -39,3 +39,5 @@ Welcome to NIE Idea Vault. This document defines operating rules, architectural 
 ## 5. Learned Rules (Promoted from LESSONS.md)
 - *Rule 1*: Upstream Google API/Stitch MCP requests on Windows Node environments may encounter IPv6 DNS connection timeouts; use Windows Schannel or forced IPv4 fallback.
 - *Rule 2*: Duplicate idea detection must evaluate both title and description similarity using TF-IDF + Cosine Similarity before insertion, returning detailed match information (similarity score, matching title, author) to trigger the interactive Duplicate Warning modal.
+- *Rule 3*: In Flask full-stack applications serving multiple frontend directories (e.g., core views in `frontend/`, standalone screens in `frontend/screens/`, and raw designs in `frontend/stitch/`), set `static_folder=None` on the Flask constructor to prevent Flask's built-in static router from short-circuiting custom cascading handlers.
+- *Rule 4*: Every database test must be idempotent; tests modifying student passwords, profiles, or votes must reset and clean up state in tearDownClass/setUpClass to avoid state pollution across runs.

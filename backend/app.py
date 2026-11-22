@@ -8,7 +8,7 @@ from duplicate_detection import detect_duplicate
 # Path configurations
 FRONTEND_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend")
 
-app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
+app = Flask(__name__, static_folder=None)
 CORS(app, origins="*")
 
 # Initialize database schema and initial seed data
@@ -17,23 +17,65 @@ seed_database_if_empty()
 
 
 # ============================================================================
-# Static Frontend Serving
+# Static Frontend & Screen Serving
 # ============================================================================
+SCREENS_DIR = os.path.join(FRONTEND_DIR, "screens")
+STITCH_DIR = os.path.join(FRONTEND_DIR, "stitch")
+
+SCREEN_FILES = {
+    1: "screen_01_post_idea.html",
+    2: "screen_02_profile_settings.html",
+    3: "screen_03_notification_center.html",
+    4: "screen_04_teammates.html",
+    5: "screen_05_leaderboard.html",
+    6: "screen_06_duplicate_warning.html",
+    7: "screen_07_idea_detail.html",
+    8: "screen_08_submissions.html",
+    9: "screen_09_settings_security.html",
+    10: "screen_10_energy_grid.html",
+    11: "screen_11_profile_drawer.html",
+    12: "screen_12_home_idea_board.html",
+    13: "screen_13_loading_skeleton.html",
+}
+
+
 @app.route("/")
 def serve_index():
     return send_from_directory(FRONTEND_DIR, "index.html")
 
 
 @app.route("/screens")
-def serve_screens():
+def serve_screens_page():
+    return send_from_directory(FRONTEND_DIR, "screens.html")
+
+
+@app.route("/screens/<path:filename>")
+def serve_screens_subfile(filename):
+    if os.path.exists(os.path.join(SCREENS_DIR, filename)):
+        return send_from_directory(SCREENS_DIR, filename)
+    return send_from_directory(FRONTEND_DIR, "screens.html")
+
+
+@app.route("/stitch/<path:filename>")
+def serve_stitch_subfile(filename):
+    if os.path.exists(os.path.join(STITCH_DIR, filename)):
+        return send_from_directory(STITCH_DIR, filename)
     return send_from_directory(FRONTEND_DIR, "screens.html")
 
 
 @app.route("/screen/<int:num>")
-def serve_screen_num(num):
-    alias = f"screen_{num}.html"
-    if os.path.exists(os.path.join(FRONTEND_DIR, alias)):
-        return send_from_directory(FRONTEND_DIR, alias)
+def serve_screen_by_number(num):
+    fname = SCREEN_FILES.get(num)
+    if fname and os.path.exists(os.path.join(SCREENS_DIR, fname)):
+        return send_from_directory(SCREENS_DIR, fname)
+    return send_from_directory(FRONTEND_DIR, "screens.html")
+
+
+@app.route("/screen_<int:num>.html")
+def serve_screen_alias_number(num):
+    fname = SCREEN_FILES.get(num)
+    if fname and os.path.exists(os.path.join(SCREENS_DIR, fname)):
+        return send_from_directory(SCREENS_DIR, fname)
     return send_from_directory(FRONTEND_DIR, "screens.html")
 
 
@@ -41,6 +83,10 @@ def serve_screen_num(num):
 def serve_static(path):
     if os.path.exists(os.path.join(FRONTEND_DIR, path)):
         return send_from_directory(FRONTEND_DIR, path)
+    if os.path.exists(os.path.join(SCREENS_DIR, path)):
+        return send_from_directory(SCREENS_DIR, path)
+    if os.path.exists(os.path.join(STITCH_DIR, path)):
+        return send_from_directory(STITCH_DIR, path)
     return send_from_directory(FRONTEND_DIR, "index.html")
 
 

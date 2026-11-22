@@ -186,6 +186,15 @@ class FullSystemE2ETestCase(unittest.TestCase):
             self.assertEqual(r.status_code, 200, f"Named screen {ns} failed with {r.status_code}")
             r.close()
 
+            # Also verify explicit /screens/ prefix and /stitch/ prefix
+            r_screens = self.client.get(f"/screens{ns}")
+            self.assertEqual(r_screens.status_code, 200, f"/screens{ns} failed with {r_screens.status_code}")
+            r_screens.close()
+
+            r_stitch = self.client.get(f"/stitch{ns}")
+            self.assertEqual(r_stitch.status_code, 200, f"/stitch{ns} failed with {r_stitch.status_code}")
+            r_stitch.close()
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -63,3 +63,10 @@ Legend:
 - [x] 6.4 Build master Stitch Screen Directory (`frontend/screens.html` / `/screens`) showcasing all 13 screens with search, category filtering, and direct links to standalone screens, live apps, and raw stitch files [Verified: 2026-11-22]
 - [x] 6.5 Add `Screens (13)` link to top navigation across all application views and verify Flask routing in `backend/app.py` [Verified: 2026-11-22]
 - [x] 6.6 Expand automated tests in `backend/test_e2e.py` verifying `/screens`, `/screen/<num>`, and all 13 screen routes return HTTP 200 OK (25/25 tests passing) [Verified: 2026-11-22]
+
+## Phase 7: Clean Full-Stack Integration & Residue Cleanup
+- [x] 7.1 Reorganize frontend architecture: consolidate dedicated screen files cleanly into `frontend/screens/` and raw files in `frontend/stitch/`, removing 26 loose/duplicate files from `frontend/` root [Verified: 2026-11-22]
+- [x] 7.2 Remove redundant file residues across repository: delete stale `backend/idea_vault.db`, consolidate `requirements.txt` into root with `flask-cors>=4.0.0`, and remove duplicate `backend/API_DOCUMENTATION.md` and `backend/requirements.txt` [Verified: 2026-11-22]
+- [x] 7.3 Implement unified cascading static router in `backend/app.py` with `static_folder=None` serving `frontend/`, `frontend/screens/`, and `frontend/stitch/` seamlessly [Verified: 2026-11-22]
+- [x] 7.4 Verify end-to-end integration: 25/25 automated unit and e2e integration tests passing cleanly [Verified: 2026-11-22]
+- [x] 7.5 Synchronize living documentation and commit clean state to both GitHub remotes [Verified: 2026-11-22]

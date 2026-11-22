@@ -26,15 +26,22 @@ NIE Idea Vault is an end-to-end campus innovation portal built for the National 
 .venv\Scripts\activate   # On Windows
 
 # Install dependencies
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 2. Run Application
 ```bash
-python backend/app.py
+# Run from repository root
+python app.py
 ```
 Backend API will be running on: `http://127.0.0.1:5000`  
-Frontend application accessible directly at: `http://127.0.0.1:5000` or open `frontend/index.html` in browser.
+Frontend application accessible directly at: `http://127.0.0.1:5000`  
+Stitch Screen Directory (All 13 screens): `http://127.0.0.1:5000/screens`
+
+### 3. Run Automated Tests
+```bash
+python -m unittest backend/test_backend.py backend/test_e2e.py
+```
 
 ## Documentation Index
 - [Product Requirements Document (PRD)](./docs/PRD.md)

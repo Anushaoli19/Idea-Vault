@@ -13,7 +13,7 @@
 ## 3. Local Environment & Ports
 - **Backend API**: `http://127.0.0.1:5000` (Flask Python REST API)
 - **Frontend App**: `http://127.0.0.1:5000` (Flask static serving or local browser preview `frontend/index.html`)
-- **Database**: SQLite3 (`backend/idea_vault.db`)
+- **Database**: SQLite3 (`idea_vault.db` in repository root)
 - **Python Environment**: `.venv` (Python 3.11+)
 
 ## 4. Design & UI System Standards

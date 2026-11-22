@@ -11,3 +11,9 @@
 - **Root Cause**: The password update endpoint alters database state directly without automatic rollback in the test fixture.
 - **Fix Applied**: Added explicit pre-test reset and post-test cleanup to restore the default student password (`NieMysuru@2025`) in `test_backend.py`.
 - **Rule Going Forward**: Every test modifying database state must ensure idempotent teardown or fixture resetting so test suites can be executed repeatedly without state pollution.
+
+## [2026-11-22] — Flask static_folder Interception of Cascading Static Routing
+- **Trigger / What Happened**: Serving standalone screen files located in subdirectories (`frontend/screens/`) returned HTTP 404 despite existing in `os.path.join(SCREENS_DIR, ...)`.
+- **Root Cause**: Flask's built-in static endpoint intercepts all matching root paths when `static_folder` and `static_url_path=""` are set on the `Flask` constructor, bypassing any custom `@app.route("/<path:path>")` fallback handlers.
+- **Fix Applied**: Initialized `Flask(__name__, static_folder=None)` and implemented a unified cascading route handler checking `frontend/`, `frontend/screens/`, and `frontend/stitch/` in priority order.
+- **Rule Going Forward**: In Flask single-service full-stack apps serving assets from multiple directory trees, disable Flask's default static folder (`static_folder=None`) to allow explicit cascading route resolution.
