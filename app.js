@@ -9,12 +9,39 @@
 const API_BASE = 'http://localhost:5000';
 const USE_MOCK = true;
 
-// LocalStorage Keys for Vote Tracking & Custom Submissions
+// LocalStorage Keys for State Management
 const STORAGE_KEYS = {
   UPVOTES: 'idea_vault_upvotes',
   INTERESTS: 'idea_vault_interests',
   BOOKMARKS: 'idea_vault_bookmarks',
-  CUSTOM_IDEAS: 'idea_vault_custom_ideas'
+  CUSTOM_IDEAS: 'idea_vault_custom_ideas',
+  USER_PROFILE: 'idea_vault_user_profile'
+};
+
+/**
+ * Default Student Profile
+ */
+const DEFAULT_PROFILE = {
+  name: "Rohan Sharma",
+  shortName: "Rohan S.",
+  usn: "4NI21CS089",
+  email: "rohan.s.cse21@nie.ac.in",
+  department: "Computer Science & Engineering (CSE)",
+  batch: "Class of 2025 (8th Semester - Capstone Final)",
+  batchShort: "CSE '25",
+  campus: "NIE South Campus (Manandavadi Road)",
+  cgpa: "8.92 / 10.0",
+  showCgpa: true,
+  avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
+  github: "rohansharma-nie",
+  website: "https://rohansharma.dev",
+  linkedin: "rohansharma-cse",
+  scholar: "scholar.google.com/citations?user=nie_cs",
+  openForCollab: true,
+  teamingObjective: "Actively looking for Hardware / ECE Co-Founders for Smart Grid Micro-Inverter project.",
+  skills: ["React.js", "Python 3.11", "FastAPI", "PyTorch", "ESP32 Firmware", "Docker", "PostgreSQL"],
+  desiredRoles: ["Backend / Cloud Architect", "ML Edge Engineer"],
+  authorizedLabs: ["C-Block IoT Research Cell", "Embedded Systems Lab 3"]
 };
 
 /**
@@ -65,19 +92,19 @@ const SAMPLE_IDEAS = [
     ],
     interestedStudents: [
       {
-        name: "Rohan Sharma",
+        name: "Soham",
         role: "Backend / Cloud",
         branch: "CSE, 3rd Year (B.Tech)",
         avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5eVXxn04nuxNzMUS5xny0NJ1rTCHHvCpWBREgSGGy1TPHUwyy8HUyNmToUkHvbRV9imb5iHrSKN3-VhqvzT-C5bUdvDtVq_--4scaCkYGKJFdRG9_rz7L6qHJ7Z9ZF-i9Z-QokEIq-zYAexynLAar_nH2X4-eLvNVsytHu26ymABB2ggX5AtjRmalNGSsVboCy5PSnO6U7BzTdykl-zSfr3wMNO1GPsi-AGzJKQFx"
       },
       {
-        name: "Kavya N. Rao",
+        name: "Anusha",
         role: "Embedded / Sensors",
-        branch: "ECE, 3rd Year (B.Tech)",
+        branch: "ECE, 2rd Year (B.Tech)",
         avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCcu7gqjJ-xSHPI5eY2O-PwJ7Aj6umw1pjTPjGTEENXxIcoggjWbssxLZF_BRS-QNJ6RH3mJyw0SKUdIXVriGH4kC-tmTErhwEX8B_0JkTEGAIOhAWrlMishNbv8gm8PC2VZP31yRWcdA-asoB-JOW_EVUDHv5wvf-pgbvJlqMEkFydPaM5xv2bh0BaFxYSQnGG3kLVdOHk8UANA8hAg8mMn0EVvb_N5obubKFOo549"
       },
       {
-        name: "Aditya Kulkarni",
+        name: "Ramcharan K A",
         role: "Model Opt.",
         branch: "AIML, 2nd Year (B.Tech)",
         avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7nipV0oZtPOK22a9hQBlMgZyz9LKoBhybrnRz-jWrJdMLkvMRYWDR6dnPxY4uY1x6hqnreF4YThoTaomcPrbBtCwgu7z4UMgyyqGMpvvxOXMbxdtpFReRuJ_DOuwYQUgzMI_sdsHH9v_c_0zlRGj_sQmdFQSdPVVBFdqt7oy2aFCbdAiNxLyKZEBa8xV-QuoTh3wqUWvDD9jPPb5m2Jms4LHH5-U-bH_kiD50Pvyg"
@@ -254,10 +281,10 @@ const SAMPLE_IDEAS = [
     categoriesBadge: "App • EdTech",
     department: "Computer Science & Engineering",
     departmentShort: "CSE Dept",
-    authorName: "Rohan Patil",
+    authorName: "Rohan Sharma",
     authorBatch: "CSE '25",
-    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5eVXxn04nuxNzMUS5xny0NJ1rTCHHvCpWBREgSGGy1TPHUwyy8HUyNmToUkHvbRV9imb5iHrSKN3-VhqvzT-C5bUdvDtVq_--4scaCkYGKJFdRG9_rz7L6qHJ7Z9ZF-i9Z-QokEIq-zYAexynLAar_nH2X4-eLvNVsytHu26ymABB2ggX5AtjRmalNGSsVboCy5PSnO6U7BzTdykl-zSfr3wMNO1GPsi-AGzJKQFx",
-    authorEmail: "rohan.22cs102@nie.ac.in",
+    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
+    authorEmail: "rohan.s.cse21@nie.ac.in",
     description: "Decentralized study exchange app for NIE students to find verified previous semester handwritten lab records and tutor sessions.",
     problemStatement: "Students scramble across informal WhatsApp groups for reliable previous years' lab manuals, assignment solutions, and peer tutoring before exams.",
     architecture: "Flutter cross-platform app backed by Firebase Cloud Firestore, featuring cryptographic student identity verification and peer rating.",
@@ -307,6 +334,30 @@ function saveStoredSet(key, set) {
   }
 }
 
+// Helper: Get user profile
+function getUserProfile() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.USER_PROFILE);
+    if (!raw) {
+      localStorage.setItem(STORAGE_KEYS.USER_PROFILE, JSON.stringify(DEFAULT_PROFILE));
+      return DEFAULT_PROFILE;
+    }
+    return JSON.parse(raw);
+  } catch (e) {
+    console.error("Error reading profile:", e);
+    return DEFAULT_PROFILE;
+  }
+}
+
+// Helper: Save user profile
+function saveUserProfile(profile) {
+  try {
+    localStorage.setItem(STORAGE_KEYS.USER_PROFILE, JSON.stringify(profile));
+  } catch (e) {
+    console.error("Error saving profile:", e);
+  }
+}
+
 // Helper: Get locally created custom ideas
 function getCustomIdeas() {
   try {
@@ -342,7 +393,7 @@ function showToast(message, type = 'info') {
 
   const toast = document.createElement('div');
   toast.className = `toast toast-${type}`;
-  
+
   let iconName = 'info';
   if (type === 'success') iconName = 'check_circle';
   if (type === 'error') iconName = 'error';
@@ -372,11 +423,9 @@ function showToast(message, type = 'info') {
  */
 async function fetchIdeas() {
   if (USE_MOCK) {
-    // Combine base samples with any newly created custom ideas
     const custom = getCustomIdeas();
     const all = [...custom, ...SAMPLE_IDEAS];
-    
-    // Apply localStorage vote increments
+
     const upvotedSet = getStoredSet(STORAGE_KEYS.UPVOTES);
     const interestedSet = getStoredSet(STORAGE_KEYS.INTERESTS);
 
@@ -440,11 +489,9 @@ async function fetchIdeaById(id) {
 
 /**
  * Duplicate Checker (POST /check-duplicate)
- * Computes token similarity between proposed idea and existing archive.
  */
 async function checkDuplicate(title, description, category) {
   if (USE_MOCK) {
-    // Artificial small delay to show similarity engine pulse
     await new Promise(r => setTimeout(r, 600));
 
     const all = [...getCustomIdeas(), ...SAMPLE_IDEAS];
@@ -458,7 +505,6 @@ async function checkDuplicate(title, description, category) {
       const existingText = `${existing.title} ${existing.description}`.toLowerCase();
       const existingTokens = new Set(existingText.split(/\W+/).filter(w => w.length > 3));
 
-      // Token intersection count
       let common = 0;
       incomingTokens.forEach(t => {
         if (existingTokens.has(t)) common++;
@@ -467,9 +513,8 @@ async function checkDuplicate(title, description, category) {
       const union = new Set([...incomingTokens, ...existingTokens]).size;
       const jaccard = union > 0 ? (common / union) : 0;
 
-      // Special rule: Food waste / mess auditor ideas trigger the 88% high match from Stitch
       const isMessFoodWaste = (incomingText.includes('mess') || incomingText.includes('food') || incomingText.includes('waste')) &&
-                             (existing.id === "1" || existing.id === "2");
+        (existing.id === "1" || existing.id === "2");
 
       let score = Math.round(jaccard * 100);
       if (isMessFoodWaste) {
@@ -511,6 +556,8 @@ async function checkDuplicate(title, description, category) {
  * Publish New Idea (POST /ideas)
  */
 async function createIdea(ideaPayload) {
+  const profile = getUserProfile();
+
   if (USE_MOCK) {
     const newId = `nie-${Date.now().toString().slice(-5)}`;
     const newIdea = {
@@ -519,12 +566,12 @@ async function createIdea(ideaPayload) {
       title: ideaPayload.title,
       category: ideaPayload.category || 'Other',
       categoriesBadge: `${ideaPayload.category} • Capstone`,
-      department: ideaPayload.department || 'Engineering',
-      departmentShort: ideaPayload.departmentShort || 'Eng Dept',
-      authorName: ideaPayload.authorName || 'Rohan S.',
-      authorBatch: ideaPayload.authorBatch || "CSE '25",
-      authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
-      authorEmail: "rohan.22cs102@nie.ac.in",
+      department: ideaPayload.department || 'Computer Science & Engineering',
+      departmentShort: ideaPayload.departmentShort || 'CSE Dept',
+      authorName: profile.name,
+      authorBatch: profile.batchShort,
+      authorAvatar: profile.avatar,
+      authorEmail: profile.email,
       description: ideaPayload.description,
       problemStatement: ideaPayload.problemStatement || ideaPayload.description,
       architecture: ideaPayload.architecture || "Modular microservices architecture with edge telemetry.",
@@ -554,7 +601,6 @@ async function createIdea(ideaPayload) {
     };
 
     saveCustomIdea(newIdea);
-    // Auto-upvote author's own idea
     const upvotes = getStoredSet(STORAGE_KEYS.UPVOTES);
     upvotes.add(newId);
     saveStoredSet(STORAGE_KEYS.UPVOTES, upvotes);
@@ -566,7 +612,11 @@ async function createIdea(ideaPayload) {
     const response = await fetch(`${API_BASE}/ideas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(ideaPayload)
+      body: JSON.stringify({
+        ...ideaPayload,
+        authorName: profile.name,
+        authorEmail: profile.email
+      })
     });
     if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
     return await response.json();
@@ -578,18 +628,15 @@ async function createIdea(ideaPayload) {
 
 /**
  * Upvote Idea (POST /ideas/:id/upvote)
- * Anti-Double Vote via localStorage
  */
 async function upvoteIdea(ideaId, buttonElement) {
   const upvotedSet = getStoredSet(STORAGE_KEYS.UPVOTES);
   const alreadyUpvoted = upvotedSet.has(ideaId);
 
-  // Optimistic UI updates
   const countSpan = buttonElement ? buttonElement.querySelector('.vote-count') : null;
   let currentCount = countSpan ? parseInt(countSpan.textContent, 10) : 0;
 
   if (alreadyUpvoted) {
-    // Unvote
     upvotedSet.delete(ideaId);
     saveStoredSet(STORAGE_KEYS.UPVOTES, upvotedSet);
     if (countSpan) countSpan.textContent = Math.max(0, currentCount - 1);
@@ -604,7 +651,6 @@ async function upvoteIdea(ideaId, buttonElement) {
     }
     showToast("Vote removed", "info");
   } else {
-    // Upvote
     upvotedSet.add(ideaId);
     saveStoredSet(STORAGE_KEYS.UPVOTES, upvotedSet);
     if (countSpan) countSpan.textContent = currentCount + 1;
@@ -620,7 +666,6 @@ async function upvoteIdea(ideaId, buttonElement) {
     showToast("Upvoted idea! Stored in your profile.", "success");
   }
 
-  // Network call
   if (!USE_MOCK) {
     try {
       await fetch(`${API_BASE}/ideas/${ideaId}/upvote`, { method: 'POST' });
@@ -632,7 +677,6 @@ async function upvoteIdea(ideaId, buttonElement) {
 
 /**
  * Express Collaboration Interest (POST /ideas/:id/interest)
- * Anti-Double Click via localStorage
  */
 async function interestIdea(ideaId, buttonElement) {
   const interestSet = getStoredSet(STORAGE_KEYS.INTERESTS);
@@ -690,7 +734,188 @@ function toggleBookmark(ideaId, buttonElement) {
   }
 }
 
-// Global Export for inline script tags
+/**
+ * Global Profile Drawer / Popover Management
+ * Replicates Stitch Screen: Account Menu & Profile Drawer
+ */
+function injectProfileDrawer() {
+  if (document.getElementById('profile-drawer')) return;
+
+  const profile = getUserProfile();
+
+  const drawerContainer = document.createElement('div');
+  drawerContainer.id = 'global-profile-drawer-root';
+  drawerContainer.innerHTML = `
+    <!-- Ambient Backdrop Scrim with Glass Blur -->
+    <div class="fixed inset-0 top-16 z-40 bg-on-background/30 backdrop-blur-[3px] transition-opacity duration-300 hidden" id="profile-backdrop" onclick="IdeaVault.closeProfileDrawer()"></div>
+    
+    <!-- Anchored Profile Popover / Slide-Over Card Container -->
+    <div class="fixed top-[4.25rem] right-4 md:right-8 lg:right-[max(2rem,calc((100vw-80rem)/2+2rem))] z-50 w-[calc(100vw-2rem)] sm:w-[410px] max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain bg-surface-container-lowest rounded-2xl shadow-2xl transition-all transform duration-300 origin-top-right flex flex-col hidden" id="profile-drawer">
+      <!-- Top Accent Brand Bar -->
+      <div class="h-1.5 w-full bg-gradient-to-r from-primary-container via-surface-tint to-secondary-container"></div>
+      
+      <div class="p-space-lg flex flex-col gap-space-md">
+        <!-- 1. Header & Identity Section -->
+        <div class="flex flex-col gap-space-sm">
+          <div class="flex items-start justify-between gap-space-sm">
+            <div class="flex items-center gap-space-md">
+              <div class="relative shrink-0">
+                <img alt="${profile.name} Avatar" class="w-14 h-14 rounded-full object-cover shadow-sm bg-surface-container" src="${profile.avatar}"/>
+                <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary ring-2 ring-surface-container-lowest" title="Active on Campus Network"></span>
+              </div>
+              <div class="flex flex-col min-w-0">
+                <div class="flex items-center gap-space-xs">
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold truncate">${profile.name}</h3>
+                  <span class="material-symbols-outlined text-[1.125rem] text-primary" title="NIE Identity Verified">verified</span>
+                </div>
+                <p class="font-label-sm text-label-sm text-on-surface-variant font-medium mt-0.5 truncate">USN: ${profile.usn}</p>
+                <p class="font-label-sm text-label-sm text-on-surface-variant truncate">B.E. Computer Science &amp; Engg.</p>
+              </div>
+            </div>
+            <button aria-label="Close user menu" class="p-1 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" onclick="IdeaVault.closeProfileDrawer()" type="button">
+              <span class="material-symbols-outlined text-[1.25rem]">close</span>
+            </button>
+          </div>
+
+          <!-- Badges & Campus Anchor -->
+          <div class="flex flex-wrap items-center gap-space-xs mt-space-xs">
+            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
+              <span class="material-symbols-outlined text-[0.875rem]">school</span>
+              ${profile.batchShort}
+            </span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-low text-secondary font-label-sm text-label-sm font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Verified NIE Undergrad
+            </span>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <div class="flex items-center gap-1 text-on-surface-variant">
+              <span class="material-symbols-outlined text-[1rem]">location_on</span>
+              <span class="font-label-sm text-label-sm">NIE South Campus (Manandavadi Rd)</span>
+            </div>
+            <a class="inline-flex items-center gap-0.5 font-label-sm text-label-sm text-primary-container font-semibold hover:text-primary transition-colors" href="profile.html">
+              Profile <span class="material-symbols-outlined text-[0.875rem]">chevron_right</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. Quick Innovation Stats Bar -->
+        <div class="bg-surface-container-low rounded-xl p-space-sm grid grid-cols-3 gap-space-xs text-center">
+          <div class="flex flex-col items-center justify-center py-space-xs px-1 cursor-pointer hover:bg-surface-container rounded-lg transition-colors" onclick="window.location.href='submissions.html'">
+            <div class="flex items-baseline gap-1">
+              <span class="font-headline-sm text-headline-sm text-on-surface font-bold">4</span>
+              <span class="font-label-sm text-label-sm text-tertiary font-medium">(1 Rev)</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-on-surface-variant text-[0.7rem] uppercase tracking-wider mt-0.5">Submissions</span>
+          </div>
+          <div class="flex flex-col items-center justify-center py-space-xs px-1 bg-surface-container-lowest/80 rounded-lg shadow-sm">
+            <span class="font-headline-sm text-headline-sm text-primary-container font-bold">248</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant text-[0.7rem] uppercase tracking-wider mt-0.5">Endorsements</span>
+          </div>
+          <div class="flex flex-col items-center justify-center py-space-xs px-1 relative">
+            <div class="flex items-center gap-1">
+              <span class="font-headline-sm text-headline-sm text-on-surface font-bold">3</span>
+              <span class="w-2 h-2 rounded-full bg-secondary animate-pulse" title="Active Teammate Requests"></span>
+            </div>
+            <span class="font-label-sm text-label-sm text-on-surface-variant text-[0.7rem] uppercase tracking-wider mt-0.5">Inquiries</span>
+          </div>
+        </div>
+
+        <!-- 3. Quick Navigation & Saved Items List -->
+        <div class="flex flex-col gap-1">
+          <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold px-2 mb-1">Workspace &amp; Portfolios</span>
+          
+          <a class="flex items-center justify-between px-space-sm py-2.5 rounded-xl hover:bg-surface-container-low transition-colors group" href="profile.html">
+            <div class="flex items-center gap-space-sm">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary-fixed group-hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[1.125rem]">manage_accounts</span>
+              </div>
+              <span class="font-title-sm text-title-sm text-on-surface font-medium">Profile &amp; Academic Settings</span>
+            </div>
+            <span class="material-symbols-outlined text-[1rem] text-outline">chevron_right</span>
+          </a>
+
+          <a class="flex items-center justify-between px-space-sm py-2.5 rounded-xl hover:bg-surface-container-low transition-colors group" href="submissions.html">
+            <div class="flex items-center gap-space-sm">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary-fixed group-hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[1.125rem]">folder_open</span>
+              </div>
+              <span class="font-title-sm text-title-sm text-on-surface font-medium">My Submissions Dashboard</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">4 Projects</span>
+          </a>
+
+          <a class="flex items-center justify-between px-space-sm py-2.5 rounded-xl bg-surface-container-low/60 hover:bg-surface-container-low transition-colors group" href="submissions.html">
+            <div class="flex items-center gap-space-sm">
+              <div class="w-8 h-8 rounded-lg bg-secondary-container/40 flex items-center justify-center text-on-secondary-container">
+                <span class="material-symbols-outlined text-[1.125rem]">group_add</span>
+              </div>
+              <div class="flex flex-col text-left">
+                <span class="font-title-sm text-title-sm text-on-surface font-medium leading-tight">Team Invites &amp; Collabs</span>
+                <span class="font-label-sm text-label-sm text-secondary font-semibold">2 New Requests Waiting</span>
+              </div>
+            </div>
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+          </a>
+        </div>
+
+        <!-- 4. Footer Actions -->
+        <div class="pt-space-sm border-t border-surface-container flex items-center justify-between">
+          <button class="font-label-sm text-label-sm text-on-surface-variant hover:text-error transition-colors flex items-center gap-1" onclick="IdeaVault.showToast('Demo account session active', 'info')">
+            <span class="material-symbols-outlined text-[1rem]">logout</span>
+            <span>Sign Out</span>
+          </button>
+          <span class="font-label-sm text-label-sm text-outline">NIE Vault v2.4</span>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(drawerContainer);
+}
+
+function toggleProfileDrawer() {
+  const drawer = document.getElementById('profile-drawer');
+  const backdrop = document.getElementById('profile-backdrop');
+  if (!drawer || !backdrop) {
+    injectProfileDrawer();
+    return toggleProfileDrawer();
+  }
+
+  const isHidden = drawer.classList.contains('hidden');
+  if (isHidden) {
+    drawer.classList.remove('hidden');
+    backdrop.classList.remove('hidden');
+  } else {
+    drawer.classList.add('hidden');
+    backdrop.classList.add('hidden');
+  }
+}
+
+function closeProfileDrawer() {
+  const drawer = document.getElementById('profile-drawer');
+  const backdrop = document.getElementById('profile-backdrop');
+  if (drawer) drawer.classList.add('hidden');
+  if (backdrop) backdrop.classList.add('hidden');
+}
+
+/**
+ * Initialize Header Profile Trigger On Load
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  injectProfileDrawer();
+
+  // Attach click listener to profile buttons in header
+  const profileLinks = document.querySelectorAll('[data-path="profile-settings"], [data-path="profile-trigger"], .profile-avatar-btn');
+  profileLinks.forEach(elem => {
+    elem.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleProfileDrawer();
+    });
+  });
+});
+
+// Global Export
 window.IdeaVault = {
   API_BASE,
   USE_MOCK,
@@ -703,5 +928,9 @@ window.IdeaVault = {
   interestIdea,
   toggleBookmark,
   showToast,
-  getStoredSet
+  getStoredSet,
+  getUserProfile,
+  saveUserProfile,
+  toggleProfileDrawer,
+  closeProfileDrawer
 };

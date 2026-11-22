@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="web_standard" name="shell-type" />
+  <title>Profile & Academic Settings - NIE Idea Vault</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#3525cd",
+            "primary-container": "#4f46e5",
+            "on-primary": "#ffffff",
+            "primary-fixed": "#e2dfff",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-primary-fixed": "#0f0069",
+            "on-primary-fixed-variant": "#3323cc",
+            "on-primary-container": "#dad7ff",
+
+            "secondary": "#006c49",
+            "secondary-container": "#6cf8bb",
+            "secondary-fixed": "#6ffbbe",
+            "secondary-fixed-dim": "#4edea3",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#00714d",
+            "on-secondary-fixed": "#002113",
+            "on-secondary-fixed-variant": "#005236",
+
+            "tertiary": "#684000",
+            "tertiary-container": "#885500",
+            "tertiary-fixed": "#ffddb8",
+            "tertiary-fixed-dim": "#ffb95f",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#ffd4a4",
+            "on-tertiary-fixed": "#2a1700",
+            "on-tertiary-fixed-variant": "#653e00",
+
+            "surface": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "surface-bright": "#f8f9ff",
+            "surface-variant": "#d3e4fe",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eff4ff",
+            "surface-container-high": "#dce9ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-lowest": "#ffffff",
+
+            "on-surface": "#0b1c30",
+            "on-surface-variant": "#464555",
+            "outline": "#777587",
+            "outline-variant": "#c7c4d8",
+
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem"
+          },
+          fontFamily: {
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "title-sm": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          fontSize: {
+            "label-sm": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.025em", fontWeight: "600" }],
+            "label-md": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "500" }],
+            "body-sm": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0em", fontWeight: "400" }],
+            "body-md": ["1rem", { lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "400" }],
+            "body-lg": ["1.125rem", { lineHeight: "1.75rem", letterSpacing: "0em", fontWeight: "400" }],
+            "title-sm": ["1rem", { lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "600" }],
+            "title-md": ["1.125rem", { lineHeight: "1.625rem", letterSpacing: "-0.005em", fontWeight: "600" }],
+            "headline-sm": ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "headline-md": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "headline-lg": ["2rem", { lineHeight: "2.5rem", letterSpacing: "-0.02em", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col">
+  <!-- Global Header Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-container shadow-[0_1px_8px_rgba(15,23,42,0.04)]">
+    <div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-md">
+      <!-- Left: Logo & Nav -->
+      <div class="flex items-center gap-space-lg">
+        <a href="index.html" class="flex items-center gap-space-sm">
+          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm">
+            <span class="material-symbols-outlined text-[20px]">lightbulb</span>
+          </div>
+          <span class="font-title-md text-title-md text-on-surface font-bold tracking-tight whitespace-nowrap">Idea Vault</span>
+          <span class="px-space-sm py-space-xs rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide">NIE Mysuru</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-space-md">
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="index.html">Explore Ideas</a>
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="submissions.html">My Submissions</a>
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="#" onclick="IdeaVault.showToast('Campus Leaderboard coming soon in next milestone!', 'info'); return false;">Campus Leaderboard</a>
+        </nav>
+      </div>
+
+      <!-- Right: Action Buttons & Profile -->
+      <div class="flex items-center gap-space-md">
+        <a href="post.html" class="inline-flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.25)]">
+          <span class="material-symbols-outlined text-[1.125rem]">add</span>
+          <span>Post Idea</span>
+        </a>
+        <button aria-label="Campus Notifications" class="relative p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors" type="button" onclick="IdeaVault.showToast('No new notifications today', 'info')">
+          <span class="material-symbols-outlined text-[1.5rem]">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+        </button>
+        <div class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container cursor-pointer hover:opacity-85 transition-opacity profile-avatar-btn" data-path="profile-trigger" onclick="IdeaVault.toggleProfileDrawer()" title="Click to view profile menu">
+          <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-container" id="headerProfileAvatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"/>
+          <div class="hidden lg:flex flex-col text-left">
+            <span class="font-label-md text-label-md text-on-surface font-semibold leading-none" id="headerProfileName">Rohan S.</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-space-xs" id="headerProfileBatch">CSE '25</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)] max-w-7xl mx-auto px-gutter"><div class="flex flex-col w-full">
+<!-- Breadcrumbs & Header Section -->
+<div class="py-space-lg flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-primary transition-colors" href="#">NIE Idea Vault</a>
+<span class="material-symbols-outlined text-[1rem]">chevron_right</span>
+<span class="text-on-surface-variant">Account Settings</span>
+<span class="material-symbols-outlined text-[1rem]">chevron_right</span>
+<span class="text-primary font-semibold">Student Profile</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Profile &amp; Academic Settings</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+        Manage your NIE student credentials, capstone team discoverability, linked portfolio repositories, and faculty notification channels.
+      </p>
+</div>
+<!-- Quick Actions -->
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-full bg-surface-container-lowest hover:bg-surface-container-low text-on-surface font-label-md text-label-md shadow-sm transition-all" type="button" onclick="openPublicPreviewModal()"><span class="material-symbols-outlined text-[1.125rem]">visibility</span><span>Preview Public Profile</span></button>
+<button class="inline-flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-md hover:shadow-lg transition-all" id="saveTopBtn" type="button">
+<span class="material-symbols-outlined text-[1.125rem]">check_circle</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+<!-- Main Grid (Asymmetric Desktop Layout ~65% / ~35%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg pb-space-xl">
+<!-- LEFT COLUMN: Main Academic & Technical Portfolio Area (lg:col-span-8) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- CARD A: Student Academic Identity Card -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col gap-space-lg relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-56 h-56 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Identity Header with Avatar & USN Badge -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="relative group">
+<img class="w-20 h-20 rounded-full object-cover shadow-sm ring-4 ring-surface-container" data-alt="Close up portrait photograph of Rohan Sharma, a 21-year-old male Indian engineering student from NIE Mysuru wearing glasses and a smart casual navy polo shirt, smiling confidently in front of modern campus university glass atrium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJedfsbbRUv-znj6olZFV0uT_F7fx54PJYLftMauaeJdBHBTa44ZSsvmDomjND_4DNA8ulXedXuNRfPEmpVpyqtnq_OKQzRtvJah2DGn0oTTM8umCBV_TqBR9zqbWBsQ7sQlElq95LTX30dg-7_3e3cAU6w9PpNwmCTHkDck_ovV6lT_Ka7NDxyobHrdsCg7A9SNOw6_7wKM5GHnQhNzVqUKPHQnOmXyk55AdkQhDf"/>
+<button aria-label="Change photo" onclick="triggerAvatarUpload()" class="absolute bottom-0 right-0 bg-primary-container text-on-primary p-1.5 rounded-full shadow-md hover:scale-105 transition-transform" type="button">
+<span class="material-symbols-outlined text-[1rem]">photo_camera</span>
+</button>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-title-md text-title-md text-on-surface font-bold">Rohan Sharma</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Verified NIE Undergraduate
+                </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[1rem]">badge</span>
+<span>USN: <strong class="text-on-surface font-semibold">4NI21CS089</strong></span>
+<span class="text-outline-variant">•</span>
+<span>Department of CSE</span>
+</p>
+</div>
+</div>
+<button class="self-start sm:self-center px-space-md py-space-xs rounded-full bg-surface-container-low hover:bg-surface-container text-primary font-label-sm text-label-sm transition-colors" type="button" onclick="triggerAvatarUpload()">Upload Avatar</button>
+          </button>
+</div>
+<!-- Academic Credentials Input Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Full Legal Name -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="fullName">Full Legal Name</label>
+<div class="relative">
+<input class="w-full h-11 px-space-md rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="fullName" type="text" value="Rohan Sharma"/>
+</div>
+</div>
+<!-- Official College Email (Locked) -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="collegeEmail">Institutional Email</label>
+<span class="inline-flex items-center gap-0.5 text-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[0.875rem]">verified</span>
+                Domain SSO
+              </span>
+</div>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pl-10 rounded-DEFAULT bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm cursor-not-allowed shadow-inner" id="collegeEmail" readonly="" type="email" value="rohan.s.cse21@nie.ac.in"/>
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[1.125rem]">lock</span>
+</div>
+</div>
+<!-- Academic Branch / Major Dropdown -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="branchMajor">Academic Branch &amp; Major</label>
+<div class="relative">
+<select class="w-full h-11 px-space-md pr-10 rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary appearance-none cursor-pointer" id="branchMajor">
+<option selected="">Computer Science &amp; Engineering (CSE)</option>
+<option>Information Science &amp; Engineering (ISE)</option>
+<option>Electronics &amp; Communication (ECE)</option>
+<option>Electrical &amp; Electronics Engineering (EEE)</option>
+<option>Mechanical Engineering (ME)</option>
+<option>Civil Engineering (CV)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant text-[1.25rem]">unfold_more</span>
+</div>
+</div>
+<!-- Batch & Graduation Year -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="batchGrad">Batch &amp; Current Semester</label>
+<div class="relative">
+<select class="w-full h-11 px-space-md pr-10 rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary appearance-none cursor-pointer" id="batchGrad">
+<option selected="">Class of 2025 (8th Semester - Capstone Final)</option>
+<option>Class of 2026 (6th Semester - Mini Project)</option>
+<option>Class of 2027 (4th Semester - Ideation Phase)</option>
+<option>Class of 2028 (2nd Semester - Foundation)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant text-[1.25rem]">unfold_more</span>
+</div>
+</div>
+<!-- Campus Division -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="campusLoc">Campus Division Base</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pl-10 rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="campusLoc" type="text" value="NIE South Campus (Manandavadi Road)"/>
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[1.125rem]">location_on</span>
+</div>
+</div>
+<!-- CGPA & Privacy Toggle -->
+<div class="flex flex-col gap-space-xs justify-between">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="cgpaVal">Cumulative CGPA</label>
+<div class="flex items-center gap-space-sm">
+<input class="w-32 h-11 px-space-md rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="cgpaVal" type="text" value="8.92 / 10.0"/>
+<div class="flex items-center gap-2 bg-surface-container-low px-space-sm py-2 rounded-DEFAULT flex-1">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary cursor-pointer" id="showCgpa" type="checkbox"/>
+<label class="font-label-sm text-label-sm text-on-surface-variant cursor-pointer select-none" for="showCgpa">
+                  Display to mentors
+                </label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CARD B: Developer, Research & Technical Portfolios -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[1.25rem]">terminal</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Developer &amp; Research Repositories</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Linked handles enhance your team matching algorithm rank.</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-space-sm py-space-xs rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[0.875rem]">sync</span> Auto-synced
+          </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- GitHub Handle -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="githubInput">
+<span class="material-symbols-outlined text-[1rem]">code</span> GitHub Profile
+              </label>
+<span class="inline-flex items-center gap-1 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[0.875rem]">check_circle</span> 14 Public Repos
+              </span>
+</div>
+<div class="flex items-center rounded-DEFAULT bg-surface shadow-sm overflow-hidden focus-within:ring-2 focus-within:ring-primary">
+<span class="px-3 text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low select-none">github.com/</span>
+<input class="w-full h-11 px-2 bg-transparent text-on-surface font-body-sm text-body-sm focus:outline-none" id="githubInput" type="text" value="rohansharma-nie"/>
+</div>
+</div>
+<!-- Personal Website / Live Portfolio -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="siteInput">
+<span class="material-symbols-outlined text-[1rem]">language</span> Personal Website
+            </label>
+<div class="relative">
+<input class="w-full h-11 px-space-md rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="siteInput" type="url" value="https://rohansharma.dev"/>
+</div>
+</div>
+<!-- LinkedIn Profile -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="linkedinInput">
+<span class="material-symbols-outlined text-[1rem]">group</span> LinkedIn Profile
+            </label>
+<div class="flex items-center rounded-DEFAULT bg-surface shadow-sm overflow-hidden focus-within:ring-2 focus-within:ring-primary">
+<span class="px-3 text-on-surface-variant font-body-sm text-body-sm bg-surface-container-low select-none">linkedin.com/in/</span>
+<input class="w-full h-11 px-2 bg-transparent text-on-surface font-body-sm text-body-sm focus:outline-none" id="linkedinInput" type="text" value="rohansharma-cse"/>
+</div>
+</div>
+<!-- Scholar / ResearchGate Profile -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold flex items-center gap-1.5" for="scholarInput">
+<span class="material-symbols-outlined text-[1rem]">menu_book</span> Google Scholar / Research ID
+            </label>
+<div class="relative">
+<input class="w-full h-11 px-space-md rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="scholarInput" type="text" value="scholar.google.com/citations?user=nie_cs"/>
+</div>
+</div>
+</div>
+<!-- Tech Stack & Primary Skills Inventory -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Featured Technical Competencies</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant">7 of 12 slots used</span>
+</div>
+<!-- Chips List with Remove Tags -->
+<div class="flex flex-wrap items-center gap-space-xs p-space-sm bg-surface rounded-DEFAULT shadow-inner min-h-[52px]" id="skillsWrapper">
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              React.js
+              <button aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" type="button"><span class="material-symbols-outlined text-[0.875rem]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              Python 3.11
+              <button aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" type="button"><span class="material-symbols-outlined text-[0.875rem]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+              FastAPI
+              <button aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" type="button"><span class="material-symbols-outlined text-[0.875rem]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+              PyTorch
+              <button aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" type="button"><span class="material-symbols-outlined text-[0.875rem]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim"></span>
+              ESP32 Firmware
+              <button aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" type="button"><span class="material-symbols-outlined text-[0.875rem]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+              Docker
+              <button aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" type="button"><span class="material-symbols-outlined text-[0.875rem]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              PostgreSQL
+              <button aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" type="button"><span class="material-symbols-outlined text-[0.875rem]">close</span></button>
+</span>
+<div class="flex items-center gap-1 ml-auto">
+<input class="h-8 px-space-sm bg-transparent text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none" id="skillInput" placeholder="+ Add skill (e.g. ROS2)" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- CARD C: Resume & Capstone Portfolio Asset Card -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[1.25rem]">description</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Resume &amp; Capstone Documents</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Shared with prospective capstone leaders and NIE faculty evaluators.</p>
+</div>
+</div>
+<!-- Current File State -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-DEFAULT bg-surface-container-low gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-DEFAULT bg-error-container text-error flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[1.75rem]">picture_as_pdf</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold truncate max-w-xs sm:max-w-sm">
+                Rohan_Sharma_CSE_Resume_2025.pdf
+              </span>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span>1.8 MB</span>
+<span>•</span>
+<span>Uploaded 5 days ago</span>
+<span>•</span>
+<span class="text-secondary font-semibold">Active for Capstone Applications</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<button class="px-space-md py-space-xs rounded-full bg-surface-container-lowest hover:bg-surface text-on-surface font-label-sm text-label-sm shadow-sm transition-all flex items-center gap-1" type="button" onclick="IdeaVault.showToast('Downloading Rohan_Sharma_CSE_Resume_2025.pdf', 'success')"><span class="material-symbols-outlined text-[1rem]">download</span><span>Download</span></button>
+<button class="px-space-md py-space-xs rounded-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed-variant font-label-sm text-label-sm transition-all flex items-center gap-1" type="button" onclick="handleReplaceResume()"><span class="material-symbols-outlined text-[1rem]">upload_file</span><span>Replace File</span></button>
+</div>
+</div>
+<!-- Drag & Drop Upload Zone -->
+<div class="flex flex-col items-center justify-center p-space-lg rounded-DEFAULT bg-surface/60 hover:bg-surface transition-colors cursor-pointer text-center gap-space-xs">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary-container mb-1">
+<span class="material-symbols-outlined text-[1.5rem]">cloud_upload</span>
+</div>
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Drag &amp; drop updated resume or <span class="text-primary hover:underline">browse files</span></span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Supports PDF, DOCX up to 10MB. Synced directly to faculty evaluation records.</p>
+</div>
+<!-- Walkthrough / Pitch Deck Link Input -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="videoPitch">Capstone Pitch Deck / Video Walkthrough Link (Optional)</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pl-10 rounded-DEFAULT bg-surface text-on-surface font-body-sm text-body-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="videoPitch" placeholder="e.g. https://youtu.be/nie-iot-demo or Loom / Pitch link" type="url"/>
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[1.125rem]">play_circle</span>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Sidebar Controls & Security Telemetry (lg:col-span-4) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- SIDEBAR CARD 1: Capstone Discoverability & Teaming -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden">
+<div class="flex items-center justify-between">
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Capstone Teaming</h2>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            Available
+          </span>
+</div>
+<!-- Open for Collaboration Toggle Switch -->
+<div class="flex items-start justify-between gap-space-md p-space-sm rounded-DEFAULT bg-surface">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Open to Collaborations</span><span class="font-body-sm text-body-sm text-on-surface-variant leading-snug">Permit campus project leads to invite you directly to final-year capstones.</span></div><label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1"><input checked="" class="sr-only peer" id="openCollabToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Teaming Status Banner -->
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center gap-1 text-on-surface font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[1rem] text-primary">groups</span>
+<span>Current Teaming Objective:</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">
+            <textarea id="teamingObjective" class="w-full bg-transparent font-body-sm text-body-sm text-on-surface font-medium resize-none focus:outline-none focus:ring-1 focus:ring-primary rounded p-1" rows="2">Actively looking for Hardware / ECE Co-Founders for Smart Grid Micro-Inverter project.</textarea>
+          </p>
+</div>
+<!-- Preferred Roles Selection -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Desired Project Roles</label>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-medium">Backend / Cloud Architect</span>
+<span class="px-space-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-medium">ML Edge Engineer</span>
+<button class="px-space-sm py-1 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">+ Add Role</button>
+</div>
+</div>
+<!-- Campus Lab Access Badges -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Authorized NIE Lab Clearances</label>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between p-2 rounded bg-surface text-body-sm font-body-sm">
+<span class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[1rem] text-secondary">domain</span>
+                C-Block IoT Research Cell
+              </span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Authorized</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface text-body-sm font-body-sm">
+<span class="flex items-center gap-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[1rem] text-secondary">memory</span>
+                Embedded Systems Lab 3
+              </span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Authorized</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SIDEBAR CARD 2: Notification & Alert Preferences -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Notifications</h2>
+<span class="material-symbols-outlined text-primary text-[1.25rem]">notifications_active</span>
+</div>
+<!-- Toggles List -->
+<div class="flex flex-col gap-space-md">
+<!-- Teammate Applications -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Teammate Applications</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Notify when peers request to join your idea teams.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-0.5">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Faculty Reviews & Grants -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Faculty Reviews &amp; Grants</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Instant alerts when mentors post reviews or approve funding.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-0.5">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- AI Duplicate Screening Alerts -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">AI Similarity Alerts</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Notifications when new projects overlap with your proposals.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-0.5">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Campus Innovation Digest -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">NIE Innovation Digest</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Curated weekly highlights of trending research across NIE.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-0.5">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Frequency Channel Radio Group -->
+<div class="flex flex-col gap-space-xs pt-space-sm">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold">Email Delivery Cadence</label>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 p-2 rounded bg-surface cursor-pointer">
+<input checked="" class="text-primary accent-primary" name="emailCadence" type="radio"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Instant Push &amp; Real-time College Email</span>
+</label>
+<label class="flex items-center gap-2 p-2 rounded bg-surface cursor-pointer">
+<input class="text-primary accent-primary" name="emailCadence" type="radio"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Daily Consolidated Summary (6:00 PM IST)</span>
+</label>
+</div>
+</div>
+</section>
+<!-- SIDEBAR CARD 3: Campus Security & Session Data -->
+<section class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col gap-space-md">
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Security &amp; Device Sessions</h2>
+<div class="flex flex-col gap-space-sm">
+<!-- Active Session Info -->
+<div class="flex items-start gap-space-sm p-space-sm rounded-DEFAULT bg-surface">
+<span class="material-symbols-outlined text-primary text-[1.5rem] mt-0.5">laptop_mac</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold leading-tight">Chrome on macOS</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">NIE Mysore South Campus Wi-Fi (VLAN 4)</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold mt-1">Active Now • IP 172.16.42.108</span>
+</div>
+</div>
+<!-- USN Validation Info -->
+<div class="p-space-sm rounded-DEFAULT bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">SSO Authenticated via</span>
+<span class="font-title-sm text-title-sm text-on-surface font-bold">NIE Central LDAP Server</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[1.5rem]">shield</span>
+</div>
+<!-- Data Export Action -->
+<button class="w-full h-11 px-space-md rounded-DEFAULT bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[1.125rem]">download_for_offline</span>
+<span>Export Submissions &amp; Idea Log (JSON)</span>
+</button>
+<!-- Deactivate Profile Subtle Action -->
+<div class="pt-space-xs text-center">
+<button class="font-label-sm text-label-sm text-error hover:underline transition-all" type="button">
+              Request Profile Archival or Deactivation
+            </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Sticky Bottom Sync Feedback Bar -->
+<div class="sticky bottom-4 z-40 w-full max-w-5xl mx-auto px-4">
+<div class="p-space-md rounded-full bg-inverse-surface text-inverse-on-surface shadow-2xl flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm pl-2">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-pulse"></div>
+<span class="font-body-sm text-body-sm text-inverse-on-surface font-medium hidden sm:inline">
+          All profile updates sync to the official NIE Student Innovation Ledger.
+        </span>
+<span class="font-body-sm text-body-sm text-inverse-on-surface font-medium sm:hidden">
+          Synced to NIE Ledger.
+        </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-full hover:bg-surface-container-highest/20 text-inverse-on-surface font-label-sm text-label-sm transition-colors" id="discardBtn" type="button">
+          Discard
+        </button>
+<button class="px-space-lg py-2 rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-md transition-all flex items-center gap-1.5" id="saveBottomBtn" type="button">
+<span class="material-symbols-outlined text-[1rem]">done</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Toast Notification Overlay (Hidden by Default) -->
+<div class="fixed bottom-20 right-8 z-50 transform translate-y-8 opacity-0 pointer-events-none transition-all duration-300 ease-out flex items-center gap-space-sm p-space-md rounded-DEFAULT bg-surface-container-lowest text-on-surface shadow-xl" id="saveToast">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[1.25rem]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Profile Updated</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Changes saved to your NIE student account.</span>
+</div>
+</div>
+
+</div>
+  <!-- Public Profile Preview Modal -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-on-background/50 backdrop-blur-sm hidden" id="publicPreviewModal">
+    <div class="bg-surface-container-lowest rounded-3xl shadow-2xl max-w-lg w-[calc(100vw-2rem)] p-space-lg relative overflow-hidden border border-surface-container">
+      <div class="h-2 w-full absolute top-0 left-0 bg-gradient-to-r from-primary via-primary-container to-secondary"></div>
+      <div class="flex items-center justify-between pb-space-sm border-b border-surface-container">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">badge</span>
+          <h3 class="font-title-md text-title-md font-bold text-on-surface">Verified Student Profile Card</h3>
+        </div>
+        <button class="p-1 rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" onclick="closePublicPreviewModal()" type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="py-space-md flex flex-col gap-space-md">
+        <!-- Identity -->
+        <div class="flex items-center gap-space-md">
+          <img class="w-16 h-16 rounded-full object-cover ring-2 ring-primary/20" id="modalPreviewAvatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR" alt="Student" />
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5">
+              <span class="font-title-md text-title-md font-bold text-on-surface" id="modalPreviewName">Rohan Sharma</span>
+              <span class="material-symbols-outlined text-secondary text-[1.125rem]">verified</span>
+            </div>
+            <span class="font-body-sm text-body-sm text-on-surface-variant" id="modalPreviewUsn">USN: 4NI21CS089 • Dept of CSE</span>
+            <span class="font-label-sm text-label-sm text-secondary font-semibold" id="modalPreviewBatch">Class of 2025 • 8th Semester</span>
+          </div>
+        </div>
+
+        <!-- Teaming Status -->
+        <div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col gap-1">
+          <span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Teaming Objective</span>
+          <p class="font-body-sm text-body-sm text-on-surface" id="modalPreviewObjective">"Actively looking for Hardware / ECE Co-Founders for Smart Grid Micro-Inverter project."</p>
+        </div>
+
+        <!-- Skills -->
+        <div class="flex flex-col gap-1">
+          <span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Technical Skills</span>
+          <div class="flex flex-wrap gap-1.5" id="modalPreviewSkills">
+            <!-- Chips injected dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-space-sm border-t border-surface-container flex items-center justify-end gap-space-sm">
+        <button class="px-space-md py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" onclick="closePublicPreviewModal()" type="button">Close Preview</button>
+        <button class="px-space-md py-1.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm transition-colors flex items-center gap-1" onclick="navigator.clipboard.writeText(window.location.origin + '/profile.html'); IdeaVault.showToast('Profile link copied to clipboard!', 'success');" type="button">
+          <span class="material-symbols-outlined text-[1rem]">share</span>
+          <span>Copy Public Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>  <!-- Global Footer -->
+  <footer class="w-full bg-surface-container-low border-t border-surface-container py-space-lg mt-auto">
+    <div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded bg-primary flex items-center justify-center text-on-primary text-xs font-bold">IV</div>
+        <p>© 2025 The National Institute of Engineering, Mysuru. Idea Vault Innovation Hub.</p>
+      </div>
+      <div class="flex items-center gap-space-lg">
+        <a class="hover:text-on-surface transition-colors" href="#" onclick="IdeaVault.showToast('Faculty Guidelines v2.4 (VTU Capstone Regulations)', 'info'); return false;">Faculty Guidelines</a>
+        <a class="hover:text-on-surface transition-colors" href="#" onclick="IdeaVault.showToast('IP & Ethics Clearance Portal active', 'info'); return false;">IP & Ethics</a>
+        <a class="hover:text-on-surface transition-colors" href="#" onclick="IdeaVault.showToast('NIE Research & Development Cell', 'info'); return false;">NIE Research Cell</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    let currentProfile = {};
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProfileData();
+
+      // Top and bottom save buttons
+      const saveTopBtn = document.getElementById('saveTopBtn');
+      const saveBottomBtn = document.getElementById('saveBottomBtn');
+      if (saveTopBtn) saveTopBtn.addEventListener('click', saveProfileData);
+      if (saveBottomBtn) saveBottomBtn.addEventListener('click', saveProfileData);
+
+      // Discard button
+      const discardBtn = document.getElementById('discardBtn');
+      if (discardBtn) {
+        discardBtn.addEventListener('click', () => {
+          loadProfileData();
+          IdeaVault.showToast('All unsaved changes discarded', 'info');
+        });
+      }
+
+      // Add Skill on Enter
+      const skillInput = document.getElementById('skillInput');
+      if (skillInput) {
+        skillInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && skillInput.value.trim() !== '') {
+            e.preventDefault();
+            addSkillChip(skillInput.value.trim());
+            skillInput.value = '';
+          }
+        });
+      }
+    });
+
+    function loadProfileData() {
+      currentProfile = IdeaVault.getUserProfile();
+
+      // Input bindings
+      const nameInput = document.getElementById('fullName');
+      if (nameInput) nameInput.value = currentProfile.name || 'Rohan Sharma';
+
+      const emailInput = document.getElementById('collegeEmail');
+      if (emailInput) emailInput.value = currentProfile.email || 'rohan.s.cse21@nie.ac.in';
+
+      const branchSelect = document.getElementById('branchMajor');
+      if (branchSelect) branchSelect.value = currentProfile.department || 'Computer Science & Engineering (CSE)';
+
+      const batchSelect = document.getElementById('batchGrad');
+      if (batchSelect) batchSelect.value = currentProfile.batch || 'Class of 2025 (8th Semester - Capstone Final)';
+
+      const campusInput = document.getElementById('campusLoc');
+      if (campusInput) campusInput.value = currentProfile.campus || 'NIE South Campus (Manandavadi Road)';
+
+      const cgpaInput = document.getElementById('cgpaVal');
+      if (cgpaInput) cgpaInput.value = currentProfile.cgpa ? currentProfile.cgpa.split('/')[0].trim() : '8.92';
+
+      const showCgpa = document.getElementById('showCgpa');
+      if (showCgpa) showCgpa.checked = currentProfile.showCgpa !== false;
+
+      const githubInput = document.getElementById('githubInput');
+      if (githubInput) githubInput.value = currentProfile.github || 'rohansharma-nie';
+
+      const siteInput = document.getElementById('siteInput');
+      if (siteInput) siteInput.value = currentProfile.website || 'https://rohansharma.dev';
+
+      const linkedinInput = document.getElementById('linkedinInput');
+      if (linkedinInput) linkedinInput.value = currentProfile.linkedin || 'rohansharma-cse';
+
+      const scholarInput = document.getElementById('scholarInput');
+      if (scholarInput) scholarInput.value = currentProfile.scholar || 'scholar.google.com/citations?user=nie_cs';
+
+      const openCollab = document.getElementById('openCollabToggle');
+      if (openCollab) openCollab.checked = currentProfile.openForCollab !== false;
+
+      const teamingObj = document.getElementById('teamingObjective');
+      if (teamingObj) teamingObj.value = currentProfile.teamingObjective || 'Actively looking for Hardware / ECE Co-Founders for Smart Grid Micro-Inverter project.';
+
+      // Render skill chips
+      renderSkills(currentProfile.skills || ["React.js", "Python 3.11", "FastAPI", "PyTorch", "ESP32 Firmware", "Docker", "PostgreSQL"]);
+    }
+
+    function renderSkills(skills) {
+      const skillsWrapper = document.getElementById('skillsWrapper');
+      if (!skillsWrapper) return;
+
+      const skillInputContainer = document.getElementById('skillInput')?.parentElement;
+      // Clear existing chip elements except the input container
+      Array.from(skillsWrapper.children).forEach(child => {
+        if (child !== skillInputContainer) child.remove();
+      });
+
+      skills.forEach(skill => {
+        const tag = document.createElement('span');
+        tag.className = "inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group skill-tag";
+        tag.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-primary"></span>
+          <span class="skill-tag-text">${skill}</span>
+          <button type="button" aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" onclick="this.closest('.skill-tag').remove()">
+            <span class="material-symbols-outlined text-[0.875rem]">close</span>
+          </button>
+        `;
+        if (skillInputContainer) {
+          skillsWrapper.insertBefore(tag, skillInputContainer);
+        } else {
+          skillsWrapper.appendChild(tag);
+        }
+      });
+    }
+
+    function addSkillChip(skillText) {
+      if (!skillText) return;
+      const skillsWrapper = document.getElementById('skillsWrapper');
+      const skillInputContainer = document.getElementById('skillInput')?.parentElement;
+      if (!skillsWrapper) return;
+
+      const tag = document.createElement('span');
+      tag.className = "inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm group skill-tag animate-slideDown";
+      tag.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-primary"></span>
+        <span class="skill-tag-text">${skillText}</span>
+        <button type="button" aria-label="Remove skill" class="text-on-surface-variant hover:text-error ml-1 transition-colors" onclick="this.closest('.skill-tag').remove()">
+          <span class="material-symbols-outlined text-[0.875rem]">close</span>
+        </button>
+      `;
+      if (skillInputContainer) {
+        skillsWrapper.insertBefore(tag, skillInputContainer);
+      } else {
+        skillsWrapper.appendChild(tag);
+      }
+    }
+
+    function saveProfileData() {
+      const updated = {
+        ...currentProfile,
+        name: document.getElementById('fullName')?.value.trim() || currentProfile.name,
+        department: document.getElementById('branchMajor')?.value || currentProfile.department,
+        batch: document.getElementById('batchGrad')?.value || currentProfile.batch,
+        campus: document.getElementById('campusLoc')?.value || currentProfile.campus,
+        cgpa: (document.getElementById('cgpaVal')?.value || '8.92') + ' / 10.0',
+        showCgpa: document.getElementById('showCgpa')?.checked ?? true,
+        github: document.getElementById('githubInput')?.value.trim() || currentProfile.github,
+        website: document.getElementById('siteInput')?.value.trim() || currentProfile.website,
+        linkedin: document.getElementById('linkedinInput')?.value.trim() || currentProfile.linkedin,
+        scholar: document.getElementById('scholarInput')?.value.trim() || currentProfile.scholar,
+        openForCollab: document.getElementById('openCollabToggle')?.checked ?? true,
+        teamingObjective: document.getElementById('teamingObjective')?.value.trim() || currentProfile.teamingObjective,
+        skills: Array.from(document.querySelectorAll('#skillsWrapper .skill-tag-text')).map(el => el.textContent.trim())
+      };
+
+      currentProfile = updated;
+      IdeaVault.saveUserProfile(updated);
+
+      // Trigger Stitch Save Toast
+      const toast = document.getElementById('saveToast');
+      if (toast) {
+        toast.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+        }, 3000);
+      }
+
+      // Also trigger global Toast
+      IdeaVault.showToast('Academic profile updated and synchronized!', 'success');
+    }
+
+    function openPublicPreviewModal() {
+      const modal = document.getElementById('publicPreviewModal');
+      if (!modal) return;
+      document.getElementById('modalPreviewName').textContent = document.getElementById('fullName')?.value || currentProfile.name;
+      document.getElementById('modalPreviewBatch').textContent = document.getElementById('batchGrad')?.value || currentProfile.batch;
+      document.getElementById('modalPreviewObjective').textContent = `"${document.getElementById('teamingObjective')?.value || currentProfile.teamingObjective}"`;
+      
+      const skillsContainer = document.getElementById('modalPreviewSkills');
+      if (skillsContainer) {
+        const skills = Array.from(document.querySelectorAll('#skillsWrapper .skill-tag-text')).map(el => el.textContent.trim());
+        skillsContainer.innerHTML = skills.map(s => `
+          <span class="px-2.5 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface">${s}</span>
+        `).join('');
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closePublicPreviewModal() {
+      const modal = document.getElementById('publicPreviewModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handleExportProfileData() {
+      const profile = IdeaVault.getUserProfile();
+      let customIdeas = [];
+      try {
+        const raw = localStorage.getItem(IdeaVault.STORAGE_KEYS.CUSTOM_IDEAS);
+        customIdeas = raw ? JSON.parse(raw) : [];
+      } catch(e) {}
+
+      const exportPayload = {
+        exportDate: new Date().toISOString(),
+        institution: "The National Institute of Engineering, Mysuru",
+        profile: profile,
+        submissions: customIdeas
+      };
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportPayload, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `NIE_IdeaVault_Profile_${profile.usn}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+
+      IdeaVault.showToast('Profile & Submissions exported as JSON!', 'success');
+    }
+
+    function triggerAvatarUpload() {
+      const url = prompt("Enter Image URL or Avatar Link:", currentProfile.avatar || "");
+      if (url && url.trim()) {
+        currentProfile.avatar = url.trim();
+        IdeaVault.saveUserProfile(currentProfile);
+        document.querySelectorAll('img[alt*="Avatar"], #headerProfileAvatar').forEach(img => {
+          img.src = url.trim();
+        });
+        IdeaVault.showToast('Profile photo updated!', 'success');
+      }
+    }
+
+    function handleReplaceResume() {
+      IdeaVault.showToast('Resume uploaded! Synced to Capstone Evaluation board.', 'success');
+    }
+  </script>
+</body>
+</html>

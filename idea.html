@@ -120,6 +120,7 @@
 
 <body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
   <!-- Fixed Header -->
+  <!-- Global Header Navigation Bar -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-container shadow-[0_1px_8px_rgba(15,23,42,0.04)]">
     <div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-md">
       <!-- Left: Logo & Nav -->
@@ -133,26 +134,26 @@
         </a>
         <nav class="hidden md:flex items-center gap-space-md">
           <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="index.html">Explore Ideas</a>
-          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="index.html">My Submissions</a>
-          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="#" onclick="showToast('Campus Leaderboard coming soon in next milestone!', 'info')">Campus Leaderboard</a>
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="submissions.html">My Submissions</a>
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="#" onclick="IdeaVault.showToast('Campus Leaderboard coming soon in next milestone!', 'info'); return false;">Campus Leaderboard</a>
         </nav>
       </div>
 
       <!-- Right: Action Buttons & Profile -->
       <div class="flex items-center gap-space-md">
-        <a href="post.html" class="inline-flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-colors shadow-sm">
+        <a href="post.html" class="inline-flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.25)]">
           <span class="material-symbols-outlined text-[1.125rem]">add</span>
           <span>Post Idea</span>
         </a>
-        <button aria-label="Campus Notifications" class="relative p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors" type="button" onclick="showToast('No new notifications today', 'info')">
+        <button aria-label="Campus Notifications" class="relative p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors" type="button" onclick="IdeaVault.showToast('No new notifications today', 'info')">
           <span class="material-symbols-outlined text-[1.5rem]">notifications</span>
           <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
         </button>
-        <div class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container">
-          <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"/>
+        <div class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container cursor-pointer hover:opacity-85 transition-opacity profile-avatar-btn" data-path="profile-trigger" onclick="IdeaVault.toggleProfileDrawer()" title="Click to view profile menu">
+          <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-container" id="headerProfileAvatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"/>
           <div class="hidden lg:flex flex-col text-left">
-            <span class="font-label-md text-label-md text-on-surface font-semibold leading-none">Rohan S.</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-space-xs">CSE '25</span>
+            <span class="font-label-md text-label-md text-on-surface font-semibold leading-none" id="headerProfileName">Rohan S.</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-space-xs" id="headerProfileBatch">CSE '25</span>
           </div>
         </div>
       </div>
