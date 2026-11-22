@@ -526,11 +526,16 @@
       banner.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    async function postAnyway() {
+        async function postAnyway() {
       if (!pendingPayload) return;
       const btn = document.getElementById('btn-dup-post-anyway');
-      if (btn) btn.innerHTML = `<span class="material-symbols-outlined text-[1.125rem] animate-spin">sync</span> Posting anyway...`;
-      await executePost(pendingPayload);
+      if (btn) btn.innerHTML = `<span class="material-symbols-outlined text-[1.125rem] animate-spin">sync</span> Submitting bypass...`;
+      try {
+        const payloadWithBypass = { ...pendingPayload, force: true };
+        await executePost(payloadWithBypass);
+      } catch (e) {
+        window.IdeaVault.showToast("Failed to bypass duplicate gate", "error");
+      }
     }
 
     async function executePost(payload) {

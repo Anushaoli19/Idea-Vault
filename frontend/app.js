@@ -544,49 +544,24 @@ async function fetchIdeaById(id) {
  */
 async function checkDuplicate(title, description, category) {
   if (USE_MOCK) {
-    await new Promise(r => setTimeout(r, 600));
-
+    await simulateNetworkDelay(400);
     const all = [...getCustomIdeas(), ...SAMPLE_IDEAS];
     const incomingText = `${title} ${description}`.toLowerCase();
-    const incomingTokens = new Set(incomingText.split(/\W+/).filter(w => w.length > 3));
-
+    const incomingTokens = new Set(incomingText.split(/\W+/).filter(w => w.length > 2));
     let bestMatch = null;
     let highestScore = 0;
-
     for (const existing of all) {
       const existingText = `${existing.title} ${existing.description}`.toLowerCase();
-      const existingTokens = new Set(existingText.split(/\W+/).filter(w => w.length > 3));
-
+      const existingTokens = new Set(existingText.split(/\W+/).filter(w => w.length > 2));
       let common = 0;
-      incomingTokens.forEach(t => {
-        if (existingTokens.has(t)) common++;
-      });
-
+      incomingTokens.forEach(t => { if (existingTokens.has(t)) common++; });
       const union = new Set([...incomingTokens, ...existingTokens]).size;
-      const jaccard = union > 0 ? (common / union) : 0;
-
-      const isMessFoodWaste = (incomingText.includes('mess') || incomingText.includes('food') || incomingText.includes('waste')) &&
-        (existing.id === "1" || existing.id === "2");
-
-      let score = Math.round(jaccard * 100);
-      if (isMessFoodWaste) {
-        score = Math.max(score, 88);
-      }
-
-      if (score > highestScore) {
-        highestScore = score;
-        bestMatch = existing;
-      }
+      const score = union > 0 ? Math.round((common / union) * 100) : 0;
+      if (score > highestScore) { highestScore = score; bestMatch = existing; }
     }
-
-    if (highestScore >= 60 && bestMatch) {
-      return {
-        isDuplicate: true,
-        similarity: highestScore,
-        matchedIdea: bestMatch
-      };
+    if (highestScore >= 40 && bestMatch) {
+      return { isDuplicate: true, similarity: highestScore, similarity_score: highestScore, matchedIdea: bestMatch };
     }
-
     return { isDuplicate: false, similarity: highestScore, matchedIdea: null };
   }
 
@@ -597,9 +572,15 @@ async function checkDuplicate(title, description, category) {
       body: JSON.stringify({ title, description, category })
     });
     if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
-    return await response.json();
+    const data = await response.json();
+    return {
+      isDuplicate: data.is_duplicate || data.duplicate || false,
+      similarity: data.similarity_score || 0,
+      similarity_score: data.similarity_score || 0,
+      matchedIdea: data.similar_idea || data.matchedIdea || null
+    };
   } catch (err) {
-    console.warn("Backend check-duplicate failed, using mock check:", err);
+    console.warn("Backend check-duplicate failed:", err);
     return { isDuplicate: false, similarity: 0, matchedIdea: null };
   }
 }

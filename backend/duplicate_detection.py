@@ -5,8 +5,16 @@ from sklearn.metrics.pairwise import cosine_similarity
 SIMILARITY_THRESHOLD = 0.40
 
 
-def detect_duplicate(new_idea, existing_ideas):
+def extract_idea_text(item):
+    """Helper to extract searchable content from either string or dictionary."""
+    if isinstance(item, dict):
+        title = item.get("title", "")
+        desc = item.get("description", "")
+        return f"{title} {desc}".strip()
+    return str(item).strip()
 
+
+def detect_duplicate(new_idea, existing_ideas):
     if not existing_ideas:
         return {
             "is_duplicate": False,
@@ -16,10 +24,10 @@ def detect_duplicate(new_idea, existing_ideas):
         }
 
     descriptions = [
-        idea["description"] for idea in existing_ideas
+        extract_idea_text(idea) for idea in existing_ideas
     ]
 
-    descriptions.append(new_idea)
+    descriptions.append(extract_idea_text(new_idea))
 
     vectorizer = TfidfVectorizer(stop_words="english")
     tfidf_matrix = vectorizer.fit_transform(descriptions)
@@ -46,8 +54,9 @@ def detect_duplicate(new_idea, existing_ideas):
         "similarity_score": round(best_score * 100, 2),
         "similar_idea": best_match if is_duplicate else None
     }
-if __name__ == "__main__":
 
+
+if __name__ == "__main__":
     existing_ideas = [
         {
             "id": 1,
@@ -62,7 +71,6 @@ if __name__ == "__main__":
     ]
 
     new_idea = "A college parking application to locate free parking spaces."
-
     result = detect_duplicate(new_idea, existing_ideas)
 
     print("\nDUPLICATE IDEA DETECTION")

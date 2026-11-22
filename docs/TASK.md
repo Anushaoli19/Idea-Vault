@@ -42,3 +42,13 @@ Legend:
 ## Phase 6: Symmetrical Directory Structure
 - [x] 6.1 Create `backend/` directory and organize backend files (`app.py`, `database.py`, `duplicate_detection.py`, `requirements.txt`, `API_DOCUMENTATION.md`) [Verified: 2026-11-22 file move & import test]
 - [x] 6.2 Update documentation and run scripts for `backend/` and `frontend/` [Verified: 2026-11-22 README & docs update]
+
+## Phase 7: Backend Feature Completeness & End-to-End Scratchpad Verification
+- [x] 7.1 Audit all frontend expected features vs backend endpoints [Verified: 2026-11-22 gap analysis]
+- [x] 7.2 Implement `GET /ideas/<id>` single idea deep dive with architecture, BOM, team slots, and interested users [Verified: 2026-11-22 scratchpad test]
+- [x] 7.3 Implement dedicated `POST /check-duplicate` endpoint returning TF-IDF similarity % and matched proposal [Verified: 2026-11-22 scratchpad test]
+- [x] 7.4 Support `"force": true` bypass parameter in `POST /ideas` for "Post anyway" flow [Verified: 2026-11-22 scratchpad test]
+- [x] 7.5 Implement `GET /profile` and `POST /profile` for persistent student identity management [Verified: 2026-11-22 scratchpad test]
+- [x] 7.6 Implement `GET /my-submissions` and `POST /inquiries/<id>/action` for collaborator triage [Verified: 2026-11-22 scratchpad test]
+- [x] 7.7 Seed SQLite database with authentic 6 NIE Mysuru capstone ideas and Rohan Sharma's verified profile [Verified: 2026-11-22 scratchpad test]
+- [x] 7.8 Run comprehensive 14-point scratchpad integration test (`scratch/test_all_features.py`) [Verified: 2026-11-22 14/14 tests passing 100%]
