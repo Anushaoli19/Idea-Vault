@@ -3,11 +3,11 @@
 ## 1. Project Overview & Identity
 - **Project**: NIE Idea Vault
 - **Domain**: Higher Education, Student Innovation, Capstone Project Management
-- **Repository State**: Complete Full-Stack Implementation & Pushed to GitHub (`https://github.com/Ramcharan77587/idea-vault`) on branch `main`
+- **Repository State**: Complete Full-Stack Implementation & Pushed to GitHub (`https://github.com/Anushaoli19/Idea-Vault` and `https://github.com/Ramcharan77587/idea-vault`) on branch `main`
 
 ## 2. Active Focus & Immediate Sprint
-- **Current Phase**: Phase 5 — GitHub Remote Deployment & Session Continuity
-- **Active Task**: Pushed cleanly to GitHub remote `origin/main`. All 13 Stitch screens & backend features verified.
+- **Current Phase**: Phase 5 — Multi-Remote Deployment & Session Continuity
+- **Active Task**: Pushed cleanly to both `upstream/main` (`Anushaoli19/Idea-Vault`) and `origin/main` (`Ramcharan77587/idea-vault`). All 13 Stitch screens, backend APIs, duplicate engine, and tests verified.
 - **Current Blocker(s)**: None. System is ready for live production use and student demonstration.
 
 ## 3. Local Environment & Ports
