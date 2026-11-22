@@ -1,24 +1,65 @@
-# User Guide & Manual — NIE Idea Vault
+# User Guide & Deployment Manual — NIE Idea Vault
 
 ## 1. Getting Started
 Welcome to **NIE Idea Vault**, the official innovation and capstone collaboration platform for students and faculty of The National Institute of Engineering (NIE), Mysuru.
 
 ### System Access
-- **Local Development URL**: `http://localhost:5173`
-- **Backend API URL**: `http://localhost:8000`
-- **Interactive Swagger Documentation**: `http://localhost:8000/docs`
+- **Local Client**: `http://localhost:5173`
+- **Backend API**: `http://localhost:8000`
+- **Interactive Swagger Docs**: `http://localhost:8000/docs`
 - **Supported Browsers**: Chrome, Firefox, Edge, Safari (modern desktop and responsive mobile).
 
 ---
 
-## 2. Global Navigation & Layout
-- **Institutional Header**: Shows the NIE Mysuru badge, main navigation links ("Explore Ideas", "My Submissions", "Campus Leaderboard"), action CTA ("+ Post Idea"), notification bell with unread count badge, and user profile avatar.
-- **Account Drawer**: Clicking on the top-right profile avatar opens the slide-over account drawer revealing student USN, CGPA, quick settings, and lab credentials.
-- **Global Footer**: NIE Research Cell links, IP & Ethics policies, Faculty Guidelines, and academic copyright notices.
+## 2. Pushing to GitHub
+
+To publish the code to GitHub:
+```bash
+# Verify git status
+git status
+
+# Add your GitHub remote repository (replace with your personal or NIE organization URL)
+git remote add origin https://github.com/<your-username>/nie-idea-vault.git
+
+# Set active branch to main
+git branch -M main
+
+# Push all files and commit history
+git push -u origin main
+```
 
 ---
 
-## 3. Core Feature Walkthroughs
+## 3. Deploying to Vercel
+
+The application is pre-configured for instant zero-configuration deployment to Vercel.
+
+### Option A: Via Vercel Web Dashboard (Recommended)
+1. Push your repository to GitHub.
+2. Sign in to [Vercel](https://vercel.com/) and click **"Add New..."** -> **"Project"**.
+3. Import your GitHub repository (`nie-idea-vault`).
+4. Vercel automatically detects the root `vercel.json`:
+   - **Framework Preset**: Vite
+   - **Build Command**: `cd frontend && npm install && npm run build`
+   - **Output Directory**: `frontend/dist`
+5. Click **"Deploy"**.
+6. The application is live with all 13 Google Stitch screens immediately functional!
+
+### Option B: Deploying Subdirectory `frontend/`
+If you prefer setting the Vercel Root Directory to `frontend/`:
+1. In Vercel Project Settings, select `frontend` as Root Directory.
+2. Vercel will use `frontend/package.json` (`npm run build`) and output to `dist`.
+3. `frontend/vercel.json` provides SPA fallback rewrites to `/index.html`.
+
+### Option C: Deploying using Vercel CLI
+```bash
+npm install -g vercel
+vercel
+```
+
+---
+
+## 4. Core Feature Walkthroughs
 
 ### Workflow 1: Exploring Ideas & Collaborative Voting
 1. Navigate to **Explore Ideas** (`/` or Home).
@@ -38,7 +79,7 @@ Welcome to **NIE Idea Vault**, the official innovation and capstone collaboratio
    - **Tech Stack Tags**: Tags like `React`, `FastAPI`, `OpenCV`, `ESP32`.
    - **Teammate Seeking**: Enable the cross-branch checkbox and select desired roles (e.g. `ECE Hardware`, `CSE Backend`, `UI/UX Designer`).
 3. Click **"Check & Post Idea"**:
-   - The platform sends the proposal to the AI duplicate detection engine.
+   - The platform evaluates semantic overlap against past archives.
    - **No Duplicate Detected (< 40% match)**: The proposal is published immediately and assigned to your submissions dashboard.
    - **High/Moderate Similarity Detected (>= 40% match)**: The **Duplicate Warning** screen is presented showing:
      - % match detected banner (e.g. 88% match).
@@ -65,10 +106,10 @@ Welcome to **NIE Idea Vault**, the official innovation and capstone collaboratio
 
 ---
 
-## 4. Troubleshooting & FAQ
-- **Q: Why was my proposal flagged as a duplicate?**
-  - *A*: The similarity engine evaluates semantic overlap against past NIE capstone archives. If another team already tackled the same problem with similar hardware or software stacks, consider joining their team or refining your unique value proposition.
+## 5. Troubleshooting & FAQ
+- **Q: How does the AI Duplicate Detection work?**
+  - *A*: The similarity engine uses TF-IDF vectorization and cosine similarity, breaking down matches across Problem Context, Hardware & Tech Choice, and Target Demographic.
+- **Q: Does the Vercel deployment require a live backend server?**
+  - *A*: No! The frontend client features a built-in hybrid fallback engine. If a live backend is specified via `VITE_API_BASE_URL`, it uses it; otherwise, it seamlessly runs the full application and similarity engine in-browser.
 - **Q: How are leaderboard points computed?**
   - *A*: Points are awarded for approved capstone proposals (100 pts), peer upvotes (10 pts each), forming cross-department teams (50 pts), and faculty mentor endorsements (150 pts).
-- **Q: Can I edit a proposal after submission?**
-  - *A*: Yes, from the **My Submissions** dashboard you can update project milestones, adjust open team roles, or request faculty review.
