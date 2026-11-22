@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Campus Leaderboard — NIE Idea Vault</title>
+  
+  <!-- Google Fonts: Inter & Material Symbols Outlined -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Stitch Design System Tailwind Config -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#3525cd",
+            "primary-container": "#4f46e5",
+            "on-primary": "#ffffff",
+            "primary-fixed": "#e2dfff",
+            "primary-fixed-dim": "#c3c0ff",
+            "secondary": "#006c49",
+            "secondary-container": "#6cf8bb",
+            "surface": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "surface-bright": "#f8f9ff",
+            "surface-variant": "#d3e4fe",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eff4ff",
+            "surface-container-high": "#dce9ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#0b1c30",
+            "on-surface-variant": "#464555",
+            "outline": "#777587",
+            "error": "#ba1a1a"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body class="bg-surface font-sans text-on-surface min-h-screen">
+  <!-- Global Header Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-container shadow-[0_1px_8px_rgba(15,23,42,0.04)]">
+    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm">
+            <span class="material-symbols-outlined text-[20px]">lightbulb</span>
+          </div>
+          <span class="font-bold text-lg text-on-surface tracking-tight whitespace-nowrap">Idea Vault</span>
+          <span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-xs font-semibold">NIE Mysuru</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-4">
+          <a class="text-on-surface-variant hover:text-on-surface py-2 text-sm font-medium transition-colors" href="index.html">Explore Ideas</a>
+          <a class="text-on-surface-variant hover:text-on-surface py-2 text-sm font-medium transition-colors" href="submissions.html">My Submissions</a>
+          <a class="text-primary border-b-2 border-primary py-2 text-sm font-semibold transition-colors" href="leaderboard.html">Campus Leaderboard</a>
+          <a class="text-on-surface-variant hover:text-on-surface py-2 text-sm font-medium transition-colors" href="teammates.html">Find Teammates</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="post.html" class="inline-flex items-center gap-1.5 bg-primary-container hover:bg-primary text-on-primary text-sm font-semibold px-4 py-2 rounded-full transition-colors shadow-sm">
+          <span class="material-symbols-outlined text-[18px]">add</span>
+          <span>Post Idea</span>
+        </a>
+        <a href="notifications.html" aria-label="Campus Notifications" class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors">
+          <span class="material-symbols-outlined text-[22px]">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+        </a>
+        <div class="flex items-center gap-2 pl-3 border-l border-surface-container cursor-pointer hover:opacity-85 transition-opacity profile-avatar-btn" data-path="profile-trigger" onclick="IdeaVault.toggleProfileDrawer()" title="Click to view profile menu">
+          <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-container" id="headerProfileAvatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"/>
+          <div class="hidden lg:flex flex-col text-left">
+            <span class="text-xs font-semibold text-on-surface leading-none" id="headerProfileName">Rohan S.</span>
+            <span class="text-[11px] text-on-surface-variant leading-none mt-1" id="headerProfileBatch">CSE '25</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="w-full pt-20 pb-16 max-w-7xl mx-auto px-6">
+    <!-- Header Banner -->
+    <div class="relative w-full rounded-2xl bg-surface-container-low p-8 mb-8 overflow-hidden shadow-sm">
+      <div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+      <div class="relative z-10 max-w-2xl">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest text-primary text-xs font-semibold shadow-sm mb-3">
+          <span class="material-symbols-outlined text-[16px]">military_tech</span>
+          <span>Official Campus Rankings</span>
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight text-on-surface">Campus Innovation Leaderboard</h1>
+        <p class="text-on-surface-variant text-base mt-2">
+          Recognizing the most impactful capstone ideas, highest community endorsements, and leading engineering departments across NIE Mysuru.
+        </p>
+      </div>
+    </div>
+
+    <!-- Top 3 Podium Row -->
+    <div id="podium-section" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 items-end">
+      <!-- Loading placeholders -->
+      <div class="h-64 rounded-2xl bg-surface-container-lowest animate-pulse"></div>
+      <div class="h-72 rounded-2xl bg-surface-container-lowest animate-pulse"></div>
+      <div class="h-60 rounded-2xl bg-surface-container-lowest animate-pulse"></div>
+    </div>
+
+    <!-- Two-Column Layout: Project Rankings & Department Metrics -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Left Column: Top 10 Projects Table -->
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">trending_up</span>
+            <span>Top Innovation Proposals</span>
+          </h2>
+          <span class="text-xs text-on-surface-variant font-medium">Ranked by Community Endorsements</span>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden border border-surface-container">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm" id="leaderboard-table">
+              <thead class="bg-surface-container-low text-on-surface-variant font-semibold border-b border-surface-container">
+                <tr>
+                  <th class="py-3 px-4 text-center w-12">#</th>
+                  <th class="py-3 px-4">Project Title & Department</th>
+                  <th class="py-3 px-4 text-center">Category</th>
+                  <th class="py-3 px-4 text-center">Upvotes</th>
+                  <th class="py-3 px-4 text-center">Collaborators</th>
+                  <th class="py-3 px-4 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-tbody" class="divide-y divide-surface-container">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Department Metrics & Top Innovators -->
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <!-- Department Performance Card -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container">
+          <h3 class="text-base font-bold text-on-surface flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-secondary">apartment</span>
+            <span>Department Engagement</span>
+          </h3>
+          <div id="department-stats-list" class="flex flex-col gap-4">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Top Innovators Card -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container">
+          <h3 class="text-base font-bold text-on-surface flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-tertiary">star</span>
+            <span>Top Student Innovators</span>
+          </h3>
+          <div id="top-innovators-list" class="flex flex-col gap-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch(`${window.IdeaVault.API_BASE}/leaderboard`);
+        if (!res.ok) throw new Error("Leaderboard API returned error");
+        const data = await res.json();
+        renderPodium(data.top_ideas);
+        renderTable(data.top_ideas);
+        renderDepartments(data.department_stats);
+        renderInnovators(data.top_innovators);
+      } catch (err) {
+        console.error("Failed to load leaderboard:", err);
+        window.IdeaVault.showToast("Loaded offline campus leaderboard.", "info");
+      }
+    });
+
+    function renderPodium(ideas) {
+      if (!ideas || ideas.length < 3) return;
+      const podium = document.getElementById('podium-section');
+      const [first, second, third] = ideas;
+
+      podium.innerHTML = `
+        <!-- Silver 2nd Place -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container flex flex-col items-center text-center order-2 md:order-1 h-72 justify-between">
+          <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-lg shadow-inner ring-4 ring-slate-200">2</div>
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-xs font-semibold">${second.category}</span>
+            <h3 class="font-bold text-base text-on-surface line-clamp-2 mt-2">${second.title}</h3>
+            <p class="text-xs text-on-surface-variant mt-1">${second.author_name} • ${second.author_batch}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-bold text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">thumb_up</span> ${second.upvotes}</span>
+            <a href="idea.html?id=${second.id}" class="text-xs font-semibold text-primary hover:underline">View Spec →</a>
+          </div>
+        </div>
+
+        <!-- Gold 1st Place -->
+        <div class="bg-gradient-to-b from-primary-fixed/40 to-surface-container-lowest rounded-2xl p-8 shadow-md border-2 border-primary flex flex-col items-center text-center order-1 md:order-2 h-80 justify-between relative overflow-hidden">
+          <div class="absolute top-2 right-2"><span class="material-symbols-outlined text-amber-500 text-[28px]">crown</span></div>
+          <div class="w-14 h-14 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-xl shadow-md ring-4 ring-amber-300">1</div>
+          <div>
+            <span class="px-3 py-1 rounded-full bg-primary-container text-on-primary text-xs font-bold shadow-sm">${first.category}</span>
+            <h3 class="font-bold text-lg text-on-surface line-clamp-2 mt-2">${first.title}</h3>
+            <p class="text-xs text-on-surface-variant mt-1">${first.author_name} • ${first.author_batch}</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-base font-bold text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">thumb_up</span> ${first.upvotes} Endorsements</span>
+            <a href="idea.html?id=${first.id}" class="text-xs font-bold text-on-primary bg-primary px-3 py-1.5 rounded-full hover:bg-primary-container transition-colors">Inspect Project</a>
+          </div>
+        </div>
+
+        <!-- Bronze 3rd Place -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-surface-container flex flex-col items-center text-center order-3 md:order-3 h-64 justify-between">
+          <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-900 font-bold flex items-center justify-center text-lg shadow-inner ring-4 ring-amber-200">3</div>
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-xs font-semibold">${third.category}</span>
+            <h3 class="font-bold text-base text-on-surface line-clamp-2 mt-2">${third.title}</h3>
+            <p class="text-xs text-on-surface-variant mt-1">${third.author_name} • ${third.author_batch}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-bold text-primary flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">thumb_up</span> ${third.upvotes}</span>
+            <a href="idea.html?id=${third.id}" class="text-xs font-semibold text-primary hover:underline">View Spec →</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTable(ideas) {
+      const tbody = document.getElementById('leaderboard-tbody');
+      tbody.innerHTML = (ideas || []).map((idea, index) => `
+        <tr class="hover:bg-surface-container-low/50 transition-colors">
+          <td class="py-3.5 px-4 text-center font-bold text-on-surface-variant">${index + 1}</td>
+          <td class="py-3.5 px-4">
+            <a href="idea.html?id=${idea.id}" class="font-semibold text-on-surface hover:text-primary transition-colors block line-clamp-1">${idea.title}</a>
+            <span class="text-xs text-on-surface-variant">${idea.department} • Lead: ${idea.author_name}</span>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-full bg-surface-container text-xs font-medium">${idea.category}</span>
+          </td>
+          <td class="py-3.5 px-4 text-center font-bold text-primary">${idea.upvotes}</td>
+          <td class="py-3.5 px-4 text-center font-medium text-secondary">${idea.interested_students}</td>
+          <td class="py-3.5 px-4 text-right">
+            <a href="idea.html?id=${idea.id}" class="text-xs font-semibold text-primary-container hover:text-primary">Details →</a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderDepartments(depts) {
+      const container = document.getElementById('department-stats-list');
+      const maxVotes = Math.max(...(depts || []).map(d => d.total_upvotes), 1);
+
+      container.innerHTML = (depts || []).map(d => {
+        const pct = Math.round((d.total_upvotes / maxVotes) * 100);
+        return `
+          <div class="flex flex-col gap-1">
+            <div class="flex justify-between text-xs font-semibold">
+              <span class="text-on-surface truncate max-w-[200px]">${d.department}</span>
+              <span class="text-primary font-bold">${d.total_upvotes} votes</span>
+            </div>
+            <div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+              <div class="bg-primary h-2 rounded-full" style="width: ${pct}%"></div>
+            </div>
+            <span class="text-[11px] text-on-surface-variant">${d.total_projects} projects registered</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderInnovators(innovators) {
+      const container = document.getElementById('top-innovators-list');
+      container.innerHTML = (innovators || []).map((inv, idx) => `
+        <div class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container-low transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-full bg-surface-container font-bold text-xs flex items-center justify-center text-on-surface">${idx + 1}</div>
+            <div class="flex flex-col">
+              <span class="text-sm font-semibold text-on-surface">${inv.author_name}</span>
+              <span class="text-xs text-on-surface-variant">${inv.author_usn} • ${inv.author_batch}</span>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-primary bg-primary-fixed/40 px-2 py-0.5 rounded-full">${inv.cumulative_upvotes} votes</span>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

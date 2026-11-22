@@ -1,49 +1,76 @@
-# NIE Idea Vault - User & Operator Guide
+# User Guide & Operational Manual — NIE Idea Vault
 
-## 1. Quick Start
-1. Open `index.html` in any modern web browser (Google Chrome, Firefox, Safari, Edge).
-2. No build tools or node servers are required (`USE_MOCK = true` is pre-configured).
-3. The platform preloads 6 engineering capstone and research ideas from across NIE Mysuru departments.
+## 1. Getting Started
+Welcome to **NIE Idea Vault**, the official innovation portal for National Institute of Engineering students, researchers, and faculty.
 
-## 2. Navigating the Platform
-- **Explore Ideas (`index.html`)**:
-  - Filter by category tabs: `All`, `AI/ML`, `Web`, `IoT`, `App`, `Other`.
-  - Sort by `Most Upvoted` or `Newest`.
-  - Instant live search by typing in the search bar (press `/` key to focus immediately).
-  - Click on any card title to navigate to the deep-dive detail page (`idea.html?id=...`).
-  - Click the **Upvote** or **Collab** buttons on cards for immediate optimistic counters.
-- **Post an Idea (`post.html`)**:
-  - Enter project title, department, innovation category, and detailed description.
-  - Character counter alerts you if your proposal needs more technical depth.
-  - Optional bill of materials (hardware chips, sensors, microcontrollers).
-  - Automatic duplicate checker: If you submit a topic similar to an existing idea (e.g., "Smart hostel dining waste analytics"), the **Duplicate Warning** banner will catch it!
-- **Idea Deep Dive (`idea.html`)**:
-  - Problem Statement, Proposed System Architecture, and BOM Hardware & Sensor Registry.
-  - Open Team Slots with real-time status (Available vs. Filled).
-  - Interested students sidebar with "Express Interest" action and bookmarking.
-- **Profile & Academic Settings (`profile.html`)**:
-  - Access by clicking your avatar in the top right header navigation.
-  - Displays Verified NIE Student Identity: Rohan Sharma, USN `4NI21CS089`, Department of CSE, Class of 2025.
-  - Manage Developer Links: GitHub, LinkedIn, Personal Portfolio, Google Scholar.
-  - Interactive Skills Chips: Type in any technical skill (e.g., PyTorch, Rust, Docker) and press Enter to add, or click `x` to remove.
-  - Toggle Capstone Collaboration availability and teaming objective.
-  - Download active Resume PDF (`Rohan_Sharma_CSE_Resume_2025.pdf`) or simulate replacing the file.
-  - Click **Save Changes** (top or bottom) to persist updates in browser `localStorage`.
-  - Click **Preview Public Profile** to inspect your verified student card modal.
-  - Click **Export Submissions & Idea Log (JSON)** to download your entire portfolio payload.
-- **My Submissions Dashboard (`submissions.html`)**:
-  - Access by clicking **My Submissions** in the header navigation or the profile drawer.
-  - View 4 high-level KPIs: Active Submissions, Campus Endorsements, Collaborator Inquiries, Teams in Prototyping.
-  - Filter submitted projects by status: `All Submissions`, `Under Review`, `Approved & Open`, `Team Formed`, `Drafts & Warnings`.
-  - Search across your proposals in real time.
-  - Any new ideas submitted via `post.html` automatically appear dynamically at the top of the dashboard!
-  - Review peer collaborator requests with one-click **Accept** and **Decline** actions.
-  - Track Faculty Guides and TEQIP-III seed grant allocations.
-  - Export a portfolio summary report in JSON format.
+### Accessing the Platform
+- **Local Development URL**: `http://127.0.0.1:5000`
+- **Recommended Browsers**: Google Chrome, Microsoft Edge, Brave, Mozilla Firefox.
 
-## 3. Switching to Real Backend Mode
-When your Flask / Node.js backend is ready:
-1. Open `app.js`.
-2. Set `const USE_MOCK = false;`.
-3. Set `const API_BASE = 'http://localhost:5000';` (or your backend domain).
-4. Refresh the browser. All requests will route to the live REST API endpoints.
+---
+
+## 2. Platform Navigation & 13 Stitch Screens Overview
+
+| # | Screen | File / Location | Primary Purpose |
+|---|---|---|---|
+| 1 | **Post Idea** | `post.html` | Step-by-step submission form with automatic duplicate idea checking. |
+| 2 | **Profile & Settings** | `profile.html` | Student academic identity, USN, portfolio links, skills, and lab authorizations. |
+| 3 | **Notification Center** | `notifications.html` | Campus activity stream, team application notices, upvote milestones, and review status. |
+| 4 | **Teammate Matching** | `teammates.html` | Open interdisciplinary role listings filtered by skill (Python, ML, Firmware, React, CAD). |
+| 5 | **Campus Leaderboard** | `leaderboard.html` | Top 3 podium, rankings table, departmental engagement progress, and top student innovators. |
+| 6 | **Duplicate Warning** | `post.html` (Modal / Banner) | Highlights >= 40% duplicate matches with diagnostic comparisons and bypass options. |
+| 7 | **Idea Detail** | `idea.html` | Technical breakdown with Problem Statement, BOM table, Architecture, and Team Roles. |
+| 8 | **My Submissions** | `submissions.html` | Personal dashboard managing your submitted capstone ideas and team requests. |
+| 9 | **Settings & Security** | `settings.html` | Workspace themes, brand accent tones, high contrast switch, password & TOTP 2FA, session manager. |
+| 10 | **Energy Grid Showcase** | `idea.html?id=1` | Featured capstone showcase for Smart Campus Micro-Grid & Autonomous Energy Optimization. |
+| 11 | **Profile Drawer** | Global Header (`app.js`) | Quick popover / slide-over drawer accessible from any page via the header profile avatar. |
+| 12 | **Home / Idea Board** | `index.html` | Browse all submitted projects with search query, department chips, and upvote controls. |
+| 13 | **Detail Loading State** | `idea.html` (Skeleton) | Polished shimmer skeleton loading state displayed while fetching project specs. |
+
+---
+
+## 3. Core Feature Walkthroughs
+
+### Workflow 1: Posting an Idea with AI Duplicate Detection
+1. Click **Post Idea** (`+`) on the top navigation bar.
+2. Enter the **Project Title**, select your **Department** (e.g. CSE, ISE, ECE, MECH, EEE), and pick a **Category**.
+3. Select your project's **Maturity Stage** (Concept, Prototype, Validation).
+4. Enter your **Problem & Pitch Summary** and **Proposed Architecture**.
+5. Click **Check & Submit Proposal**:
+   - If the idea is novel (similarity < 40%), it is saved immediately and you are redirected to the live Idea Detail view (`idea.html?id=...`).
+   - If the idea overlaps with an existing idea (similarity >= 40%), the **Duplicate Warning Banner / Modal** appears, highlighting:
+     - The similarity match percentage (e.g. `78.5% match detected`).
+     - The title, lead student, department, and description excerpt of the matching idea.
+     - **"View Existing Idea"**: Opens the existing project in a new tab.
+     - **"Proceed with separate submission"**: Bypasses the duplicate warning using `force: true` to record an independent study or alternative methodology.
+
+### Workflow 2: Upvoting & Expressing Interest in Open Roles
+1. From the **Idea Board** or **Idea Detail** page, click the **Upvote** button.
+   - The counter updates immediately and is saved in both SQLite and your browser session.
+2. To join a project team, navigate to **Find Teammates** (`teammates.html`) or view the **Team Slots** table on any project detail page.
+3. Click **"Apply to Join"**:
+   - Your student USN (`4NI21CS089`), name, and batch are submitted to the project lead.
+   - An alert notification is delivered to the lead's Notification Center.
+
+### Workflow 3: Notification Center & Activity Feed
+1. Click the **Notifications** bell icon in the header.
+2. Filter updates by category pills: **All Updates**, **Teammate Requests**, **Upvotes & Endorsements**, **Comments & Threads**, or **Faculty & Grants**.
+3. Toggle **Unread only** to isolate pending actions.
+4. Click **"Accept Teammate"** on an applicant card to confirm them into your project team roster.
+5. Click **"Mark all as read"** to clear unread badges and update server state.
+
+### Workflow 4: Settings, Security & Campus Integrations
+1. Open the **Profile Drawer** and select **Settings & Security** (`settings.html`).
+2. Switch your Workspace Theme between **Light Mode**, **Dark Mode**, and **OS Auto Sync**.
+3. Select campus brand accent tones: **Electric Indigo** (`#4f46e5`), **Slate Navy**, or **Eco-Tech** (`#006c49`).
+4. Enable **High Contrast Projector View** for auditorium project defenses.
+5. Review connected accounts (Contineo Student Portal SSO, GitHub Academic, ORCID).
+6. Manage TOTP Two-Factor Authentication and terminate unauthorized campus Wi-Fi sessions.
+
+---
+
+## 4. Troubleshooting & FAQ
+- **Q: Why was my proposal flagged as a duplicate?**
+  - *A*: The backend evaluated your proposal's title and description using TF-IDF and Cosine Similarity against all registered ideas. If overlap is >= 40.0%, it flags it to prevent redundant capstone efforts. You can click "Proceed with separate submission" if your methodology or scope is distinctly different.
+- **Q: How do I run the project locally?**
+  - *A*: Run `python backend/app.py` in your terminal. Open `http://127.0.0.1:5000` in your web browser.

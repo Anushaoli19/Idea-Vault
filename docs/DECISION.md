@@ -1,24 +1,40 @@
-# Architecture Decision Records (ADR)
+# Architecture Decision Records (ADR) — NIE Idea Vault
 
-## ADR-001: Zero-Build Plain HTML, CSS, and Vanilla JavaScript
-- **Date**: 2026-11-22
+## ADR-001: Architecture & Framework Selection
 - **Status**: Accepted
-- **Context**: The user requested a clean, performant frontend composed of `index.html`, `post.html`, `idea.html`, `app.js`, and `styles.css` matching the Google Stitch layout and styling exactly.
-- **Alternatives Evaluated**:
-  1. *React + Vite build*: Increases tooling complexity, requires node runtime and compilation for static views.
-  2. *Plain HTML + CSS + Vanilla JS with Tailwind CDN & Design Tokens*: Runs instantly in any browser without npm/vite dependencies while keeping 100% exact styling parity with Stitch.
-- **Decision**: Adopt Plain HTML5, Tailwind CDN with custom Stitch theme config, and a unified `app.js` and `styles.css`.
-- **Consequences**: Instant startup, zero bundle overhead, portable across static hosts.
+- **Date**: 2026-11-22
+- **Context**: The NIE Idea Vault project requires an agile, robust full-stack architecture that supports AI/ML text similarity calculations for duplicate detection, rich multi-page campus workflows (Board, Post, Detail, Submissions, Leaderboard, Teammate Matching), and rapid execution without heavy client-side bundler overhead.
+- **Considered Alternatives**:
+  1. FastAPI + React SPA with Vite: Excellent type safety, but requires concurrent Node.js runtime and separate build pipeline for local campus deployments.
+  2. Django + Templates: Heavy ORM and battery overhead; excessive for a focused capstone portal.
+  3. Flask + Semantic HTML5 / Tailwind CSS + Scikit-Learn: Lightweight, Python-native ML integration (`TfidfVectorizer` and `cosine_similarity` run in-process), direct static file serving, and zero frontend build step.
+- **Decision Outcome**: Selected Flask (Python 3.11+) with SQLite3, Scikit-Learn for duplicate detection, and responsive HTML5/Tailwind frontend adhering to the Google Stitch Design System.
+- **Consequences**:
+  - *Positive*: Seamless in-process ML vectorization, instant local launch without complex node build steps, direct mapping to Stitch design tokens.
+  - *Negative*: Client-side state synchronization (upvotes, bookmarks) handled via a unified JavaScript client adapter with LocalStorage persistence.
 
-## ADR-002: Dual-Mode Execution (API_BASE + USE_MOCK Fallback)
-- **Date**: 2026-11-22
-- **Status**: Accepted
-- **Context**: The frontend needs to work standalone without requiring an active backend server while maintaining full compatibility with backend REST endpoints (`GET /ideas`, `POST /ideas`, `POST /ideas/:id/upvote`, `POST /ideas/:id/interest`, `POST /check-duplicate`).
-- **Decision**: Implement `API_BASE` and `USE_MOCK = true` at the top of `app.js`. In mock mode, 6 rich sample ideas are loaded with token-based duplicate scoring. When `USE_MOCK = false`, standard fetch calls are made to `API_BASE`.
-- **Consequences**: Developers and users can test all screens immediately out of the box.
+---
 
-## ADR-003: LocalStorage Double-Vote Prevention
-- **Date**: 2026-11-22
+## ADR-002: Machine Learning Duplicate Detection Strategy
 - **Status**: Accepted
-- **Decision**: Persist upvoted idea IDs (`idea_vault_upvotes`) and interested idea IDs (`idea_vault_interests`) in browser `localStorage`.
-- **Consequences**: Optimistic UI updates occur instantly; duplicate voting is prevented even on page refresh.
+- **Date**: 2026-11-22
+- **Context**: Students frequently submit capstone ideas that overlap heavily with prior projects. The system must reliably detect semantic similarity in real time without calling expensive external proprietary APIs for every keystroke.
+- **Decision Outcome**: Implemented in-process TF-IDF (Term Frequency-Inverse Document Frequency) vectorization with english stop-word filtering and Cosine Similarity metric from `scikit-learn`. Evaluates both description-to-description similarity and combined title+description overlap, selecting the maximum.
+- **Threshold**: Established a default similarity threshold of `0.40` (40.0%).
+- **Behavior**: When a user submits or previews an idea with similarity >= 40%, the backend returns HTTP 409 Conflict with the matching idea's details, triggering the Stitch Duplicate Warning modal on the client.
+
+---
+
+## ADR-003: Duplicate Warning Override Mechanism
+- **Status**: Accepted
+- **Date**: 2026-11-22
+- **Context**: While duplicate warning is essential to prevent identical capstone submissions, research projects with identical domain goals (e.g. campus solar micro-grids) may explore fundamentally different hardware architectures or algorithmic models.
+- **Decision Outcome**: Supported a `force: true` parameter in `POST /ideas`. When the user reviews the Duplicate Warning and clicks "Proceed with separate submission", the client resends the payload with `force: true`, bypassing the duplicate rejection gate and registering the idea.
+
+---
+
+## ADR-004: Stitch Design System Token Architecture and Global Drawer
+- **Status**: Accepted
+- **Date**: 2026-11-22
+- **Context**: All 13 desktop screens generated in the Stitch MCP project shared a unified Material/Stitch token set (Inter font, Primary `#3525cd`, Primary Container `#4f46e5`, Secondary `#006c49`, Surface `#f8f9ff`). The global account menu drawer needed to appear identically across all pages without duplicating HTML templates.
+- **Decision Outcome**: Embedded the Stitch Tailwind config tokens into each page `<head>` and injected the Account Menu & Profile Drawer dynamically via `app.js` with backdrop blur, metric counters, and direct workspace links.

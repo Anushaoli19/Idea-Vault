@@ -6,7 +6,9 @@
  */
 
 // Global Configuration
-const API_BASE = 'http://127.0.0.1:5000';
+const API_BASE = (typeof window !== 'undefined' && window.location && window.location.port === '5000') 
+  ? '' 
+  : 'http://127.0.0.1:5000';
 const USE_MOCK = false;
 
 /**
@@ -24,38 +26,60 @@ function adaptBackendIdea(raw) {
   const isUpvoted = upvotedSet.has(raw.id);
   const isInterested = interestedSet.has(raw.id);
 
+  let parsedBom = [];
+  try {
+    if (typeof raw.bom_json === "string") parsedBom = JSON.parse(raw.bom_json);
+    else if (Array.isArray(raw.bom)) parsedBom = raw.bom;
+  } catch (e) { parsedBom = []; }
+
+  let parsedTags = [];
+  try {
+    if (typeof raw.tags_json === "string") parsedTags = JSON.parse(raw.tags_json);
+    else if (Array.isArray(raw.tags)) parsedTags = raw.tags;
+    else parsedTags = [raw.category || "Innovation", "Capstone"];
+  } catch (e) { parsedTags = [raw.category || "Innovation"]; }
+
   return {
     id: raw.id,
+    nieId: raw.nieId || `NIE-25-${(raw.category || 'ENG').slice(0, 3).toUpperCase()}-${raw.id}`,
     title: raw.title || "Untitled Innovation",
     description: raw.description || "",
     category: raw.category || "General",
     department: raw.department || raw.category || "Computer Science & Engineering (CSE)",
-    departmentShort: (raw.category || "CSE").slice(0, 4).toUpperCase(),
-    categoriesBadge: raw.category || "Technology",
-    createdAt: raw.created_at || new Date().toISOString(),
-    timeAgo: "Recently active",
+    departmentShort: (raw.department || raw.category || "CSE").slice(0, 4).toUpperCase(),
+    categoriesBadge: raw.category ? `${raw.category} • Capstone` : "Engineering • Capstone",
+    createdAt: raw.created_at || raw.createdAt || new Date().toISOString(),
+    timeAgo: raw.timeAgo || "Recently active",
     upvotes: typeof raw.upvotes === "number" ? raw.upvotes : 0,
     interests: typeof raw.interested_students === "number" ? raw.interested_students : (raw.interests || 0),
     isUpvoted: isUpvoted,
     isInterested: isInterested,
-    tags: raw.tags || [raw.category || "Innovation", "Capstone"],
-    authorName: raw.authorName || "NIE Student",
-    authorBatch: raw.authorBatch || "Class of 2025",
-    authorAvatar: raw.authorAvatar || "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
-    problemStatement: raw.problemStatement || raw.description || "",
-    proposedSolution: raw.proposedSolution || raw.description || "",
+    tags: parsedTags,
+    authorName: raw.author_name || raw.authorName || "NIE Student",
+    authorUsn: raw.author_usn || raw.authorUsn || "4NI21CS089",
+    authorBatch: raw.author_batch || raw.authorBatch || "Class of 2025",
+    authorAvatar: raw.author_avatar || raw.authorAvatar || "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
+    problemStatement: raw.problem_statement || raw.problemStatement || raw.description || "",
+    proposedSolution: raw.proposed_solution || raw.proposedSolution || raw.description || "",
     architecture: raw.architecture || "Cloud & Edge Architecture",
-    bom: raw.bom || [
+    hardware: raw.hardware || "Standard campus laboratory development boards.",
+    stage: raw.stage || "Prototype",
+    bom: parsedBom.length ? parsedBom : [
       { item: "Compute Core", spec: "Edge Gateway / Cloud VM", qty: 1, cost: "₹4,500" },
       { item: "Sensor Suite", spec: "Multi-parameter telemetry", qty: 2, cost: "₹1,800" }
     ],
-    teamSlots: raw.teamSlots || [
-      { role: "Backend Developer", status: "Available" },
-      { role: "Frontend / UI Lead", status: "Available" }
+    roles: raw.roles || raw.teamSlots || [
+      { role_title: "Backend Developer", skills_required: "Python, SQLite" },
+      { role_title: "Frontend Lead", skills_required: "HTML5, Tailwind CSS, JavaScript" }
     ],
-    interestedUsers: [
-      { name: "Pooja Hegde", batch: "ISE '25", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDFW21bJ0r1x2GgN0E_3x4y5z6" },
-      { name: "Aditya Verma", batch: "ECE '25", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC1_q2w3e4r5t6y7u8" }
+    teamSlots: (raw.roles || raw.teamSlots || []).map(r => ({
+      role: r.role_title || r.role || "Technical Lead",
+      status: r.status || "Available",
+      skills: r.skills_required || r.skills || "Engineering"
+    })),
+    interestedUsers: raw.interested_users || raw.interestedUsers || [
+      { student_name: "Pooja Hegde", student_id: "4NI21IS045", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDFW21bJ0r1x2GgN0E_3x4y5z6" },
+      { student_name: "Aditya Verma", student_id: "4NI21EC012", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC1_q2w3e4r5t6y7u8" }
     ]
   };
 }
@@ -498,11 +522,11 @@ async function fetchIdeas() {
     const response = await fetch(`${API_BASE}/ideas`);
     if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
     const data = await response.json();
-    return data;
+    return Array.isArray(data) ? data.map(adaptBackendIdea) : [];
   } catch (err) {
     console.warn("Backend API unavailable, falling back to mock mode:", err);
     showToast("Backend unavailable. Loaded offline campus registry.", "warning");
-    return SAMPLE_IDEAS;
+    return SAMPLE_IDEAS.map(adaptBackendIdea);
   }
 }
 
@@ -520,22 +544,125 @@ async function fetchIdeaById(id) {
     const isUpvoted = upvotedSet.has(idea.id);
     const isInterested = interestedSet.has(idea.id);
 
-    return {
+    return adaptBackendIdea({
       ...idea,
       isUpvoted,
       isInterested,
       upvotes: idea.upvotes + (isUpvoted ? 1 : 0),
       interests: idea.interests + (isInterested ? 1 : 0)
-    };
+    });
   }
 
   try {
     const response = await fetch(`${API_BASE}/ideas/${id}`);
     if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-    return await response.json();
+    const raw = await response.json();
+    return adaptBackendIdea(raw);
   } catch (err) {
     console.warn("Backend API fetchIdeaById failed:", err);
-    return SAMPLE_IDEAS.find(item => String(item.id) === String(id)) || null;
+    const found = SAMPLE_IDEAS.find(item => String(item.id) === String(id));
+    return found ? adaptBackendIdea(found) : null;
+  }
+}
+
+/**
+ * Fetch Leaderboard Data (GET /leaderboard)
+ */
+async function getLeaderboard() {
+  try {
+    const res = await fetch(`${API_BASE}/leaderboard`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("getLeaderboard fallback:", err);
+    return null;
+  }
+}
+
+/**
+ * Fetch Open Teammate Roles (GET /roles)
+ */
+async function getRoles(skillFilter = '') {
+  try {
+    const url = skillFilter ? `${API_BASE}/roles?skill=${encodeURIComponent(skillFilter)}` : `${API_BASE}/roles`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("getRoles fallback:", err);
+    return [];
+  }
+}
+
+/**
+ * Fetch Notifications Stream (GET /notifications)
+ */
+async function getNotifications(userId = '4NI21CS089') {
+  try {
+    const res = await fetch(`${API_BASE}/notifications?user_id=${encodeURIComponent(userId)}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("getNotifications fallback:", err);
+    return { notifications: [], unread_count: 0 };
+  }
+}
+
+/**
+ * Mark a single notification read
+ */
+async function markNotificationRead(id) {
+  try {
+    const res = await fetch(`${API_BASE}/notifications/${id}/read`, { method: 'POST' });
+    return res.ok;
+  } catch (err) {
+    return false;
+  }
+}
+
+/**
+ * Mark all notifications read
+ */
+async function markAllNotificationsRead(userId = '4NI21CS089') {
+  try {
+    const res = await fetch(`${API_BASE}/notifications/read-all?user_id=${encodeURIComponent(userId)}`, { method: 'POST' });
+    return res.ok;
+  } catch (err) {
+    return false;
+  }
+}
+
+/**
+ * Get Profile
+ */
+async function getProfile(studentId = '4NI21CS089') {
+  try {
+    const res = await fetch(`${API_BASE}/profile?student_id=${encodeURIComponent(studentId)}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("getProfile fallback:", err);
+    return getUserProfile();
+  }
+}
+
+/**
+ * Update Profile
+ */
+async function updateProfile(profileData) {
+  try {
+    const res = await fetch(`${API_BASE}/profile`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(profileData)
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    saveUserProfile(profileData);
+    return await res.json();
+  } catch (err) {
+    console.warn("updateProfile fallback:", err);
+    saveUserProfile(profileData);
+    return { message: "Saved locally" };
   }
 }
 
@@ -647,11 +774,27 @@ async function createIdea(ideaPayload) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         ...ideaPayload,
-        authorName: profile.name,
-        authorEmail: profile.email
+        author_name: profile.name,
+        author_usn: profile.usn,
+        author_batch: profile.batchShort,
+        author_avatar: profile.avatar
       })
     });
-    if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+    
+    if (!response.ok) {
+      if (response.status === 409) {
+        const errData = await response.json();
+        const err = new Error(errData.message || "Duplicate detected");
+        err.isDuplicate = true;
+        err.duplicate = true;
+        err.similarity = errData.similarity_score;
+        err.similarity_score = errData.similarity_score;
+        err.matchedIdea = errData.similar_idea;
+        err.similar_idea = errData.similar_idea;
+        throw err;
+      }
+      throw new Error(`HTTP Error ${response.status}`);
+    }
     return await response.json();
   } catch (err) {
     console.error("Failed to post idea to backend:", err);
@@ -859,7 +1002,7 @@ function injectProfileDrawer() {
         <div class="flex flex-col gap-1">
           <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold px-2 mb-1">Workspace &amp; Portfolios</span>
           
-          <a class="flex items-center justify-between px-space-sm py-2.5 rounded-xl hover:bg-surface-container-low transition-colors group" href="profile.html">
+          <a class="flex items-center justify-between px-space-sm py-2 rounded-xl hover:bg-surface-container-low transition-colors group" href="profile.html">
             <div class="flex items-center gap-space-sm">
               <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary-fixed group-hover:text-primary transition-colors">
                 <span class="material-symbols-outlined text-[1.125rem]">manage_accounts</span>
@@ -869,7 +1012,17 @@ function injectProfileDrawer() {
             <span class="material-symbols-outlined text-[1rem] text-outline">chevron_right</span>
           </a>
 
-          <a class="flex items-center justify-between px-space-sm py-2.5 rounded-xl hover:bg-surface-container-low transition-colors group" href="submissions.html">
+          <a class="flex items-center justify-between px-space-sm py-2 rounded-xl hover:bg-surface-container-low transition-colors group" href="settings.html">
+            <div class="flex items-center gap-space-sm">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary-fixed group-hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[1.125rem]">shield</span>
+              </div>
+              <span class="font-title-sm text-title-sm text-on-surface font-medium">Settings &amp; Security</span>
+            </div>
+            <span class="material-symbols-outlined text-[1rem] text-outline">chevron_right</span>
+          </a>
+
+          <a class="flex items-center justify-between px-space-sm py-2 rounded-xl hover:bg-surface-container-low transition-colors group" href="submissions.html">
             <div class="flex items-center gap-space-sm">
               <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary-fixed group-hover:text-primary transition-colors">
                 <span class="material-symbols-outlined text-[1.125rem]">folder_open</span>
@@ -879,17 +1032,37 @@ function injectProfileDrawer() {
             <span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">4 Projects</span>
           </a>
 
-          <a class="flex items-center justify-between px-space-sm py-2.5 rounded-xl bg-surface-container-low/60 hover:bg-surface-container-low transition-colors group" href="submissions.html">
+          <a class="flex items-center justify-between px-space-sm py-2 rounded-xl hover:bg-surface-container-low transition-colors group" href="leaderboard.html">
+            <div class="flex items-center gap-space-sm">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary-fixed group-hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[1.125rem]">leaderboard</span>
+              </div>
+              <span class="font-title-sm text-title-sm text-on-surface font-medium">Campus Leaderboard</span>
+            </div>
+            <span class="material-symbols-outlined text-[1rem] text-outline">chevron_right</span>
+          </a>
+
+          <a class="flex items-center justify-between px-space-sm py-2 rounded-xl hover:bg-surface-container-low transition-colors group" href="teammates.html">
             <div class="flex items-center gap-space-sm">
               <div class="w-8 h-8 rounded-lg bg-secondary-container/40 flex items-center justify-center text-on-secondary-container">
                 <span class="material-symbols-outlined text-[1.125rem]">group_add</span>
               </div>
               <div class="flex flex-col text-left">
-                <span class="font-title-sm text-title-sm text-on-surface font-medium leading-tight">Team Invites &amp; Collabs</span>
-                <span class="font-label-sm text-label-sm text-secondary font-semibold">2 New Requests Waiting</span>
+                <span class="font-title-sm text-title-sm text-on-surface font-medium leading-tight">Find Teammates</span>
+                <span class="font-label-sm text-label-sm text-secondary font-semibold">Open Project Vacancies</span>
               </div>
             </div>
             <span class="w-2 h-2 rounded-full bg-secondary"></span>
+          </a>
+
+          <a class="flex items-center justify-between px-space-sm py-2 rounded-xl hover:bg-surface-container-low transition-colors group" href="notifications.html">
+            <div class="flex items-center gap-space-sm">
+              <div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary-fixed group-hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[1.125rem]">notifications</span>
+              </div>
+              <span class="font-title-sm text-title-sm text-on-surface font-medium">Notification Center</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-error text-white font-label-sm text-label-sm">New</span>
           </a>
         </div>
 
@@ -965,5 +1138,12 @@ window.IdeaVault = {
   getUserProfile,
   saveUserProfile,
   toggleProfileDrawer,
-  closeProfileDrawer
+  closeProfileDrawer,
+  getLeaderboard,
+  getRoles,
+  getNotifications,
+  markNotificationRead,
+  markAllNotificationsRead,
+  getProfile,
+  updateProfile
 };

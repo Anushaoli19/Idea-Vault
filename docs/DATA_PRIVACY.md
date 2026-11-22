@@ -1,15 +1,18 @@
-# Data Privacy & Security Governance
+# Data Privacy, Secrets & Compliance Policy — NIE Idea Vault
 
-## 1. PII Inventory & Data Handling
-- **Student Data**: Student names, department identifiers, and graduation batch year (e.g. `CSE '25`) are displayed publicly within the campus innovation registry.
-- **Email Contact**: Project leads share institutional email addresses for collaboration outreach. No private phone numbers or personal addresses are requested or stored.
+## 1. Sensitive Data & PII Inventory
+| Data Element | Classification | Storage Location | Encryption At Rest | Masked in Logs |
+| :--- | :--- | :--- | :---: | :---: |
+| Student USN | Student PII | SQLite (`upvotes`, `interests`) | Plaintext (Local Dev) | No |
+| Student Name | Student PII | SQLite / Client LocalStorage | Plaintext (Local Dev) | No |
+| Project IP / Proposals | Intellectual Property | SQLite (`ideas`) | Plaintext | No |
+| Session / Secret Keys | Secret | `.env` / Environment variables | Environment variable | Yes |
 
-## 2. Client Storage Policy
-- **LocalStorage Usage**:
-  - `idea_vault_upvotes`: Array of idea IDs voted on by the current browser session.
-  - `idea_vault_interests`: Array of idea IDs for which collaboration interest was expressed.
-  - `idea_vault_custom_ideas`: Array of locally submitted ideas in mock mode.
-- **No Credentials in Storage**: No passwords, tokens, or private secrets are written to `localStorage`.
+## 2. Secret Management & Zero-Leak Protocol
+- **Strict Rule**: Never commit `.env` or hardcode sensitive tokens/keys in repository files.
+- **Local Dev**: Configured via `.env` (sanitized template in `.env.example`).
+- **Git Hygiene**: Verified `.gitignore` blocks `.env`, `*.db`, and credentials.
 
-## 3. Data Sanitization
-- User inputs in project title, description, and tags are HTML-escaped before insertion into the DOM to prevent Cross-Site Scripting (XSS).
+## 3. Input Sanitization & Integrity
+- All user inputs (project titles, descriptions, role applications) are parameterized through SQLite DB adapters to prevent SQL injection.
+- Frontend rendering uses text node assignments or sanitized attributes to prevent cross-site scripting (XSS).

@@ -1,65 +1,194 @@
-# System Architecture & Technical Specifications
+# System Architecture & Technical Specifications — NIE Idea Vault
 
 ## 1. System Topology & Architecture Diagram
 ```mermaid
 graph TD
-    Client["Browser Client (index / post / idea / profile / submissions)"]
-    AppJS["Vanilla JS Engine (app.js)"]
-    CSS["Stitch Design System (styles.css + Tailwind CDN)"]
-    Storage[("Browser LocalStorage (Votes / Custom Ideas / Profile)")]
-    MockEngine["Built-in Mock Engine (6 Sample Ideas + User Profile)"]
-    API["REST API Backend (http://localhost:5000)"]
+    subgraph Frontend ["Client Layer (13 Stitch Screens & Tokens)"]
+        UI_Home["Home / Idea Board (index.html)"]
+        UI_Post["Post Idea & Duplicate Warning (post.html)"]
+        UI_Detail["Idea Detail & Loading Skeletons (idea.html)"]
+        UI_Submissions["My Submissions Dashboard (submissions.html)"]
+        UI_Leaderboard["Campus Leaderboard (leaderboard.html)"]
+        UI_Teammates["Teammate Matching & Open Roles (teammates.html)"]
+        UI_Notifications["Notification Center (notifications.html)"]
+        UI_Settings["Settings & Security (settings.html)"]
+        UI_Profile["Profile & Academic Settings (profile.html)"]
+        UI_Drawer["Global Account Menu & Profile Drawer (app.js)"]
+        Core_JS["Core App Engine (app.js)"]
+        Tailwind["Stitch Theme Tokens & Tailwind CSS"]
+    end
 
-    Client --> AppJS
-    Client --> CSS
-    AppJS --> Storage
-    AppJS -->|USE_MOCK = true| MockEngine
-    AppJS -->|USE_MOCK = false| API
+    subgraph Backend ["Python Backend Layer (Flask REST API)"]
+        API["Flask Application (app.py)"]
+        CORS["Flask-CORS Middleware"]
+        DupEngine["Duplicate Detection Engine (duplicate_detection.py)"]
+        DB_Layer["Database Adapter (database.py)"]
+    end
+
+    subgraph Storage ["Persistence Layer"]
+        SQLite[("SQLite3 Database (idea_vault.db)")]
+        LocalStorage[("Browser LocalStorage (Session / Preferences)")]
+    end
+
+    UI_Home --> Core_JS
+    UI_Post --> Core_JS
+    UI_Detail --> Core_JS
+    UI_Submissions --> Core_JS
+    UI_Leaderboard --> Core_JS
+    UI_Teammates --> Core_JS
+    UI_Notifications --> Core_JS
+    UI_Settings --> Core_JS
+    UI_Profile --> Core_JS
+    UI_Drawer --> Core_JS
+
+    Core_JS -->|REST API / JSON| API
+    Core_JS --> LocalStorage
+    API --> CORS
+    API --> DupEngine
+    API --> DB_Layer
+    DB_Layer --> SQLite
 ```
 
-## 2. Request Lifecycle & Data Flow
-1. **Explore Board Initialization**: `index.html` loads, calls `app.js:fetchIdeas()`.
-   - If `USE_MOCK` is true, loads 6 sample ideas + any user-created ideas from `localStorage:idea_vault_custom_ideas`.
-   - If `USE_MOCK` is false, sends `GET http://localhost:5000/ideas`.
-2. **Interactive Upvoting & Collaboration**:
-   - `handleCardUpvote()` calls `IdeaVault.upvoteIdea(id, btn)`.
-   - Checks `localStorage:idea_vault_upvotes`. If already voted, removes vote (toggle) or prevents duplicates.
-   - Optimistically updates UI counters and toggles active button state.
-   - If `USE_MOCK` is false, invokes `POST /ideas/:id/upvote` or `POST /ideas/:id/interest`.
-3. **Duplicate Detection Lifecycle**:
-   - In `post.html`, user completes form and submits.
-   - System calls `IdeaVault.checkDuplicate(proposalData)`.
-   - Computes weighted token similarity against existing repository ideas.
-   - If match $\ge 60\%$, halts submission, hides form, renders the **Duplicate Warning Screen** highlighting matched idea title, percentage, excerpt, and link.
-   - If user clicks "Proceed with my separate submission", calls `IdeaVault.createIdea()` with `skipDuplicateCheck = true`.
-4. **Student Profile & Academic Settings**:
-   - `profile.html` loads identity credentials (USN: 4NI21CS089, Dept of CSE, CGPA: 8.92, batch).
-   - Form inputs and dynamic skill chips reflect `IdeaVault.getUserProfile()`.
-   - Editing and saving writes to `localStorage:idea_vault_user_profile` and synchronizes the header avatar and name across all screens.
-   - Includes JSON data export of student submissions and public profile modal preview.
-5. **My Submissions Dashboard**:
-   - `submissions.html` displays 4 KPI metrics (Total Submissions, Campus Endorsements, Collaborator Inquiries, Teams in Prototyping).
-   - Combines baseline ideas with dynamic locally submitted proposals (`idea_vault_custom_ideas`).
-   - Supports filter tabs (`All`, `Under Review`, `Approved & Open`, `Team Formed`, `Drafts & Warnings`) and search keywords.
-   - Triage sidebar handles peer collaborator requests (Accept / Decline).
+## 2. Request Lifecycle & Duplicate Check Data Flow
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Student Innovator
+    participant UI as Post Idea Form (post.html)
+    participant JS as Client Engine (app.js)
+    participant API as Flask Backend (/ideas)
+    participant ML as Duplicate Engine (TF-IDF)
+    participant DB as SQLite (idea_vault.db)
 
-## 3. Technology Stack & Zero-Build Strategy
-- **Markup**: Semantic HTML5 with Google Material Design tokens.
-- **Styling**: Tailwind CSS CDN + custom theme tokens configured in `<script id="tailwind-config">` + `styles.css`.
-- **Icons**: Material Symbols Outlined (`Inter` typography).
-- **Core Logic**: Vanilla JavaScript ES6+ (`app.js`).
-- **Data Persistence**: `window.localStorage` with namespaced keys:
-  - `idea_vault_upvotes`
-  - `idea_vault_interests`
-  - `idea_vault_bookmarks`
-  - `idea_vault_custom_ideas`
-  - `idea_vault_user_profile`
+    User->>UI: Fills Title, Category, Description
+    User->>UI: Clicks "Check & Submit Proposal"
+    UI->>JS: Validate fields
+    JS->>API: POST /ideas (with payload)
+    API->>DB: Fetch all existing idea titles & descriptions
+    DB-->>API: Stored ideas corpus
+    API->>ML: detect_duplicate(title, desc, existing_ideas)
+    ML->>ML: Vectorize with TfidfVectorizer & Cosine Similarity
+    alt Similarity Score >= 40% (Duplicate Detected)
+        ML-->>API: { is_duplicate: true, score: 78.4, similar_idea: {...} }
+        API-->>JS: HTTP 409 Conflict with duplicate diagnostics
+        JS->>UI: Open "Duplicate Warning" Banner / Modal (Screen 6)
+        UI-->>User: Displays match percentage, existing idea lead & "Proceed with separate submission" button
+        opt User Chooses Bypass
+            User->>UI: Clicks "Proceed with separate submission"
+            UI->>API: POST /ideas with { force: true }
+            API->>DB: INSERT INTO ideas (...)
+            DB-->>API: idea_id created
+            API-->>JS: HTTP 201 Created
+            JS->>UI: Redirect to Idea Detail with success toast
+        end
+    else Similarity Score < 40% (Novel Idea)
+        ML-->>API: { is_duplicate: false, score: 12.1 }
+        API->>DB: INSERT INTO ideas (...)
+        DB-->>API: idea_id created
+        API-->>JS: HTTP 201 Created { idea_id, duplicate: false }
+        JS->>UI: Redirect to Idea Detail with success toast
+    end
+```
 
-## 4. API Specification
-| Method | Endpoint | Description | Request Body | Response |
+## 3. Database Schema & Data Models
+```mermaid
+erDiagram
+    IDEAS ||--o{ UPVOTES : receives
+    IDEAS ||--o{ INTERESTS : gathers
+    IDEAS ||--o{ ROLES : offers
+    PROFILES ||--o{ NOTIFICATIONS : receives
+
+    IDEAS {
+        int id PK
+        string title
+        text description
+        string category
+        string department
+        string author_name
+        string author_usn
+        string author_batch
+        text problem_statement
+        text proposed_solution
+        text architecture
+        text bom_json
+        text tags_json
+        timestamp created_at
+    }
+
+    UPVOTES {
+        int id PK
+        int idea_id FK
+        string student_id
+        timestamp created_at
+    }
+
+    INTERESTS {
+        int id PK
+        int idea_id FK
+        string student_id
+        string student_name
+        string role_applied
+        timestamp created_at
+    }
+
+    ROLES {
+        int id PK
+        int idea_id FK
+        string role_title
+        string skills_required
+        string status
+    }
+
+    NOTIFICATIONS {
+        int id PK
+        string user_id
+        string title
+        string message
+        string category
+        int is_read
+        timestamp created_at
+    }
+
+    PROFILES {
+        int id PK
+        string student_id UK
+        string name
+        string email
+        string department
+        string batch
+        string campus
+        string cgpa
+        text bio
+        string github
+        string linkedin
+        text skills_json
+        text desired_roles_json
+        text authorized_labs_json
+    }
+```
+
+## 4. API Endpoint Matrix
+| Method | Endpoint | Description | Request Body | Response Status |
 | :--- | :--- | :--- | :--- | :--- |
-| `GET` | `/ideas` | Retrieve campus ideas registry | None | `Idea[]` |
-| `POST` | `/ideas` | Submit new proposal | `{ title, description, department, category, tags, bom }` | `{ success: true, idea: Idea }` |
-| `POST` | `/ideas/:id/upvote` | Upvote an existing proposal | None | `{ success: true, upvotes: number }` |
-| `POST` | `/ideas/:id/interest` | Register collaboration interest | None | `{ success: true, interests: number }` |
-| `POST` | `/check-duplicate` | Pre-submission similarity audit | `{ title, description, category }` | `{ hasDuplicate: boolean, matchPercentage: number, matchedIdea: Idea }` |
+| `GET` | `/ideas` | List all ideas with upvotes, interests, search & category filters | Query: `q`, `category`, `department`, `sort` | 200 OK |
+| `GET` | `/ideas/<id>` | Retrieve complete idea technical profile, BOM & open roles | None | 200 OK / 404 Not Found |
+| `POST` | `/ideas` | Submit a new capstone idea (runs duplicate guard, supports `force`) | `{title, description, category, department, force, ...}` | 201 Created / 409 Conflict / 400 Bad Request |
+| `POST` | `/ideas/check-duplicate` | Real-time duplicate check without creating idea | `{title, description}` | 200 OK (`{is_duplicate, similarity_score, similar_idea}`) |
+| `POST` | `/ideas/<id>/upvote` | Toggle student upvote on idea | `{student_id}` | 200 OK (`{upvotes, is_upvoted}`) |
+| `POST` | `/ideas/<id>/interest` | Express interest in joining project team role | `{student_id, student_name, role_applied}` | 200 OK (`{interests, is_interested}`) |
+| `GET` | `/leaderboard` | Get campus rankings by upvotes, podium, department stats | None | 200 OK |
+| `GET` | `/roles` | List all open project roles across campus | Query: `skill` | 200 OK |
+| `GET` | `/notifications` | Campus activity stream and alert logs | Query: `user_id` | 200 OK (`{notifications, unread_count}`) |
+| `POST` | `/notifications/<id>/read` | Mark single notification read | None | 200 OK |
+| `POST` | `/notifications/read-all` | Mark all notifications read for user | Query: `user_id` | 200 OK |
+| `GET` | `/profile` | Get student academic profile details | Query: `student_id` | 200 OK |
+| `PUT` | `/profile` | Update student profile details | Profile JSON | 200 OK |
+
+## 5. Stitch Design System Architecture
+- **Color Palette Tokens**:
+  - `primary`: `#3525cd` / `primary-container`: `#4f46e5`
+  - `secondary`: `#006c49` / `secondary-container`: `#6cf8bb`
+  - `tertiary`: `#684000` / `tertiary-container`: `#885500`
+  - `surface`: `#f8f9ff` / `surface-container`: `#e5eeff` / `surface-container-highest`: `#d3e4fe`
+- **Typography**: Inter (Body, Label, Title, Headline).
+- **Iconography**: Google Material Symbols Outlined.

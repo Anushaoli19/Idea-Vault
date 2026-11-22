@@ -1,4 +1,4 @@
-# Implementation Checklist & Task Ledger
+# Implementation Task Checklist & Progress Ledger
 
 Legend:
 - `[ ]` Not Started
@@ -7,48 +7,48 @@ Legend:
 
 ---
 
-## Phase 1: Environment Setup & Scaffolding
-- [x] 1.1 Stitch MCP Project Discovery & Screen Fetching [Verified: 2026-11-22 via Stitch MCP API, 4 core screens + 6 companion views & tokens saved]
-- [x] 1.2 Scaffold `.gitignore` and `.env.example` [Verified: 2026-11-22 file inspection]
-- [x] 1.3 Scaffold 10 living docs in `docs/` and root `AGENTS.md`, `README.md` [Verified: 2026-11-22 file inspection]
+## Phase 1: Environment Setup & Doc Harness Scaffolding
+- [x] 1.1 Verify `.gitignore` and `.env.example` (ensure secrets, venv, and sqlite are properly configured) [Verified: 2026-11-22]
+- [x] 1.2 Scaffold root `AGENTS.md` and root `README.md` with project guidelines [Verified: 2026-11-22]
+- [x] 1.3 Scaffold the 10 living docs in `docs/` (`PRD.md`, `ARCHITECTURE.md`, `USER_GUIDE.md`, `TASK.md`, `DECISION.md`, `LESSONS.md`, `CONTEXT.md`, `DATA_PRIVACY.md`, `SECURITY_AUDIT.md`, `HANDOFF.md`) [Verified: 2026-11-22]
+- [x] 1.4 Present Initial Blueprint to User and pause for approval before writing application code [Approved by User: 2026-11-22]
 
-## Phase 2: Frontend Implementation
-- [x] 2.1 Author `styles.css` with exact Stitch design tokens, animations, and typography [Verified: 2026-11-22 file write]
-- [x] 2.2 Author `app.js` with `API_BASE`, `USE_MOCK = true`, 6 sample ideas (2 near-duplicates), localStorage vote persistence, and duplicate checker [Verified: 2026-11-22 node syntax & unit test]
-- [x] 2.3 Build `index.html` (Idea Board with search, filtering, sorting, card grid, loading & empty states) [Verified: 2026-11-22 file write]
-- [x] 2.4 Build `post.html` (Post Idea Form + Duplicate Warning Screen & bypass flow) [Verified: 2026-11-22 file write]
-- [x] 2.5 Build `idea.html` (Idea Detail view with deep-dive sections, team slots, interested students, loading skeleton) [Verified: 2026-11-22 file write]
+## Phase 2: Python Backend Architecture & API Enhancements
+- [x] 2.1 Upgrade SQLite database schema in `database.py` with expanded tables: `ideas` (with rich technical specs, author details, BOM, roles), `upvotes`, `interests`, `roles`, and `notifications` [Verified: 2026-11-22, 6 capstone projects seeded]
+- [x] 2.2 Enhance duplicate detection engine in `duplicate_detection.py` with dedicated pre-flight endpoint `/ideas/check-duplicate` and detailed match diagnostics (TF-IDF + Cosine Similarity) [Verified: 2026-11-22, similarity detection >= 40.0%]
+- [x] 2.3 Implement comprehensive REST API endpoints in `app.py`:
+  - `GET /ideas` (query filtering, category & department filter, sort orders)
+  - `GET /ideas/<id>` (full technical profile, open roles, interested students, BOM)
+  - `POST /ideas` (duplicate verification gate, force override parameter)
+  - `POST /ideas/check-duplicate` & `POST /check-duplicate` (pre-flight similarity analysis)
+  - `POST /ideas/<id>/upvote` & `POST /ideas/<id>/interest`
+  - `GET /leaderboard` (campus rankings, podium, department stats, top innovators)
+  - `GET /roles` (open team roles across all projects with skill filtering)
+  - `GET /notifications`, `POST /notifications/<id>/read`, `POST /notifications/read-all`
+  - `GET /profile` & `PUT /profile`
+- [x] 2.4 Verify backend API endpoints with automated Python test suite (`python -m unittest backend/test_backend.py` -> 10/10 passed) [Verified: 2026-11-22]
 
-## Phase 3: Verification & Quality Gate
-- [x] 3.1 Verify mock data loading, duplicate detection match scoring, and voting persistence [Verified: 2026-11-22 automated script]
-- [x] 3.2 Verify responsive layout and cross-page navigation links [Verified: 2026-11-22 file check]
-- [x] 3.3 Security & privacy audit sync in `docs/SECURITY_AUDIT.md` [Verified: 2026-11-22 audit check]
-- [x] 3.4 Session continuity handoff in `docs/HANDOFF.md` & `docs/CONTEXT.md` [Verified: 2026-11-22 handoff generation]
+## Phase 3: Frontend Architecture & Stitch Screen Implementation (All 13 Screens)
+- [x] 3.1 Harmonize Stitch Design System theme tokens in Tailwind configuration across all frontend pages (Colors: `#3525cd`, `#4f46e5`, `#006c49`, `#f8f9ff`, Inter font, Material Symbols) [Verified: 2026-11-22]
+- [x] 3.2 Implement & verify **Home / Idea Board** (`index.html`): Search, filters, cards, upvotes, profile drawer [Verified: 2026-11-22]
+- [x] 3.3 Implement & verify **Post Idea** (`post.html`) with interactive **Duplicate Warning Modal** (Screen 4/6): match percentage, similar idea details, "View Existing Idea", and "Proceed with separate submission" force bypass [Verified: 2026-11-22]
+- [x] 3.4 Implement & verify **Idea Detail** (`idea.html`) featuring:
+  - Smart Campus Energy Grid showcase layout (Screen 10)
+  - Skeleton loading state (Screen 13)
+  - Technical specs: Problem statement, Solution, Architecture, BOM table, and Open Team Slots (Screen 4/7) [Verified: 2026-11-22]
+- [x] 3.5 Implement & verify **My Submissions Dashboard** (`submissions.html` - Screen 8) with status tabs and search [Verified: 2026-11-22]
+- [x] 3.6 Implement & verify **Campus Leaderboard** (`leaderboard.html` - Screen 5): Top 3 podium, ranking table, department progress bars, top student innovators [Verified: 2026-11-22]
+- [x] 3.7 Implement & verify **Teammate Matching & Open Roles** (`teammates.html` - Screen 4): Skill filters, vacancy cards, one-click application [Verified: 2026-11-22]
+- [x] 3.8 Implement & verify **Notification Center & Campus Activity** (`notifications.html` - Screen 3): Category pills, unread toggle, mark all as read API, accept teammate interaction [Verified: 2026-11-22]
+- [x] 3.9 Implement & verify **Profile & Settings** (`profile.html` - Screen 2) and **Settings & Security** (`settings.html` - Screen 9) with workspace appearance toggles, SSO integrations, 2FA status, and session manager [Verified: 2026-11-22]
+- [x] 3.10 Upgrade `app.js` with unified client API adapter, dynamic `adaptBackendIdea` mapping, global **Account Menu & Profile Drawer** (Screen 11), and localStorage sync [Verified: 2026-11-22]
 
-## Phase 4: Student Profile & Submissions Views
-- [x] 4.1 Global Anchored Profile Drawer (`injectProfileDrawer()`, `toggleProfileDrawer()`) with glass blur backdrop and direct navigation [Verified: 2026-11-22 Node VM test & DOM check]
-- [x] 4.2 Build `profile.html` (Profile & Academic Settings page with USN 4NI21CS089, CGPA, developer links, dynamic skill chips, resume upload, teaming controls, public preview modal, JSON export) [Verified: 2026-11-22 link & structure test]
-- [x] 4.3 Build `submissions.html` (My Submissions & Project Vault dashboard with 4 KPI summary cards, filter tabs, proposal search, dynamic custom submissions injection, collaborator inquiry triage) [Verified: 2026-11-22 link & structure test]
-- [x] 4.4 Header navigation synchronization across all 5 pages (`index.html`, `post.html`, `idea.html`, `profile.html`, `submissions.html`) [Verified: 2026-11-22 automated link integrity check]
+## Phase 4: Integration, Verification & Security Audit
+- [x] 4.1 End-to-end integration test: novel idea submission, appearance on Board and Submissions (`backend/test_e2e.py`) [Verified: 2026-11-22]
+- [x] 4.2 End-to-end duplicate test: submit duplicate idea -> verify 409 Conflict & force-bypass submission [Verified: 2026-11-22]
+- [x] 4.3 Security audit: parameterized SQL checks, CORS review, XSS escaping, secret audit in `docs/SECURITY_AUDIT.md` [Verified: 2026-11-22]
+- [x] 4.4 Documentation sync: update `TASK.md`, `ARCHITECTURE.md`, `USER_GUIDE.md`, and `DECISION.md` [Verified: 2026-11-22]
 
-## Phase 5: Teammate Backend Integration & Verification
-- [x] 5.1 Backend Inspection & Route Specification mapping [Verified: 2026-11-22 via code review & documentation table]
-- [x] 5.2 Add minimal CORS fix to `app.py` (lines 2, 7) and `requirements.txt` (`flask-cors`) [Verified: 2026-11-22 client test]
-- [x] 5.3 Implement `adaptBackendIdea()` adapter and update `API_BASE` / `USE_MOCK = false` in `frontend/app.js` [Verified: 2026-11-22 Node VM test]
-- [x] 5.4 Reorganize frontend into `/frontend` folder [Verified: 2026-11-22 directory check]
-- [x] 5.5 End-to-end integration tests (Post idea, List ideas, Upvote, Express Interest, Duplicate Warning, Anti-double actions) [Verified: 2026-11-22 10/10 automated tests passed]
-- [x] 5.6 Add "How to run" guide to `README.md` [Verified: 2026-11-22 file inspection]
-
-## Phase 6: Symmetrical Directory Structure
-- [x] 6.1 Create `backend/` directory and organize backend files (`app.py`, `database.py`, `duplicate_detection.py`, `requirements.txt`, `API_DOCUMENTATION.md`) [Verified: 2026-11-22 file move & import test]
-- [x] 6.2 Update documentation and run scripts for `backend/` and `frontend/` [Verified: 2026-11-22 README & docs update]
-
-## Phase 7: Backend Feature Completeness & End-to-End Scratchpad Verification
-- [x] 7.1 Audit all frontend expected features vs backend endpoints [Verified: 2026-11-22 gap analysis]
-- [x] 7.2 Implement `GET /ideas/<id>` single idea deep dive with architecture, BOM, team slots, and interested users [Verified: 2026-11-22 scratchpad test]
-- [x] 7.3 Implement dedicated `POST /check-duplicate` endpoint returning TF-IDF similarity % and matched proposal [Verified: 2026-11-22 scratchpad test]
-- [x] 7.4 Support `"force": true` bypass parameter in `POST /ideas` for "Post anyway" flow [Verified: 2026-11-22 scratchpad test]
-- [x] 7.5 Implement `GET /profile` and `POST /profile` for persistent student identity management [Verified: 2026-11-22 scratchpad test]
-- [x] 7.6 Implement `GET /my-submissions` and `POST /inquiries/<id>/action` for collaborator triage [Verified: 2026-11-22 scratchpad test]
-- [x] 7.7 Seed SQLite database with authentic 6 NIE Mysuru capstone ideas and Rohan Sharma's verified profile [Verified: 2026-11-22 scratchpad test]
-- [x] 7.8 Run comprehensive 14-point scratchpad integration test (`scratch/test_all_features.py`) [Verified: 2026-11-22 14/14 tests passing 100%]
+## Phase 5: Delivery & Session Continuity
+- [x] 5.1 Final validation commands run: 20/20 tests passed (`python -m unittest backend/test_backend.py backend/test_e2e.py`) [Verified: 2026-11-22]
+- [x] 5.2 Session handoff compilation in `docs/HANDOFF.md` and `docs/CONTEXT.md` [Verified: 2026-11-22]

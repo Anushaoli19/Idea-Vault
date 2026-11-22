@@ -5,24 +5,31 @@
 *.pem
 *.key
 
-# Dependencies & Package Managers
-node_modules/
+# Python
 .venv/
 venv/
+env/
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Dependencies & Package Managers
+node_modules/
 
 # Build Outputs & Caches
 dist/
 build/
-.turbo/
-.next/
 coverage/
-.pytest_cache/
-.mypy_cache/
+
+# Database
+*.db
+*.sqlite3
 
 # System & IDE
 .DS_Store
 Thumbs.db
-*.db
-*.sqlite3
+.vscode/
+.idea/
