@@ -560,22 +560,34 @@
       const rolesContainer = document.getElementById('detail-roles-list');
       if (idea.roles && idea.roles.length > 0) {
         rolesContainer.innerHTML = idea.roles.map(r => `
-          <div class="p-space-md rounded-DEFAULT bg-surface-container flex items-start gap-space-sm">
-            <span class="material-symbols-outlined text-secondary text-[1.25rem] mt-0.5">person_add</span>
-            <div class="flex flex-col font-body-md text-body-md text-on-surface">
-              <span class="font-semibold text-secondary">${r.title}</span>
-              <span class="text-on-surface-variant">${r.description}</span>
+          <div class="p-space-md rounded-DEFAULT bg-surface-container flex items-center justify-between gap-space-sm">
+            <div class="flex items-start gap-space-sm">
+              <span class="material-symbols-outlined text-secondary text-[1.25rem] mt-0.5">person_add</span>
+              <div class="flex flex-col font-body-md text-body-md text-on-surface">
+                <span class="font-semibold text-secondary">${r.title}</span>
+                <span class="text-on-surface-variant text-xs">${r.description || r.skills_required || 'Collaborate on core project modules.'}</span>
+              </div>
             </div>
+            <button onclick="applyForRoleFromDetail('${(r.title || '').replace(/'/g, "\\'")}')" class="px-3 py-1.5 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-sm text-xs font-semibold shadow-sm transition-all flex items-center gap-1 shrink-0 active:scale-95">
+              <span class="material-symbols-outlined text-[14px]">handshake</span>
+              <span>Apply</span>
+            </button>
           </div>
         `).join('');
       } else {
         rolesContainer.innerHTML = `
-          <div class="p-space-md rounded-DEFAULT bg-surface-container flex items-start gap-space-sm">
-            <span class="material-symbols-outlined text-secondary text-[1.25rem] mt-0.5">person_add</span>
-            <div class="flex flex-col font-body-md text-body-md text-on-surface">
-              <span class="font-semibold text-secondary">General Collaborator Roles Open</span>
-              <span class="text-on-surface-variant">Reach out to the project lead to discuss technical modules and research roles.</span>
+          <div class="p-space-md rounded-DEFAULT bg-surface-container flex items-center justify-between gap-space-sm">
+            <div class="flex items-start gap-space-sm">
+              <span class="material-symbols-outlined text-secondary text-[1.25rem] mt-0.5">person_add</span>
+              <div class="flex flex-col font-body-md text-body-md text-on-surface">
+                <span class="font-semibold text-secondary">General Collaborator Roles Open</span>
+                <span class="text-on-surface-variant text-xs">Reach out to the project lead to discuss technical modules and research roles.</span>
+              </div>
             </div>
+            <button onclick="applyForRoleFromDetail('General Collaborator')" class="px-3 py-1.5 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-sm text-xs font-semibold shadow-sm transition-all flex items-center gap-1 shrink-0 active:scale-95">
+              <span class="material-symbols-outlined text-[14px]">handshake</span>
+              <span>Apply</span>
+            </button>
           </div>
         `;
       }
@@ -673,33 +685,49 @@
       }
     }
 
-    async function handleDetailInterest() {
+    async function handleDetailInterest(roleApplied = "Collaborator") {
       if (!currentIdea) return;
       const interests = window.IdeaVault.getStoredSet(window.IdeaVault.STORAGE_KEYS.INTERESTS);
       const isCurrentlyInterested = interests.has(currentIdea.id);
+      const profile = window.IdeaVault.getUserProfile();
 
-      if (isCurrentlyInterested) {
+      if (isCurrentlyInterested && roleApplied === "Collaborator") {
         interests.delete(currentIdea.id);
         currentIdea.interests = Math.max(0, currentIdea.interests - 1);
         currentIdea.isInterested = false;
+        window.IdeaVault.showToast("Interest withdrawn", "info");
       } else {
         interests.add(currentIdea.id);
-        currentIdea.interests += 1;
+        if (!isCurrentlyInterested) currentIdea.interests += 1;
         currentIdea.isInterested = true;
+        window.IdeaVault.showToast(roleApplied !== "Collaborator" ? `Application for ${roleApplied} sent to project lead!` : "Project lead notified of your interest!", "success");
       }
 
       window.IdeaVault.saveStoredSet(window.IdeaVault.STORAGE_KEYS.INTERESTS, interests);
       updateActionButtonsState(currentIdea);
       document.getElementById('sidebar-interest-badge').textContent = currentIdea.interests;
-      window.IdeaVault.showToast(currentIdea.isInterested ? "Project lead notified of your interest!" : "Interest withdrawn", "info");
 
       if (!window.IdeaVault.USE_MOCK) {
         try {
-          await fetch(`${window.IdeaVault.API_BASE}/ideas/${currentIdea.id}/interest`, { method: 'POST' });
+          await fetch(`${window.IdeaVault.API_BASE}/ideas/${currentIdea.id}/interest`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              student_id: profile.usn || '4NI21CS089',
+              student_name: profile.name || 'Rohan Sharma',
+              student_batch: profile.batchShort || 'CSE \'25',
+              role_applied: roleApplied,
+              message: `Interested in joining as ${roleApplied}.`
+            })
+          });
         } catch (e) {
           console.warn("Backend interest failed:", e);
         }
       }
+    }
+
+    async function applyForRoleFromDetail(roleTitle) {
+      await handleDetailInterest(roleTitle);
     }
 
     function handleDetailBookmark() {

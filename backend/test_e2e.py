@@ -54,6 +54,7 @@ class FullSystemE2ETestCase(unittest.TestCase):
         for page in pages:
             res = self.client.get(page)
             self.assertEqual(res.status_code, 200, f"Page {page} returned status {res.status_code}")
+            res.close()
 
     def test_02_ideas_api(self):
         res = self.client.get("/ideas")

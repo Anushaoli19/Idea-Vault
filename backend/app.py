@@ -525,6 +525,7 @@ def get_profile():
         profile["skills"] = json.loads(profile.get("skills_json") or "[]")
         profile["desired_roles"] = json.loads(profile.get("desired_roles_json") or "[]")
         profile["authorized_labs"] = json.loads(profile.get("authorized_labs_json") or "[]")
+        profile.pop("password", None)
 
     conn.close()
     return jsonify(profile), 200
@@ -553,6 +554,12 @@ def update_profile():
             bio = COALESCE(?, bio),
             github = COALESCE(?, github),
             linkedin = COALESCE(?, linkedin),
+            avatar = COALESCE(?, avatar),
+            website = COALESCE(?, website),
+            scholar = COALESCE(?, scholar),
+            teaming_objective = COALESCE(?, teaming_objective),
+            open_for_collab = COALESCE(?, open_for_collab),
+            show_cgpa = COALESCE(?, show_cgpa),
             skills_json = ?,
             desired_roles_json = ?,
             authorized_labs_json = ?,
@@ -568,6 +575,12 @@ def update_profile():
         data.get("bio"),
         data.get("github"),
         data.get("linkedin"),
+        data.get("avatar"),
+        data.get("website"),
+        data.get("scholar"),
+        data.get("teaming_objective"),
+        1 if data.get("open_for_collab", True) else 0,
+        1 if data.get("show_cgpa", True) else 0,
         skills_json,
         roles_json,
         labs_json,
@@ -577,6 +590,119 @@ def update_profile():
     conn.commit()
     conn.close()
     return jsonify({"message": "Profile updated successfully!"}), 200
+
+
+# ============================================================================
+# 11. Student Settings Endpoints
+# ============================================================================
+@app.route("/settings", methods=["GET"])
+def get_settings():
+    student_id = request.args.get("student_id", "4NI21CS089").strip()
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM settings WHERE student_id = ?", (student_id,))
+    row = cursor.fetchone()
+    if not row:
+        cursor.execute("SELECT * FROM settings LIMIT 1")
+        row = cursor.fetchone()
+
+    settings = dict(row) if row else {}
+    if settings:
+        try:
+            settings["sessions"] = json.loads(settings.get("sessions_json") or "[]")
+        except Exception:
+            settings["sessions"] = []
+    conn.close()
+    return jsonify(settings), 200
+
+
+@app.route("/settings", methods=["PUT"])
+def update_settings():
+    data = request.get_json() or {}
+    student_id = data.get("student_id", "4NI21CS089").strip()
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    sessions_json = json.dumps(data.get("sessions", [])) if "sessions" in data else None
+
+    cursor.execute("""
+        UPDATE settings SET
+            theme = COALESCE(?, theme),
+            accent = COALESCE(?, accent),
+            email_notifs = COALESCE(?, email_notifs),
+            in_app_notifs = COALESCE(?, in_app_notifs),
+            digest_frequency = COALESCE(?, digest_frequency),
+            two_factor_enabled = COALESCE(?, two_factor_enabled),
+            connected_github = COALESCE(?, connected_github),
+            connected_scholar = COALESCE(?, connected_scholar),
+            connected_ieee = COALESCE(?, connected_ieee),
+            sessions_json = COALESCE(?, sessions_json),
+            updated_at = CURRENT_TIMESTAMP
+        WHERE student_id = ?
+    """, (
+        data.get("theme"),
+        data.get("accent"),
+        1 if data.get("email_notifs") else 0 if "email_notifs" in data else None,
+        1 if data.get("in_app_notifs") else 0 if "in_app_notifs" in data else None,
+        data.get("digest_frequency"),
+        1 if data.get("two_factor_enabled") else 0 if "two_factor_enabled" in data else None,
+        data.get("connected_github"),
+        data.get("connected_scholar"),
+        1 if data.get("connected_ieee") else 0 if "connected_ieee" in data else None,
+        sessions_json,
+        student_id
+    ))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Settings updated successfully!"}), 200
+
+
+@app.route("/settings/password", methods=["POST"])
+def change_password():
+    data = request.get_json() or {}
+    student_id = data.get("student_id", "4NI21CS089").strip()
+    current_pw = data.get("current_password", "").strip()
+    new_pw = data.get("new_password", "").strip()
+
+    if not new_pw or len(new_pw) < 6:
+        return jsonify({"error": "New password must be at least 6 characters long."}), 400
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT password FROM profiles WHERE student_id = ?", (student_id,))
+    row = cursor.fetchone()
+    if row and row["password"] and current_pw and row["password"] != current_pw:
+        conn.close()
+        return jsonify({"error": "Current password does not match campus records."}), 403
+
+    cursor.execute("UPDATE profiles SET password = ? WHERE student_id = ?", (new_pw, student_id))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Password updated successfully!"}), 200
+
+
+@app.route("/settings/sessions/revoke", methods=["POST"])
+def revoke_sessions():
+    data = request.get_json() or {}
+    student_id = data.get("student_id", "4NI21CS089").strip()
+    session_id = data.get("session_id")
+    revoke_all_others = data.get("all_others", False)
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT sessions_json FROM settings WHERE student_id = ?", (student_id,))
+    row = cursor.fetchone()
+    sessions = json.loads(row["sessions_json"] or "[]") if row else []
+
+    if revoke_all_others:
+        sessions = [s for s in sessions if s.get("is_current")]
+    elif session_id:
+        sessions = [s for s in sessions if s.get("id") != session_id]
+
+    cursor.execute("UPDATE settings SET sessions_json = ? WHERE student_id = ?", (json.dumps(sessions), student_id))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Session(s) revoked successfully!", "sessions": sessions}), 200
 
 
 # ============================================================================

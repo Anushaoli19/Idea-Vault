@@ -150,6 +150,86 @@ class IdeaVaultApiTestCase(unittest.TestCase):
         self.assertEqual(prof_data["student_id"], "4NI21CS089")
         self.assertIn("skills", prof_data)
 
+    def test_11_update_profile(self):
+        payload = {
+            "student_id": "4NI21CS089",
+            "name": "Rohan Sharma Verified",
+            "bio": "Updated Capstone Lead Bio",
+            "website": "https://rohansharma.nie.ac.in",
+            "scholar": "0009-0004-9122-481X",
+            "skills": ["React.js", "Python 3.11", "Edge AI"]
+        }
+        res = self.client.put("/profile", json=payload)
+        self.assertEqual(res.status_code, 200)
+
+        # Verify persistence
+        res2 = self.client.get("/profile?student_id=4NI21CS089")
+        self.assertEqual(res2.status_code, 200)
+        data = res2.get_json()
+        self.assertEqual(data["name"], "Rohan Sharma Verified")
+        self.assertEqual(data["website"], "https://rohansharma.nie.ac.in")
+        self.assertIn("Edge AI", data["skills"])
+
+    def test_12_get_and_update_settings(self):
+        res = self.client.get("/settings?student_id=4NI21CS089")
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertIn("theme", data)
+        self.assertIn("accent", data)
+
+        update_payload = {
+            "student_id": "4NI21CS089",
+            "theme": "dark",
+            "accent": "slate",
+            "email_notifs": 1
+        }
+        res_put = self.client.put("/settings", json=update_payload)
+        self.assertEqual(res_put.status_code, 200)
+
+        res2 = self.client.get("/settings?student_id=4NI21CS089")
+        data2 = res2.get_json()
+        self.assertEqual(data2["theme"], "dark")
+        self.assertEqual(data2["accent"], "slate")
+
+    def test_13_change_password(self):
+        # Reset password to default for idempotency
+        conn = get_connection()
+        conn.cursor().execute("UPDATE profiles SET password = 'NieMysuru@2025' WHERE student_id = '4NI21CS089'")
+        conn.commit()
+        conn.close()
+
+        # Short password fails
+        res_fail = self.client.post("/settings/password", json={
+            "student_id": "4NI21CS089",
+            "new_password": "123"
+        })
+        self.assertEqual(res_fail.status_code, 400)
+
+        # Valid password succeeds
+        res_ok = self.client.post("/settings/password", json={
+            "student_id": "4NI21CS089",
+            "current_password": "NieMysuru@2025",
+            "new_password": "SafePassword@2026"
+        })
+        self.assertEqual(res_ok.status_code, 200)
+
+        # Reset back for clean state
+        conn = get_connection()
+        conn.cursor().execute("UPDATE profiles SET password = 'NieMysuru@2025' WHERE student_id = '4NI21CS089'")
+        conn.commit()
+        conn.close()
+
+    def test_14_revoke_sessions(self):
+        res = self.client.post("/settings/sessions/revoke", json={
+            "student_id": "4NI21CS089",
+            "all_others": True
+        })
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertIn("sessions", data)
+        for s in data["sessions"]:
+            self.assertTrue(s.get("is_current"))
+
 
 if __name__ == "__main__":
     unittest.main()

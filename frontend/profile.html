@@ -187,14 +187,14 @@
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
 <div class="flex items-center gap-space-md">
 <div class="relative group">
-<img class="w-20 h-20 rounded-full object-cover shadow-sm ring-4 ring-surface-container" data-alt="Close up portrait photograph of Rohan Sharma, a 21-year-old male Indian engineering student from NIE Mysuru wearing glasses and a smart casual navy polo shirt, smiling confidently in front of modern campus university glass atrium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJedfsbbRUv-znj6olZFV0uT_F7fx54PJYLftMauaeJdBHBTa44ZSsvmDomjND_4DNA8ulXedXuNRfPEmpVpyqtnq_OKQzRtvJah2DGn0oTTM8umCBV_TqBR9zqbWBsQ7sQlElq95LTX30dg-7_3e3cAU6w9PpNwmCTHkDck_ovV6lT_Ka7NDxyobHrdsCg7A9SNOw6_7wKM5GHnQhNzVqUKPHQnOmXyk55AdkQhDf"/>
+<img id="profileAvatarLarge" class="w-20 h-20 rounded-full object-cover shadow-sm ring-4 ring-surface-container" data-alt="Close up portrait photograph of Rohan Sharma, a 21-year-old male Indian engineering student from NIE Mysuru wearing glasses and a smart casual navy polo shirt, smiling confidently in front of modern campus university glass atrium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJedfsbbRUv-znj6olZFV0uT_F7fx54PJYLftMauaeJdBHBTa44ZSsvmDomjND_4DNA8ulXedXuNRfPEmpVpyqtnq_OKQzRtvJah2DGn0oTTM8umCBV_TqBR9zqbWBsQ7sQlElq95LTX30dg-7_3e3cAU6w9PpNwmCTHkDck_ovV6lT_Ka7NDxyobHrdsCg7A9SNOw6_7wKM5GHnQhNzVqUKPHQnOmXyk55AdkQhDf"/>
 <button aria-label="Change photo" onclick="triggerAvatarUpload()" class="absolute bottom-0 right-0 bg-primary-container text-on-primary p-1.5 rounded-full shadow-md hover:scale-105 transition-transform" type="button">
 <span class="material-symbols-outlined text-[1rem]">photo_camera</span>
 </button>
 </div>
 <div class="flex flex-col">
 <div class="flex items-center gap-space-xs flex-wrap">
-<span class="font-title-md text-title-md text-on-surface font-bold">Rohan Sharma</span>
+<span class="font-title-md text-title-md text-on-surface font-bold" id="profileDisplayName">Rohan Sharma</span>
 <span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
 <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
                   Verified NIE Undergraduate
@@ -202,14 +202,13 @@
 </div>
 <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
 <span class="material-symbols-outlined text-[1rem]">badge</span>
-<span>USN: <strong class="text-on-surface font-semibold">4NI21CS089</strong></span>
+<span>USN: <strong class="text-on-surface font-semibold" id="profileUsnDisplay">4NI21CS089</strong></span>
 <span class="text-outline-variant">•</span>
-<span>Department of CSE</span>
+<span id="profileDeptDisplay">Department of CSE</span>
 </p>
 </div>
 </div>
 <button class="self-start sm:self-center px-space-md py-space-xs rounded-full bg-surface-container-low hover:bg-surface-container text-primary font-label-sm text-label-sm transition-colors" type="button" onclick="triggerAvatarUpload()">Upload Avatar</button>
-          </button>
 </div>
 <!-- Academic Credentials Input Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
@@ -735,21 +734,26 @@
         });
       }
 
-      // Add Skill on Enter
+      // Add Skill on Enter or Comma
       const skillInput = document.getElementById('skillInput');
       if (skillInput) {
         skillInput.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' && skillInput.value.trim() !== '') {
+          if ((e.key === 'Enter' || e.key === ',') && skillInput.value.trim() !== '') {
             e.preventDefault();
-            addSkillChip(skillInput.value.trim());
+            const val = skillInput.value.replace(/,/g, '').trim();
+            if (val) addSkillChip(val);
             skillInput.value = '';
           }
         });
       }
     });
 
-    function loadProfileData() {
-      currentProfile = IdeaVault.getUserProfile();
+    async function loadProfileData() {
+      try {
+        currentProfile = await IdeaVault.getProfile('4NI21CS089');
+      } catch (e) {
+        currentProfile = IdeaVault.getUserProfile();
+      }
 
       // Input bindings
       const nameInput = document.getElementById('fullName');
@@ -771,7 +775,7 @@
       if (cgpaInput) cgpaInput.value = currentProfile.cgpa ? currentProfile.cgpa.split('/')[0].trim() : '8.92';
 
       const showCgpa = document.getElementById('showCgpa');
-      if (showCgpa) showCgpa.checked = currentProfile.showCgpa !== false;
+      if (showCgpa) showCgpa.checked = currentProfile.showCgpa !== false && currentProfile.show_cgpa !== 0;
 
       const githubInput = document.getElementById('githubInput');
       if (githubInput) githubInput.value = currentProfile.github || 'rohansharma-nie';
@@ -786,10 +790,18 @@
       if (scholarInput) scholarInput.value = currentProfile.scholar || 'scholar.google.com/citations?user=nie_cs';
 
       const openCollab = document.getElementById('openCollabToggle');
-      if (openCollab) openCollab.checked = currentProfile.openForCollab !== false;
+      if (openCollab) openCollab.checked = currentProfile.openForCollab !== false && currentProfile.open_for_collab !== 0;
 
       const teamingObj = document.getElementById('teamingObjective');
-      if (teamingObj) teamingObj.value = currentProfile.teamingObjective || 'Actively looking for Hardware / ECE Co-Founders for Smart Grid Micro-Inverter project.';
+      if (teamingObj) teamingObj.value = currentProfile.teamingObjective || currentProfile.teaming_objective || 'Actively looking for Hardware / ECE Co-Founders for Smart Grid Micro-Inverter project.';
+
+      // Update Header & Profile Display
+      const dispName = document.getElementById('profileDisplayName');
+      if (dispName && currentProfile.name) dispName.textContent = currentProfile.name;
+      const dispDept = document.getElementById('profileDeptDisplay');
+      if (dispDept && currentProfile.department) dispDept.textContent = currentProfile.department.split('(')[0].trim();
+      const largeAvatar = document.getElementById('profileAvatarLarge');
+      if (largeAvatar && currentProfile.avatar) largeAvatar.src = currentProfile.avatar;
 
       // Render skill chips
       renderSkills(currentProfile.skills || ["React.js", "Python 3.11", "FastAPI", "PyTorch", "ESP32 Firmware", "Docker", "PostgreSQL"]);
@@ -845,26 +857,40 @@
       }
     }
 
-    function saveProfileData() {
+    async function saveProfileData() {
       const updated = {
         ...currentProfile,
+        student_id: '4NI21CS089',
         name: document.getElementById('fullName')?.value.trim() || currentProfile.name,
         department: document.getElementById('branchMajor')?.value || currentProfile.department,
         batch: document.getElementById('batchGrad')?.value || currentProfile.batch,
         campus: document.getElementById('campusLoc')?.value || currentProfile.campus,
         cgpa: (document.getElementById('cgpaVal')?.value || '8.92') + ' / 10.0',
+        show_cgpa: document.getElementById('showCgpa')?.checked ? 1 : 0,
         showCgpa: document.getElementById('showCgpa')?.checked ?? true,
         github: document.getElementById('githubInput')?.value.trim() || currentProfile.github,
         website: document.getElementById('siteInput')?.value.trim() || currentProfile.website,
         linkedin: document.getElementById('linkedinInput')?.value.trim() || currentProfile.linkedin,
         scholar: document.getElementById('scholarInput')?.value.trim() || currentProfile.scholar,
+        open_for_collab: document.getElementById('openCollabToggle')?.checked ? 1 : 0,
         openForCollab: document.getElementById('openCollabToggle')?.checked ?? true,
+        teaming_objective: document.getElementById('teamingObjective')?.value.trim() || currentProfile.teamingObjective,
         teamingObjective: document.getElementById('teamingObjective')?.value.trim() || currentProfile.teamingObjective,
         skills: Array.from(document.querySelectorAll('#skillsWrapper .skill-tag-text')).map(el => el.textContent.trim())
       };
 
       currentProfile = updated;
-      IdeaVault.saveUserProfile(updated);
+      try {
+        await IdeaVault.updateProfile(updated);
+      } catch (e) {
+        IdeaVault.saveUserProfile(updated);
+      }
+
+      // Update UI displays
+      const dispName = document.getElementById('profileDisplayName');
+      if (dispName && updated.name) dispName.textContent = updated.name;
+      const dispDept = document.getElementById('profileDeptDisplay');
+      if (dispDept && updated.department) dispDept.textContent = updated.department.split('(')[0].trim();
 
       // Trigger Stitch Save Toast
       const toast = document.getElementById('saveToast');
@@ -878,7 +904,7 @@
       }
 
       // Also trigger global Toast
-      IdeaVault.showToast('Academic profile updated and synchronized!', 'success');
+      IdeaVault.showToast('Academic profile updated and synchronized with campus database!', 'success');
     }
 
     function openPublicPreviewModal() {
@@ -930,20 +956,29 @@
       IdeaVault.showToast('Profile & Submissions exported as JSON!', 'success');
     }
 
-    function triggerAvatarUpload() {
+    async function triggerAvatarUpload() {
       const url = prompt("Enter Image URL or Avatar Link:", currentProfile.avatar || "");
       if (url && url.trim()) {
         currentProfile.avatar = url.trim();
-        IdeaVault.saveUserProfile(currentProfile);
-        document.querySelectorAll('img[alt*="Avatar"], #headerProfileAvatar').forEach(img => {
+        await IdeaVault.updateProfile(currentProfile);
+        document.querySelectorAll('img[alt*="Avatar"], #headerProfileAvatar, #profileAvatarLarge').forEach(img => {
           img.src = url.trim();
         });
-        IdeaVault.showToast('Profile photo updated!', 'success');
+        IdeaVault.showToast('Profile photo updated and saved!', 'success');
       }
     }
 
     function handleReplaceResume() {
-      IdeaVault.showToast('Resume uploaded! Synced to Capstone Evaluation board.', 'success');
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.pdf,.doc,.docx';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          IdeaVault.showToast(`Resume "${file.name}" uploaded! Synced to Capstone Evaluation board.`, 'success');
+        }
+      };
+      input.click();
     }
   </script>
 </body>

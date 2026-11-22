@@ -91,7 +91,43 @@ const STORAGE_KEYS = {
   INTERESTS: 'idea_vault_interests',
   BOOKMARKS: 'idea_vault_bookmarks',
   CUSTOM_IDEAS: 'idea_vault_custom_ideas',
-  USER_PROFILE: 'idea_vault_user_profile'
+  USER_PROFILE: 'idea_vault_user_profile',
+  SETTINGS: 'idea_vault_settings'
+};
+
+/**
+ * Default Settings
+ */
+const DEFAULT_SETTINGS = {
+  theme: "light",
+  accent: "indigo",
+  email_notifs: 1,
+  in_app_notifs: 1,
+  digest_frequency: "weekly",
+  two_factor_enabled: 1,
+  connected_github: "rohansharma-nie",
+  connected_scholar: "0009-0004-9122-481X",
+  connected_ieee: 0,
+  sessions: [
+    {
+      id: "sess_1",
+      device: "MacBook Pro 14\" • macOS Sonoma",
+      browser: "Chrome 124.0.0",
+      location: "NIE South Campus Wi-Fi (Academic Block C)",
+      ip: "172.16.42.108",
+      is_current: true,
+      last_active: "Just now"
+    },
+    {
+      id: "sess_2",
+      device: "Dell OptiPlex 7090 • Ubuntu 22.04 LTS",
+      browser: "Firefox 125.0",
+      location: "IoT Research Cell (Room 304)",
+      ip: "172.16.18.52",
+      is_current: false,
+      last_active: "4 hours ago"
+    }
+  ]
 };
 
 /**
@@ -633,13 +669,57 @@ async function markAllNotificationsRead(userId = '4NI21CS089') {
 }
 
 /**
+ * Theme & Accent Styling Manager
+ */
+function applyTheme(theme, accent) {
+  const currentTheme = theme || localStorage.getItem('ideavault_theme') || 'light';
+  const isDark = currentTheme === 'dark' || (currentTheme === 'auto' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if (isDark) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+  localStorage.setItem('ideavault_theme', currentTheme);
+
+  if (accent) {
+    localStorage.setItem('ideavault_accent', accent);
+  }
+}
+
+/**
+ * Sync Header Profile Display
+ */
+function syncHeaderProfile(profile) {
+  if (!profile) profile = getUserProfile();
+  document.querySelectorAll('#headerProfileAvatar, img[alt*="Avatar"]').forEach(img => {
+    if (profile.avatar) img.src = profile.avatar;
+  });
+  const nameEl = document.getElementById('headerProfileName');
+  if (nameEl && profile.name) {
+    const parts = profile.name.split(' ');
+    nameEl.textContent = parts.length > 1 ? `${parts[0]} ${parts[parts.length - 1][0]}.` : parts[0];
+  }
+  const batchEl = document.getElementById('headerProfileBatch');
+  if (batchEl) {
+    batchEl.textContent = profile.batchShort || "CSE '25";
+  }
+}
+
+/**
  * Get Profile
  */
 async function getProfile(studentId = '4NI21CS089') {
   try {
     const res = await fetch(`${API_BASE}/profile?student_id=${encodeURIComponent(studentId)}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const data = await res.json();
+    if (data && data.name) {
+      const merged = { ...getUserProfile(), ...data, usn: data.student_id || studentId };
+      saveUserProfile(merged);
+      syncHeaderProfile(merged);
+      return merged;
+    }
+    return getUserProfile();
   } catch (err) {
     console.warn("getProfile fallback:", err);
     return getUserProfile();
@@ -657,13 +737,85 @@ async function updateProfile(profileData) {
       body: JSON.stringify(profileData)
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const updated = await res.json();
     saveUserProfile(profileData);
-    return await res.json();
+    syncHeaderProfile(profileData);
+    return updated;
   } catch (err) {
     console.warn("updateProfile fallback:", err);
     saveUserProfile(profileData);
+    syncHeaderProfile(profileData);
     return { message: "Saved locally" };
   }
+}
+
+/**
+ * Get Student Settings
+ */
+async function getSettings(studentId = '4NI21CS089') {
+  try {
+    const res = await fetch(`${API_BASE}/settings?student_id=${encodeURIComponent(studentId)}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(data));
+    if (data.theme) applyTheme(data.theme, data.accent);
+    return data;
+  } catch (err) {
+    const cached = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+    const data = cached ? JSON.parse(cached) : DEFAULT_SETTINGS;
+    if (data.theme) applyTheme(data.theme, data.accent);
+    return data;
+  }
+}
+
+/**
+ * Update Student Settings
+ */
+async function updateSettings(settingsData) {
+  try {
+    const res = await fetch(`${API_BASE}/settings`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(settingsData)
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const updated = await res.json();
+    localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settingsData));
+    if (settingsData.theme) applyTheme(settingsData.theme, settingsData.accent);
+    return updated;
+  } catch (err) {
+    localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settingsData));
+    if (settingsData.theme) applyTheme(settingsData.theme, settingsData.accent);
+    return { message: "Saved locally" };
+  }
+}
+
+/**
+ * Change Student Password
+ */
+async function changePassword(currentPassword, newPassword, studentId = '4NI21CS089') {
+  const res = await fetch(`${API_BASE}/settings/password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ student_id: studentId, current_password: currentPassword, new_password: newPassword })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Failed to update password");
+  return data;
+}
+
+/**
+ * Revoke Active Campus Sessions
+ */
+async function revokeSession(sessionId, allOthers = false, studentId = '4NI21CS089') {
+  const res = await fetch(`${API_BASE}/settings/sessions/revoke`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ student_id: studentId, session_id: sessionId, all_others: allOthers })
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Failed to revoke session");
+  return data;
 }
 
 /**
@@ -1109,6 +1261,8 @@ function closeProfileDrawer() {
  * Initialize Header Profile Trigger On Load
  */
 document.addEventListener('DOMContentLoaded', () => {
+  applyTheme();
+  syncHeaderProfile();
   injectProfileDrawer();
 
   // Attach click listener to profile buttons in header
@@ -1126,6 +1280,8 @@ window.IdeaVault = {
   API_BASE,
   USE_MOCK,
   STORAGE_KEYS,
+  DEFAULT_SETTINGS,
+  DEFAULT_PROFILE,
   fetchIdeas,
   fetchIdeaById,
   checkDuplicate,
@@ -1145,5 +1301,11 @@ window.IdeaVault = {
   markNotificationRead,
   markAllNotificationsRead,
   getProfile,
-  updateProfile
+  updateProfile,
+  getSettings,
+  updateSettings,
+  changePassword,
+  revokeSession,
+  applyTheme,
+  syncHeaderProfile
 };

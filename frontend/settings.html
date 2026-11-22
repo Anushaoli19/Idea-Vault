@@ -111,39 +111,41 @@
 <div class="flex flex-col gap-space-xs">
 <label class="font-label-md text-label-md text-on-surface font-semibold">Color Mode</label>
 <div class="grid grid-cols-3 gap-space-sm pt-space-xs">
-<!-- Light Mode Selected -->
-<button class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-all text-center shadow-sm" type="button">
+<!-- Light Mode -->
+<button id="btnThemeLight" class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-all text-center shadow-sm theme-btn" type="button">
 <div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md">
 <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">light_mode</span>
 </div>
 <span class="font-title-sm text-title-sm font-semibold">Light Mode</span>
-<span class="font-label-sm text-label-sm text-primary font-medium">Active (Default)</span>
-<div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></div>
+<span class="font-label-sm text-label-sm text-primary font-medium status-label">Active</span>
+<div class="active-indicator absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></div>
 </button>
 <!-- Dark Mode -->
-<button class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center" type="button">
+<button id="btnThemeDark" class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center theme-btn" type="button">
 <div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-inverse-surface group-hover:text-surface">
 <span class="material-symbols-outlined text-[20px]">dark_mode</span>
 </div>
 <span class="font-title-sm text-title-sm font-semibold">Dark Mode</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">OLED Pitch</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant status-label">OLED Pitch</span>
+<div class="active-indicator absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container hidden"></div>
 </button>
 <!-- System Auto -->
-<button class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center" type="button">
+<button id="btnThemeAuto" class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center theme-btn" type="button">
 <div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
 <span class="material-symbols-outlined text-[20px]">laptop_mac</span>
 </div>
 <span class="font-title-sm text-title-sm font-semibold">Auto Sync</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">OS Schedule</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant status-label">OS Schedule</span>
+<div class="active-indicator absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container hidden"></div>
 </button>
 </div>
 </div>
 <!-- Accent Tone Preference -->
 <div class="flex flex-col gap-space-xs pt-space-xs">
 <label class="font-label-md text-label-md text-on-surface font-semibold">Campus Accent Brand</label>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
-<div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low cursor-pointer shadow-sm">
-<div class="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center text-white">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm" id="accentContainer">
+<div id="accentIndigo" data-accent="indigo" class="accent-card flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low cursor-pointer shadow-sm">
+<div class="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center text-white check-icon">
 <span class="material-symbols-outlined text-[14px]">check</span>
 </div>
 <div class="flex flex-col">
@@ -151,15 +153,19 @@
 <span class="font-label-sm text-label-sm text-on-surface-variant">NIE Signature #4f46e5</span>
 </div>
 </div>
-<div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors">
-<div class="w-6 h-6 rounded-full bg-inverse-surface"></div>
+<div id="accentSlate" data-accent="slate" class="accent-card flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="w-6 h-6 rounded-full bg-inverse-surface flex items-center justify-center text-white check-icon hidden">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
 <div class="flex flex-col">
 <span class="font-label-md text-label-md font-semibold text-on-surface">Slate Navy</span>
 <span class="font-label-sm text-label-sm text-on-surface-variant">Deep Academic</span>
 </div>
 </div>
-<div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors">
-<div class="w-6 h-6 rounded-full bg-secondary"></div>
+<div id="accentEco" data-accent="eco" class="accent-card flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-white check-icon hidden">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
 <div class="flex flex-col">
 <span class="font-label-md text-label-md font-semibold text-on-surface">Eco-Tech</span>
 <span class="font-label-sm text-label-sm text-on-surface-variant">Bio &amp; Renewable</span>
@@ -177,7 +183,7 @@
 </div>
 </div>
 <label class="relative inline-flex items-center cursor-pointer">
-<input class="sr-only peer" type="checkbox"/>
+<input id="highContrastToggle" class="sr-only peer" type="checkbox"/>
 <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
 </label>
 </div>
@@ -194,7 +200,7 @@
 <p class="font-body-sm text-body-sm text-on-surface-variant">Protect intellectual property, capstone patent submissions, and student votes.</p>
 </div>
 </div>
-<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-full whitespace-nowrap">Changed 42d ago</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-full whitespace-nowrap">Protected SSO</span>
 </div>
 <!-- 2FA Institutional Banner Callout -->
 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md p-space-md rounded-xl bg-secondary-container/20">
@@ -204,62 +210,62 @@
 </div>
 <div>
 <div class="flex items-center gap-2">
-<span class="font-title-sm text-title-sm font-bold text-on-surface">Two-Factor Authentication Active</span>
-<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-secondary text-on-secondary">TOTP</span>
+<span class="font-title-sm text-title-sm font-bold text-on-surface" id="label2FA">Two-Factor Authentication Active</span>
+<span id="badge2FA" class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-secondary text-on-secondary">TOTP Active</span>
 </div>
 <p class="font-body-sm text-body-sm text-on-surface-variant">Protected via NIE Authenticator App and hardware security keys.</p>
 </div>
 </div>
-<button class="px-space-md py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-all whitespace-nowrap" type="button">
-            Manage 2FA
+<button id="btnManage2FA" class="px-space-md py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-all whitespace-nowrap" type="button">
+            Toggle 2FA
           </button>
 </div>
 <!-- Password Inputs Form -->
-<form class="flex flex-col gap-space-md" onsubmit="event.preventDefault();">
+<form id="passwordForm" class="flex flex-col gap-space-md" onsubmit="event.preventDefault(); handleUpdatePassword();">
 <!-- Current Password -->
 <div class="flex flex-col gap-1.5">
 <div class="flex justify-between items-center">
-<label class="font-label-md text-label-md text-on-surface font-semibold">Current NIE Password</label>
-<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Forgot password?</a>
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="currentPassword">Current NIE Password</label>
+<span class="font-label-sm text-label-sm text-primary hover:underline cursor-pointer" onclick="IdeaVault.showToast('Default campus password is NieMysuru@2025', 'info')">Forgot password?</span>
 </div>
 <div class="relative flex items-center">
-<input class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" type="password" value="••••••••••••••••"/>
-<button class="absolute right-3 text-on-surface-variant hover:text-on-surface p-1" type="button">
+<input id="currentPassword" class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" type="password" placeholder="Enter current password"/>
+<button id="toggleCurrentPwBtn" class="absolute right-3 text-on-surface-variant hover:text-on-surface p-1" type="button" onclick="togglePasswordVisibility('currentPassword', this)">
 <span class="material-symbols-outlined text-[20px]">visibility</span>
 </button>
 </div>
 </div>
 <!-- New Password -->
 <div class="flex flex-col gap-1.5">
-<label class="font-label-md text-label-md text-on-surface font-semibold">New Safe Password</label>
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="newPassword">New Safe Password</label>
 <div class="relative flex items-center">
-<input class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" placeholder="Minimum 12 characters, uppercase &amp; symbols" type="password"/>
-<button class="absolute right-3 text-on-surface-variant hover:text-on-surface p-1" type="button">
+<input id="newPassword" class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" placeholder="Minimum 6 characters, uppercase &amp; symbols" type="password" oninput="evaluatePasswordStrength(this.value)"/>
+<button id="toggleNewPwBtn" class="absolute right-3 text-on-surface-variant hover:text-on-surface p-1" type="button" onclick="togglePasswordVisibility('newPassword', this)">
 <span class="material-symbols-outlined text-[20px]">visibility_off</span>
 </button>
 </div>
 <!-- 4-Step Strength Meter -->
 <div class="mt-space-xs flex flex-col gap-1.5">
 <div class="grid grid-cols-4 gap-1.5 w-full">
-<div class="h-1.5 rounded-full bg-secondary"></div>
-<div class="h-1.5 rounded-full bg-secondary"></div>
-<div class="h-1.5 rounded-full bg-secondary"></div>
-<div class="h-1.5 rounded-full bg-surface-container-highest"></div>
+<div id="bar1" class="h-1.5 rounded-full bg-surface-container-highest transition-colors"></div>
+<div id="bar2" class="h-1.5 rounded-full bg-surface-container-highest transition-colors"></div>
+<div id="bar3" class="h-1.5 rounded-full bg-surface-container-highest transition-colors"></div>
+<div id="bar4" class="h-1.5 rounded-full bg-surface-container-highest transition-colors"></div>
 </div>
 <div class="flex justify-between items-center text-label-sm font-label-sm">
-<span class="text-secondary font-semibold flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">check_circle</span>
-                  Strong: 12+ chars, mixed case, symbols
+<span id="strengthText" class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                  Enter a safe new password
                 </span>
-<span class="text-on-surface-variant">Campus standard met</span>
+<span class="text-on-surface-variant">Min. 6 chars</span>
 </div>
 </div>
 </div>
 <!-- Confirm Password -->
 <div class="flex flex-col gap-1.5">
-<label class="font-label-md text-label-md text-on-surface font-semibold">Confirm New Password</label>
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="confirmPassword">Confirm New Password</label>
 <div class="relative flex items-center">
-<input class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" placeholder="Re-type your safe password" type="password"/>
+<input id="confirmPassword" class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" placeholder="Re-type your safe password" type="password"/>
 <span class="material-symbols-outlined absolute right-3 text-secondary text-[20px]">done_all</span>
 </div>
 </div>
@@ -285,50 +291,12 @@
 </div>
 </div>
 </div>
-<div class="flex flex-col gap-space-sm mt-space-xs">
-<!-- Session Item 1: Active Current -->
-<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm">
-<div class="flex items-center gap-space-md">
-<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[22px]">laptop_mac</span>
-</div>
-<div>
-<div class="flex items-center gap-2">
-<span class="font-title-sm text-title-sm text-on-surface font-bold">Chrome on macOS 14.5</span>
-<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-bold">Current Device</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">NIE South Campus Wi-Fi (VLAN 4 • 172.16.48.102) • Mysore, IN</p>
-</div>
-</div>
-<div class="hidden sm:flex flex-col items-end">
-<span class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-1">
-<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> Online Now
-              </span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Authenticated via SSO</span>
-</div>
-</div>
-<!-- Session Item 2: Mobile PWA -->
-<div class="p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low transition-colors flex items-center justify-between gap-space-sm">
-<div class="flex items-center gap-space-md">
-<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined text-[22px]">smartphone</span>
-</div>
-<div>
-<div class="flex items-center gap-2">
-<span class="font-title-sm text-title-sm text-on-surface font-semibold">Idea Vault Mobile PWA</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Pixel 8 • Android 14</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Airtel 5G Mysuru • Last active 3 hours ago</p>
-</div>
-</div>
-<button class="p-2 text-error hover:bg-error-container/40 rounded-full transition-colors" title="Revoke Device" type="button">
-<span class="material-symbols-outlined text-[20px]">logout</span>
-</button>
-</div>
+<div id="sessionsContainer" class="flex flex-col gap-space-sm mt-space-xs">
+<!-- Dynamic sessions rendered here -->
 </div>
 <div class="pt-space-xs flex justify-between items-center">
 <span class="font-label-sm text-label-sm text-on-surface-variant">All session tokens expire after 14 days of inactivity.</span>
-<button class="px-space-md py-2 rounded-full bg-error-container text-on-error-container hover:bg-error/20 font-label-md text-label-md transition-colors flex items-center gap-1.5" type="button">
+<button id="btnRevokeAllOtherSessions" class="px-space-md py-2 rounded-full bg-error-container text-on-error-container hover:bg-error/20 font-label-md text-label-md transition-colors flex items-center gap-1.5" type="button" onclick="handleRevokeAllOtherSessions()">
 <span class="material-symbols-outlined text-[18px]">power_settings_new</span>
 <span>Sign Out All Other Sessions</span>
 </button>
@@ -359,7 +327,7 @@
 <span class="font-body-sm text-body-sm text-on-surface-variant">When engineering students request to join your capstone idea.</span>
 </div>
 <label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
-<input checked="" class="sr-only peer" type="checkbox"/>
+<input id="toggleTeammates" checked="" class="sr-only peer" type="checkbox"/>
 <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
 </label>
 </div>
@@ -370,7 +338,7 @@
 <span class="font-body-sm text-body-sm text-on-surface-variant">Instant alerts for CREST / NIE Research Cell seed funding decisions.</span>
 </div>
 <label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
-<input checked="" class="sr-only peer" type="checkbox"/>
+<input id="toggleFaculty" checked="" class="sr-only peer" type="checkbox"/>
 <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
 </label>
 </div>
@@ -384,7 +352,7 @@
 <span class="font-body-sm text-body-sm text-on-surface-variant">When newly submitted ideas show &gt;70% similarity overlap.</span>
 </div>
 <label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
-<input checked="" class="sr-only peer" type="checkbox"/>
+<input id="toggleDuplicates" checked="" class="sr-only peer" type="checkbox"/>
 <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
 </label>
 </div>
@@ -395,7 +363,7 @@
 <span class="font-body-sm text-body-sm text-on-surface-variant">Curated recap of trending NIE research and department leaders.</span>
 </div>
 <label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
-<input class="sr-only peer" type="checkbox"/>
+<input id="toggleDigest" class="sr-only peer" type="checkbox"/>
 <div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
 </label>
 </div>
@@ -405,15 +373,15 @@
 <span class="font-label-md text-label-md text-on-surface font-bold">Enabled Dispatch Channels</span>
 <div class="flex flex-col gap-2.5">
 <label class="flex items-center gap-space-sm cursor-pointer">
-<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
+<input id="channelPush" checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
 <span class="font-body-sm text-body-sm text-on-surface">Desktop Web Push notifications</span>
 </label>
 <label class="flex items-center gap-space-sm cursor-pointer">
-<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
+<input id="channelEmail" checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
 <span class="font-body-sm text-body-sm text-on-surface truncate">Institutional Email (rohan.s.cse21@nie.ac.in)</span>
 </label>
 <label class="flex items-center gap-space-sm cursor-pointer">
-<input class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
+<input id="channelSms" class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
 <span class="font-body-sm text-body-sm text-on-surface">SMS for emergency viva defense updates</span>
 </label>
 </div>
@@ -460,10 +428,10 @@
 <span class="font-title-sm text-title-sm font-semibold text-on-surface truncate">GitHub Academic</span>
 <span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
-<span class="font-body-sm text-body-sm text-on-surface-variant truncate">@rohansharma-nie • 14 repos</span>
+<span id="githubAccountDisplay" class="font-body-sm text-body-sm text-on-surface-variant truncate">@rohansharma-nie • Connected</span>
 </div>
 </div>
-<button class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm transition-colors flex-shrink-0" type="button">
+<button id="btnManageGithub" class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm transition-colors flex-shrink-0" type="button" onclick="handleManageGithub()">
               Manage
             </button>
 </div>
@@ -476,27 +444,27 @@
 <div class="flex flex-col min-w-0">
 <div class="flex items-center gap-1.5">
 <span class="font-title-sm text-title-sm font-semibold text-on-surface truncate">ORCID / Scholar</span>
-<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span id="scholarStatusIcon" class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
-<span class="font-body-sm text-body-sm text-on-surface-variant truncate">0009-0004-9122-481X</span>
+<span id="scholarDisplay" class="font-body-sm text-body-sm text-on-surface-variant truncate">0009-0004-9122-481X</span>
 </div>
 </div>
-<button class="text-on-surface-variant hover:text-error p-1 transition-colors flex-shrink-0" title="Unlink profile" type="button">
+<button id="btnUnlinkScholar" class="text-on-surface-variant hover:text-error p-1 transition-colors flex-shrink-0" title="Unlink profile" type="button" onclick="handleToggleScholar()">
 <span class="material-symbols-outlined text-[18px]">link_off</span>
 </button>
 </div>
-<!-- IEEE Student Branch (Unconnected) -->
-<div class="p-space-md rounded-xl bg-surface-container-low/50 flex items-center justify-between gap-space-sm">
+<!-- IEEE Student Branch -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm">
 <div class="flex items-center gap-space-sm min-w-0">
 <div class="w-9 h-9 rounded-full bg-surface-container text-outline flex items-center justify-center font-bold text-label-sm flex-shrink-0">
 <span class="material-symbols-outlined text-[18px]">verified</span>
 </div>
 <div class="flex flex-col min-w-0">
 <span class="font-title-sm text-title-sm font-semibold text-on-surface truncate">IEEE Student Branch</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Not linked • Unlock conference credits</span>
+<span id="ieeeDisplay" class="font-body-sm text-body-sm text-on-surface-variant truncate">Not linked • Unlock conference credits</span>
 </div>
 </div>
-<button class="px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm hover:bg-primary transition-colors flex-shrink-0 shadow-sm" type="button">
+<button id="btnConnectIeee" class="px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm hover:bg-primary transition-colors flex-shrink-0 shadow-sm" type="button" onclick="handleToggleIeee()">
               Connect
             </button>
 </div>
@@ -522,10 +490,10 @@
 <span>All preference modifications are logged to the NIE Central Security Audit registry.</span>
 </div>
 <div class="flex items-center gap-space-md w-full sm:w-auto justify-end">
-<button class="px-space-lg py-2.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
+<button id="btnDiscardPreferences" class="px-space-lg py-2.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button" onclick="loadSettings()">
           Discard Changes
         </button>
-<button class="px-space-xl py-2.5 rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-md transition-all flex items-center gap-2" type="button">
+<button id="btnSavePreferences" class="px-space-xl py-2.5 rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-md transition-all flex items-center gap-2" type="button" onclick="handleSavePreferences()">
 <span class="material-symbols-outlined text-[18px]">save</span>
 <span>Save Preferences</span>
 </button>
@@ -535,70 +503,381 @@
 </div></main><footer class="w-full bg-surface-container-low border-t border-surface-container py-space-lg"><div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm"><p>© 2025 The National Institute of Engineering, Mysuru. Idea Vault Innovation Hub.</p><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" href="#">Faculty Guidelines</a><a class="hover:text-on-surface transition-colors" href="#">IP &amp; Ethics</a><a class="hover:text-on-surface transition-colors" href="#">NIE Research Cell</a></div></div></footer>
   <script src="app.js"></script>
   <script>
+    let currentSettings = {};
+
     document.addEventListener('DOMContentLoaded', async () => {
-      // Load current profile
-      try {
-        const prof = await IdeaVault.getProfile('4NI21CS089');
-        if (prof) {
-          const nameElem = document.getElementById('headerProfileName');
-          const batchElem = document.getElementById('headerProfileBatch');
-          if (nameElem && prof.name) nameElem.textContent = prof.name.split(' ')[0] + ' S.';
-          if (batchElem && prof.batch) batchElem.textContent = "CSE '25";
-        }
-      } catch(e) {}
-
-      // Mode toggles
-      const modeBtns = document.querySelectorAll('#appearance .grid-cols-3 button');
-      modeBtns.forEach((btn, idx) => {
-        btn.addEventListener('click', () => {
-          modeBtns.forEach(b => {
-            b.className = "group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center";
-          });
-          btn.className = "group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-all text-center shadow-sm";
-          const mode = idx === 0 ? 'Light' : (idx === 1 ? 'Dark' : 'Auto');
-          IdeaVault.showToast(`Workspace Theme switched to ${mode} mode`, 'info');
-        });
-      });
-
-      // Accent Brand selector
-      const accentCards = document.querySelectorAll('#appearance .grid-cols-1.sm\\:grid-cols-3 > div');
-      accentCards.forEach(card => {
-        card.addEventListener('click', () => {
-          accentCards.forEach(c => {
-            c.className = "flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors";
-          });
-          card.className = "flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low cursor-pointer shadow-sm";
-          const name = card.querySelector('span.font-label-md')?.textContent || 'Accent';
-          IdeaVault.showToast(`Primary brand accent updated to ${name}`, 'success');
-        });
-      });
-
-      // Form submission / Save Changes
-      const forms = document.querySelectorAll('form');
-      forms.forEach(f => {
-        f.addEventListener('submit', (e) => {
-          e.preventDefault();
-          IdeaVault.showToast('Security credentials updated and verified with Contineo SSO!', 'success');
-        });
-      });
-
-      // 2FA and Session buttons
-      document.querySelectorAll('button').forEach(btn => {
-        const text = btn.textContent.trim();
-        if (text.includes('Sign Out All Other Sessions')) {
-          btn.addEventListener('click', () => {
-            IdeaVault.showToast('All other campus sessions terminated successfully.', 'info');
-          });
-        } else if (text.includes('Manage 2FA')) {
-          btn.addEventListener('click', () => {
-            IdeaVault.showToast('TOTP 2FA configuration active for USN 4NI21CS089.', 'info');
-          });
-        } else if (text.includes('Save Preferences') || text.includes('Update Credentials')) {
-          btn.addEventListener('click', () => {
-            IdeaVault.showToast('Settings & Security preferences saved successfully!', 'success');
-          });
-        }
-      });
+      await loadSettings();
+      setupThemeListeners();
+      setupAccentListeners();
     });
+
+    async function loadSettings() {
+      try {
+        currentSettings = await IdeaVault.getSettings('4NI21CS089');
+      } catch (e) {
+        currentSettings = IdeaVault.DEFAULT_SETTINGS;
+      }
+
+      // 1. Theme Mode
+      const theme = currentSettings.theme || 'light';
+      updateThemeButtons(theme);
+      IdeaVault.applyTheme(theme, currentSettings.accent);
+
+      // 2. Accent
+      const accent = currentSettings.accent || 'indigo';
+      updateAccentCards(accent);
+
+      // 3. Toggles
+      const tTeammates = document.getElementById('toggleTeammates');
+      if (tTeammates) tTeammates.checked = currentSettings.in_app_notifs !== 0;
+
+      const tFaculty = document.getElementById('toggleFaculty');
+      if (tFaculty) tFaculty.checked = true;
+
+      const tDuplicates = document.getElementById('toggleDuplicates');
+      if (tDuplicates) tDuplicates.checked = true;
+
+      const tDigest = document.getElementById('toggleDigest');
+      if (tDigest) tDigest.checked = currentSettings.digest_frequency === 'weekly';
+
+      const chEmail = document.getElementById('channelEmail');
+      if (chEmail) chEmail.checked = currentSettings.email_notifs !== 0;
+
+      // 4. 2FA State
+      update2FAUI(currentSettings.two_factor_enabled !== 0);
+
+      // 5. Connected Accounts
+      const ghDisp = document.getElementById('githubAccountDisplay');
+      if (ghDisp) ghDisp.textContent = `@${currentSettings.connected_github || 'rohansharma-nie'} • Connected`;
+
+      const scholarDisp = document.getElementById('scholarDisplay');
+      if (scholarDisp) scholarDisp.textContent = currentSettings.connected_scholar || '0009-0004-9122-481X';
+
+      const ieeeDisp = document.getElementById('ieeeDisplay');
+      const ieeeBtn = document.getElementById('btnConnectIeee');
+      if (currentSettings.connected_ieee) {
+        if (ieeeDisp) ieeeDisp.textContent = 'IEEE Member #9284102 • Active';
+        if (ieeeBtn) {
+          ieeeBtn.textContent = 'Disconnect';
+          ieeeBtn.className = "px-space-md py-1.5 rounded-full bg-surface-container hover:bg-error-container text-on-surface hover:text-error font-label-sm text-label-sm transition-colors flex-shrink-0 shadow-sm";
+        }
+      } else {
+        if (ieeeDisp) ieeeDisp.textContent = 'Not linked • Unlock conference credits';
+        if (ieeeBtn) {
+          ieeeBtn.textContent = 'Connect';
+          ieeeBtn.className = "px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm hover:bg-primary transition-colors flex-shrink-0 shadow-sm";
+        }
+      }
+
+      // 6. Sessions
+      renderSessions(currentSettings.sessions || []);
+    }
+
+    function setupThemeListeners() {
+      const btnLight = document.getElementById('btnThemeLight');
+      const btnDark = document.getElementById('btnThemeDark');
+      const btnAuto = document.getElementById('btnThemeAuto');
+
+      if (btnLight) btnLight.onclick = () => switchTheme('light');
+      if (btnDark) btnDark.onclick = () => switchTheme('dark');
+      if (btnAuto) btnAuto.onclick = () => switchTheme('auto');
+    }
+
+    function switchTheme(mode) {
+      currentSettings.theme = mode;
+      updateThemeButtons(mode);
+      IdeaVault.applyTheme(mode, currentSettings.accent);
+      IdeaVault.showToast(`Workspace Theme switched to ${mode.toUpperCase()} mode`, 'info');
+    }
+
+    function updateThemeButtons(activeMode) {
+      const configs = [
+        { id: 'btnThemeLight', mode: 'light', activeLabel: 'Active' },
+        { id: 'btnThemeDark', mode: 'dark', activeLabel: 'Active (OLED)' },
+        { id: 'btnThemeAuto', mode: 'auto', activeLabel: 'Active (OS Schedule)' }
+      ];
+
+      configs.forEach(c => {
+        const btn = document.getElementById(c.id);
+        if (!btn) return;
+        const indicator = btn.querySelector('.active-indicator');
+        const statusLabel = btn.querySelector('.status-label');
+
+        if (c.mode === activeMode) {
+          btn.className = "group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-all text-center shadow-sm theme-btn ring-2 ring-primary";
+          if (indicator) indicator.classList.remove('hidden');
+          if (statusLabel) {
+            statusLabel.textContent = c.activeLabel;
+            statusLabel.className = "font-label-sm text-label-sm text-primary font-semibold status-label";
+          }
+        } else {
+          btn.className = "group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center theme-btn";
+          if (indicator) indicator.classList.add('hidden');
+          if (statusLabel) {
+            statusLabel.textContent = c.mode === 'dark' ? 'OLED Pitch' : (c.mode === 'auto' ? 'OS Schedule' : 'Default');
+            statusLabel.className = "font-label-sm text-label-sm text-on-surface-variant status-label";
+          }
+        }
+      });
+    }
+
+    function setupAccentListeners() {
+      const accents = [
+        { id: 'accentIndigo', name: 'indigo' },
+        { id: 'accentSlate', name: 'slate' },
+        { id: 'accentEco', name: 'eco' }
+      ];
+
+      accents.forEach(a => {
+        const card = document.getElementById(a.id);
+        if (card) {
+          card.onclick = () => {
+            currentSettings.accent = a.name;
+            updateAccentCards(a.name);
+            IdeaVault.applyTheme(currentSettings.theme, a.name);
+            IdeaVault.showToast(`Primary brand accent updated to ${a.name.toUpperCase()}`, 'success');
+          };
+        }
+      });
+    }
+
+    function updateAccentCards(activeAccent) {
+      const accents = ['indigo', 'slate', 'eco'];
+      accents.forEach(name => {
+        const id = 'accent' + name.charAt(0).toUpperCase() + name.slice(1);
+        const card = document.getElementById(id);
+        if (!card) return;
+        const checkIcon = card.querySelector('.check-icon');
+        if (name === activeAccent) {
+          card.className = "accent-card flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low cursor-pointer shadow-sm ring-2 ring-primary";
+          if (checkIcon) checkIcon.classList.remove('hidden');
+        } else {
+          card.className = "accent-card flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors";
+          if (checkIcon) checkIcon.classList.add('hidden');
+        }
+      });
+    }
+
+    function update2FAUI(isActive) {
+      const badge = document.getElementById('badge2FA');
+      const label = document.getElementById('label2FA');
+      const btn = document.getElementById('btnManage2FA');
+      if (isActive) {
+        if (badge) { badge.textContent = 'TOTP Active'; badge.className = 'inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-secondary text-on-secondary'; }
+        if (label) label.textContent = 'Two-Factor Authentication Active';
+        if (btn) btn.textContent = 'Disable 2FA';
+      } else {
+        if (badge) { badge.textContent = 'Disabled'; badge.className = 'inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-surface-container text-on-surface-variant'; }
+        if (label) label.textContent = 'Two-Factor Authentication Disabled';
+        if (btn) btn.textContent = 'Enable 2FA';
+      }
+    }
+
+    document.getElementById('btnManage2FA')?.addEventListener('click', async () => {
+      const isCurrentlyActive = currentSettings.two_factor_enabled !== 0;
+      currentSettings.two_factor_enabled = isCurrentlyActive ? 0 : 1;
+      update2FAUI(currentSettings.two_factor_enabled !== 0);
+      await IdeaVault.updateSettings({ two_factor_enabled: currentSettings.two_factor_enabled });
+      IdeaVault.showToast(isCurrentlyActive ? 'Two-Factor Authentication disabled' : 'Two-Factor Authentication enabled with TOTP', 'success');
+    });
+
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) icon.textContent = 'visibility';
+      } else {
+        input.type = 'password';
+        if (icon) icon.textContent = 'visibility_off';
+      }
+    }
+
+    function evaluatePasswordStrength(val) {
+      let score = 0;
+      if (val.length >= 6) score++;
+      if (val.length >= 10) score++;
+      if (/[A-Z]/.test(val) && /[a-z]/.test(val)) score++;
+      if (/[0-9]/.test(val) && /[^A-Za-z0-9]/.test(val)) score++;
+
+      const bars = [document.getElementById('bar1'), document.getElementById('bar2'), document.getElementById('bar3'), document.getElementById('bar4')];
+      const text = document.getElementById('strengthText');
+
+      bars.forEach((b, idx) => {
+        if (!b) return;
+        b.className = idx < score ? "h-1.5 rounded-full bg-secondary transition-colors" : "h-1.5 rounded-full bg-surface-container-highest transition-colors";
+      });
+
+      if (!text) return;
+      if (score === 0) text.innerHTML = '<span class="material-symbols-outlined text-[14px]">info</span> Min. 6 chars required';
+      else if (score <= 2) text.innerHTML = '<span class="material-symbols-outlined text-[14px] text-tertiary">warning</span> Moderate strength';
+      else text.innerHTML = '<span class="material-symbols-outlined text-[14px] text-secondary">check_circle</span> Strong campus password';
+    }
+
+    async function handleUpdatePassword() {
+      const currentPw = document.getElementById('currentPassword')?.value.trim();
+      const newPw = document.getElementById('newPassword')?.value.trim();
+      const confirmPw = document.getElementById('confirmPassword')?.value.trim();
+
+      if (!newPw || newPw.length < 6) {
+        IdeaVault.showToast('New password must be at least 6 characters long', 'error');
+        return;
+      }
+      if (newPw !== confirmPw) {
+        IdeaVault.showToast('New passwords do not match', 'error');
+        return;
+      }
+
+      try {
+        await IdeaVault.changePassword(currentPw, newPw);
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmPassword').value = '';
+        evaluatePasswordStrength('');
+        IdeaVault.showToast('Security password updated successfully across Contineo SSO!', 'success');
+      } catch (err) {
+        IdeaVault.showToast(err.message || 'Error updating password', 'error');
+      }
+    }
+
+    function renderSessions(sessions) {
+      const container = document.getElementById('sessionsContainer');
+      if (!container) return;
+
+      if (!sessions || sessions.length === 0) {
+        container.innerHTML = `
+          <div class="p-space-md rounded-xl bg-surface-container-low text-on-surface-variant font-body-sm text-center">
+            No other active campus sessions.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = sessions.map(s => `
+        <div class="p-space-md rounded-xl ${s.is_current ? 'bg-surface-container-low' : 'bg-surface-container-lowest hover:bg-surface-container-low'} transition-colors flex items-center justify-between gap-space-sm session-row" data-id="${s.id}">
+          <div class="flex items-center gap-space-md">
+            <div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center ${s.is_current ? 'text-primary' : 'text-on-surface-variant'}">
+              <span class="material-symbols-outlined text-[22px]">${s.device.toLowerCase().includes('phone') || s.device.toLowerCase().includes('pixel') ? 'smartphone' : 'laptop_mac'}</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-title-sm text-title-sm text-on-surface font-bold">${s.device}</span>
+                ${s.is_current ? '<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-bold">Current Device</span>' : ''}
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">${s.location} • ${s.ip} • ${s.last_active}</p>
+            </div>
+          </div>
+          <div>
+            ${s.is_current ? `
+              <div class="hidden sm:flex flex-col items-end">
+                <span class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> Online Now
+                </span>
+                <span class="font-label-sm text-label-sm text-on-surface-variant">SSO Session</span>
+              </div>
+            ` : `
+              <button onclick="handleRevokeSession('${s.id}')" class="p-2 text-error hover:bg-error-container/40 rounded-full transition-colors" title="Revoke Device" type="button">
+                <span class="material-symbols-outlined text-[20px]">logout</span>
+              </button>
+            `}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function handleRevokeSession(sessionId) {
+      try {
+        const res = await IdeaVault.revokeSession(sessionId);
+        currentSettings.sessions = res.sessions || (currentSettings.sessions || []).filter(s => s.id !== sessionId);
+        renderSessions(currentSettings.sessions);
+        IdeaVault.showToast('Authorized session terminated successfully.', 'info');
+      } catch (err) {
+        IdeaVault.showToast('Error revoking session', 'error');
+      }
+    }
+
+    async function handleRevokeAllOtherSessions() {
+      try {
+        const res = await IdeaVault.revokeSession(null, true);
+        currentSettings.sessions = res.sessions || (currentSettings.sessions || []).filter(s => s.is_current);
+        renderSessions(currentSettings.sessions);
+        IdeaVault.showToast('All other campus sessions terminated successfully.', 'success');
+      } catch (err) {
+        IdeaVault.showToast('Error terminating sessions', 'error');
+      }
+    }
+
+    async function handleManageGithub() {
+      const handle = prompt("Enter GitHub Academic Username:", currentSettings.connected_github || "rohansharma-nie");
+      if (handle && handle.trim()) {
+        currentSettings.connected_github = handle.trim();
+        document.getElementById('githubAccountDisplay').textContent = `@${handle.trim()} • Connected`;
+        await IdeaVault.updateSettings({ connected_github: handle.trim() });
+        IdeaVault.showToast(`GitHub account updated to @${handle.trim()}`, 'success');
+      }
+    }
+
+    async function handleToggleScholar() {
+      if (currentSettings.connected_scholar) {
+        if (confirm("Unlink ORCID / Google Scholar profile?")) {
+          currentSettings.connected_scholar = '';
+          document.getElementById('scholarDisplay').textContent = 'Not linked';
+          await IdeaVault.updateSettings({ connected_scholar: '' });
+          IdeaVault.showToast('Scholar profile unlinked', 'info');
+        }
+      } else {
+        const id = prompt("Enter ORCID or Google Scholar ID:", "0009-0004-9122-481X");
+        if (id && id.trim()) {
+          currentSettings.connected_scholar = id.trim();
+          document.getElementById('scholarDisplay').textContent = id.trim();
+          await IdeaVault.updateSettings({ connected_scholar: id.trim() });
+          IdeaVault.showToast('Scholar profile linked successfully!', 'success');
+        }
+      }
+    }
+
+    async function handleToggleIeee() {
+      currentSettings.connected_ieee = currentSettings.connected_ieee ? 0 : 1;
+      const ieeeDisp = document.getElementById('ieeeDisplay');
+      const ieeeBtn = document.getElementById('btnConnectIeee');
+      if (currentSettings.connected_ieee) {
+        if (ieeeDisp) ieeeDisp.textContent = 'IEEE Member #9284102 • Active';
+        if (ieeeBtn) {
+          ieeeBtn.textContent = 'Disconnect';
+          ieeeBtn.className = "px-space-md py-1.5 rounded-full bg-surface-container hover:bg-error-container text-on-surface hover:text-error font-label-sm text-label-sm transition-colors flex-shrink-0 shadow-sm";
+        }
+        IdeaVault.showToast('IEEE Student Branch linked! Conference credits unlocked.', 'success');
+      } else {
+        if (ieeeDisp) ieeeDisp.textContent = 'Not linked • Unlock conference credits';
+        if (ieeeBtn) {
+          ieeeBtn.textContent = 'Connect';
+          ieeeBtn.className = "px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm hover:bg-primary transition-colors flex-shrink-0 shadow-sm";
+        }
+        IdeaVault.showToast('IEEE Student Branch disconnected', 'info');
+      }
+      await IdeaVault.updateSettings({ connected_ieee: currentSettings.connected_ieee });
+    }
+
+    async function handleSavePreferences() {
+      const payload = {
+        theme: currentSettings.theme || 'light',
+        accent: currentSettings.accent || 'indigo',
+        in_app_notifs: document.getElementById('toggleTeammates')?.checked ? 1 : 0,
+        email_notifs: document.getElementById('channelEmail')?.checked ? 1 : 0,
+        digest_frequency: document.getElementById('toggleDigest')?.checked ? 'weekly' : 'never',
+        two_factor_enabled: currentSettings.two_factor_enabled !== 0 ? 1 : 0,
+        connected_github: currentSettings.connected_github || 'rohansharma-nie',
+        connected_scholar: currentSettings.connected_scholar || '',
+        connected_ieee: currentSettings.connected_ieee || 0
+      };
+
+      try {
+        await IdeaVault.updateSettings(payload);
+        IdeaVault.showToast('Preferences saved and synchronized across NIE campus registry!', 'success');
+      } catch (e) {
+        IdeaVault.showToast('Settings saved locally', 'info');
+      }
+    }
   </script>
 </body></html>

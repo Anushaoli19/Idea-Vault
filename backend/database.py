@@ -131,7 +131,46 @@ def create_tables():
             desired_roles_json TEXT DEFAULT '[]',
             authorized_labs_json TEXT DEFAULT '[]',
             avatar TEXT DEFAULT '',
+            website TEXT DEFAULT '',
+            scholar TEXT DEFAULT '',
+            teaming_objective TEXT DEFAULT '',
+            open_for_collab INTEGER DEFAULT 1,
+            show_cgpa INTEGER DEFAULT 1,
+            password TEXT DEFAULT 'NieMysuru@2025',
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    cursor.execute("PRAGMA table_info(profiles)")
+    existing_profile_cols = {row[1] for row in cursor.fetchall()}
+    profile_columns = [
+        ("website", "TEXT DEFAULT ''"),
+        ("scholar", "TEXT DEFAULT ''"),
+        ("teaming_objective", "TEXT DEFAULT ''"),
+        ("open_for_collab", "INTEGER DEFAULT 1"),
+        ("show_cgpa", "INTEGER DEFAULT 1"),
+        ("password", "TEXT DEFAULT 'NieMysuru@2025'")
+    ]
+    for col_name, col_def in profile_columns:
+        if col_name not in existing_profile_cols:
+            cursor.execute(f"ALTER TABLE profiles ADD COLUMN {col_name} {col_def}")
+
+    # 7. Student Settings Table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS settings (
+            student_id TEXT PRIMARY KEY,
+            theme TEXT DEFAULT 'light',
+            accent TEXT DEFAULT 'indigo',
+            email_notifs INTEGER DEFAULT 1,
+            in_app_notifs INTEGER DEFAULT 1,
+            digest_frequency TEXT DEFAULT 'weekly',
+            two_factor_enabled INTEGER DEFAULT 1,
+            connected_github TEXT DEFAULT 'rohansharma-nie',
+            connected_scholar TEXT DEFAULT '0009-0004-9122-481X',
+            connected_ieee INTEGER DEFAULT 0,
+            sessions_json TEXT DEFAULT '[]',
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (student_id) REFERENCES profiles(student_id) ON DELETE CASCADE
         )
     """)
 
@@ -143,35 +182,88 @@ def seed_database_if_empty():
     conn = get_connection()
     cursor = conn.cursor()
 
+    # Always ensure default student profile and settings exist
+    cursor.execute("SELECT COUNT(*) FROM profiles WHERE student_id = '4NI21CS089'")
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("""
+            INSERT OR REPLACE INTO profiles (
+                student_id, name, email, department, batch, campus, cgpa, bio, github, linkedin,
+                skills_json, desired_roles_json, authorized_labs_json, avatar,
+                website, scholar, teaming_objective, open_for_collab, show_cgpa, password
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            "4NI21CS089",
+            "Rohan Sharma",
+            "rohan.s.cse21@nie.ac.in",
+            "Computer Science & Engineering (CSE)",
+            "Class of 2025 (8th Semester - Capstone Final)",
+            "NIE South Campus (Manandavadi Road)",
+            "8.92 / 10.0",
+            "Passionate full-stack & edge systems engineer. Working on decentralised smart grid telemetry and edge inference.",
+            "rohansharma-nie",
+            "rohansharma-cse",
+            json.dumps(["React.js", "Python 3.11", "FastAPI", "PyTorch", "ESP32 Firmware", "Docker", "PostgreSQL"]),
+            json.dumps(["Backend / Cloud Architect", "ML Edge Engineer"]),
+            json.dumps(["C-Block IoT Research Cell", "Embedded Systems Lab 3"]),
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
+            "https://rohansharma.dev",
+            "scholar.google.com/citations?user=nie_cs",
+            "Actively looking for Hardware / ECE Co-Founders for Smart Grid Micro-Inverter project.",
+            1,
+            1,
+            "NieMysuru@2025"
+        ))
+
+    # Always ensure default settings exist
+    cursor.execute("SELECT COUNT(*) FROM settings WHERE student_id = '4NI21CS089'")
+    if cursor.fetchone()[0] == 0:
+        default_sessions = json.dumps([
+            {
+                "id": "sess_1",
+                "device": "MacBook Pro 14\" • macOS Sonoma",
+                "browser": "Chrome 124.0.0",
+                "location": "NIE South Campus Wi-Fi (Academic Block C)",
+                "ip": "172.16.42.108",
+                "is_current": True,
+                "last_active": "Just now"
+            },
+            {
+                "id": "sess_2",
+                "device": "Dell OptiPlex 7090 • Ubuntu 22.04 LTS",
+                "browser": "Firefox 125.0",
+                "location": "IoT Research Cell (Room 304)",
+                "ip": "172.16.18.52",
+                "is_current": False,
+                "last_active": "4 hours ago"
+            }
+        ])
+        cursor.execute("""
+            INSERT OR REPLACE INTO settings (
+                student_id, theme, accent, email_notifs, in_app_notifs,
+                digest_frequency, two_factor_enabled, connected_github,
+                connected_scholar, connected_ieee, sessions_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            "4NI21CS089",
+            "light",
+            "indigo",
+            1,
+            1,
+            "weekly",
+            1,
+            "rohansharma-nie",
+            "0009-0004-9122-481X",
+            0,
+            default_sessions
+        ))
+
     cursor.execute("SELECT COUNT(*) FROM ideas")
     count = cursor.fetchone()[0]
 
     if count > 0:
+        conn.commit()
         conn.close()
         return
-
-    # Seed Default Profile
-    cursor.execute("""
-        INSERT OR REPLACE INTO profiles (
-            student_id, name, email, department, batch, campus, cgpa, bio, github, linkedin,
-            skills_json, desired_roles_json, authorized_labs_json, avatar
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (
-        "4NI21CS089",
-        "Rohan Sharma",
-        "rohan.s.cse21@nie.ac.in",
-        "Computer Science & Engineering (CSE)",
-        "Class of 2025 (8th Semester - Capstone Final)",
-        "NIE South Campus (Manandavadi Road)",
-        "8.92 / 10.0",
-        "Passionate full-stack & edge systems engineer. Working on decentralised smart grid telemetry and edge inference.",
-        "rohansharma-nie",
-        "rohansharma-cse",
-        json.dumps(["React.js", "Python 3.11", "FastAPI", "PyTorch", "ESP32 Firmware", "Docker", "PostgreSQL"]),
-        json.dumps(["Backend / Cloud Architect", "ML Edge Engineer"]),
-        json.dumps(["C-Block IoT Research Cell", "Embedded Systems Lab 3"]),
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"
-    ))
 
     # Seed Sample Ideas Matching Stitch Design System Showcase
     sample_ideas = [
