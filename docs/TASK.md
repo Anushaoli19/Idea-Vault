@@ -55,3 +55,11 @@ Legend:
 - [x] 5.3 GitHub Repository Initialized & Pushed to Remote: `https://github.com/Ramcharan77587/idea-vault` on branch `main` [Verified: 2026-11-22]
 - [x] 5.4 Merged with `Anushaoli19/Idea-Vault` preserving initial commit history and API documentation, pushed to `https://github.com/Anushaoli19/Idea-Vault` on branch `main` [Verified: 2026-11-22]
 - [x] 5.5 Fully wired all interactive features across Profile and Settings (dark/light theme switching, accent branding, password changes, session revocations, live backend synchronization, 24/24 tests passing) [Verified: 2026-11-22]
+
+## Phase 6: Stitch Screens Standalone Expansion & Central Directory (Screens 01–13)
+- [x] 6.1 Download and preserve all 13 high-fidelity Stitch desktop HTML screens in `frontend/stitch/` [Verified: 2026-11-22]
+- [x] 6.2 Generate 13 dedicated standalone interactive screen files (`frontend/screen_01_post_idea.html` to `frontend/screen_13_loading_skeleton.html`) with top inspection banners and intra-screen navigation [Verified: 2026-11-22]
+- [x] 6.3 Provide short alias files (`screen_1.html` through `screen_13.html`) ensuring direct 1-click access to screens 7, 8, 9, 10, 11, 12, 13 [Verified: 2026-11-22]
+- [x] 6.4 Build master Stitch Screen Directory (`frontend/screens.html` / `/screens`) showcasing all 13 screens with search, category filtering, and direct links to standalone screens, live apps, and raw stitch files [Verified: 2026-11-22]
+- [x] 6.5 Add `Screens (13)` link to top navigation across all application views and verify Flask routing in `backend/app.py` [Verified: 2026-11-22]
+- [x] 6.6 Expand automated tests in `backend/test_e2e.py` verifying `/screens`, `/screen/<num>`, and all 13 screen routes return HTTP 200 OK (25/25 tests passing) [Verified: 2026-11-22]

@@ -24,6 +24,19 @@ def serve_index():
     return send_from_directory(FRONTEND_DIR, "index.html")
 
 
+@app.route("/screens")
+def serve_screens():
+    return send_from_directory(FRONTEND_DIR, "screens.html")
+
+
+@app.route("/screen/<int:num>")
+def serve_screen_num(num):
+    alias = f"screen_{num}.html"
+    if os.path.exists(os.path.join(FRONTEND_DIR, alias)):
+        return send_from_directory(FRONTEND_DIR, alias)
+    return send_from_directory(FRONTEND_DIR, "screens.html")
+
+
 @app.route("/<path:path>")
 def serve_static(path):
     if os.path.exists(os.path.join(FRONTEND_DIR, path)):

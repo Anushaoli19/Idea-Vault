@@ -9,23 +9,31 @@ Welcome to **NIE Idea Vault**, the official innovation portal for National Insti
 
 ---
 
-## 2. Platform Navigation & 13 Stitch Screens Overview
+## 2. Platform Navigation & 13 Stitch Screens Complete Directory
 
-| # | Screen | File / Location | Primary Purpose |
-|---|---|---|---|
-| 1 | **Post Idea** | `post.html` | Step-by-step submission form with automatic duplicate idea checking. |
-| 2 | **Profile & Settings** | `profile.html` | Student academic identity, USN, portfolio links, skills, and lab authorizations. |
-| 3 | **Notification Center** | `notifications.html` | Campus activity stream, team application notices, upvote milestones, and review status. |
-| 4 | **Teammate Matching** | `teammates.html` | Open interdisciplinary role listings filtered by skill (Python, ML, Firmware, React, CAD). |
-| 5 | **Campus Leaderboard** | `leaderboard.html` | Top 3 podium, rankings table, departmental engagement progress, and top student innovators. |
-| 6 | **Duplicate Warning** | `post.html` (Modal / Banner) | Highlights >= 40% duplicate matches with diagnostic comparisons and bypass options. |
-| 7 | **Idea Detail** | `idea.html` | Technical breakdown with Problem Statement, BOM table, Architecture, and Team Roles. |
-| 8 | **My Submissions** | `submissions.html` | Personal dashboard managing your submitted capstone ideas and team requests. |
-| 9 | **Settings & Security** | `settings.html` | Workspace themes, brand accent tones, high contrast switch, password & TOTP 2FA, session manager. |
-| 10 | **Energy Grid Showcase** | `idea.html?id=1` | Featured capstone showcase for Smart Campus Micro-Grid & Autonomous Energy Optimization. |
-| 11 | **Profile Drawer** | Global Header (`app.js`) | Quick popover / slide-over drawer accessible from any page via the header profile avatar. |
-| 12 | **Home / Idea Board** | `index.html` | Browse all submitted projects with search query, department chips, and upvote controls. |
-| 13 | **Detail Loading State** | `idea.html` (Skeleton) | Polished shimmer skeleton loading state displayed while fetching project specs. |
+Every screen from the Google Stitch project is available in three distinct forms:
+1. **Interactive Production App View** (`*.html`): Full dynamic connectivity with Python Flask REST backend and SQLite database.
+2. **Dedicated Standalone Screen View** (`screen_{num:02d}_*.html` and `screen_{num}.html`): Exact replica of the Stitch desktop design with interactive inspection banner and intra-screen navigation.
+3. **Master Screen Directory** (`screens.html` / `http://127.0.0.1:5000/screens`): Central catalog displaying all 13 screens with search, category filtering, and direct links.
+
+| # | Stitch Screen Title | Dedicated Standalone File | Short Alias | Live App View | Stitch Raw Source |
+|---|---|---|---|---|---|
+| **01** | **Post Idea** | `screen_01_post_idea.html` | `screen_1.html` | `post.html` | `stitch/screen_01_post_idea.html` |
+| **02** | **Profile & Settings** | `screen_02_profile_settings.html` | `screen_2.html` | `profile.html` | `stitch/screen_02_profile_settings.html` |
+| **03** | **Notification Center** | `screen_03_notification_center.html` | `screen_3.html` | `notifications.html` | `stitch/screen_03_notification_center.html` |
+| **04** | **Teammate Matching** | `screen_04_teammates.html` | `screen_4.html` | `teammates.html` | `stitch/screen_04_teammates.html` |
+| **05** | **Campus Leaderboard** | `screen_05_leaderboard.html` | `screen_5.html` | `leaderboard.html` | `stitch/screen_05_leaderboard.html` |
+| **06** | **Duplicate Warning** | `screen_06_duplicate_warning.html` | `screen_6.html` | `post.html` (Modal) | `stitch/screen_06_duplicate_warning.html` |
+| **07** | **Idea Detail (Food Waste Auditor)** | `screen_07_idea_detail.html` | `screen_7.html` | `idea.html?id=2` | `stitch/screen_07_idea_detail.html` |
+| **08** | **My Submissions Dashboard** | `screen_08_submissions.html` | `screen_8.html` | `submissions.html` | `stitch/screen_08_submissions.html` |
+| **09** | **Settings & Security** | `screen_09_settings_security.html` | `screen_9.html` | `settings.html` | `stitch/screen_09_settings_security.html` |
+| **10** | **Idea Detail - Smart Campus Energy Grid** | `screen_10_energy_grid.html` | `screen_10.html` | `idea.html?id=1` | `stitch/screen_10_energy_grid.html` |
+| **11** | **Account Menu & Profile Drawer** | `screen_11_profile_drawer.html` | `screen_11.html` | `index.html#drawer` | `stitch/screen_11_profile_drawer.html` |
+| **12** | **Home / Idea Board** | `screen_12_home_idea_board.html` | `screen_12.html` | `index.html` | `stitch/screen_12_home_idea_board.html` |
+| **13** | **Idea Detail - Loading State** | `screen_13_loading_skeleton.html` | `screen_13.html` | `idea.html` (Loading) | `stitch/screen_13_loading_skeleton.html` |
+
+> [!TIP]
+> You can visit `http://127.0.0.1:5000/screens` anytime or click **Screens (13)** in the top header to explore the interactive visual directory for all screens.
 
 ---
 

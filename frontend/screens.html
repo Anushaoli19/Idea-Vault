@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Stitch Screen Directory (13 Screens) — NIE Idea Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#3525cd",
+            "primary-container": "#4f46e5",
+            secondary: "#006c49",
+            "secondary-container": "#6cf8bb",
+            surface: "#f8f9ff",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eff4ff",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#0b1c30",
+            "on-surface-variant": "#464555",
+            outline: "#777587"
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface font-sans text-on-surface min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-surface-container shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-md">
+            <span class="material-symbols-outlined text-xl">lightbulb</span>
+          </div>
+          <span class="font-bold text-lg text-on-surface tracking-tight">Idea Vault</span>
+          <span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-semibold text-xs tracking-wide">NIE Mysuru</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+          <a href="index.html" class="text-on-surface-variant hover:text-primary transition-colors py-2">Explore Ideas</a>
+          <a href="submissions.html" class="text-on-surface-variant hover:text-primary transition-colors py-2">My Submissions</a>
+          <a href="leaderboard.html" class="text-on-surface-variant hover:text-primary transition-colors py-2">Campus Leaderboard</a>
+          <a href="teammates.html" class="text-on-surface-variant hover:text-primary transition-colors py-2">Find Teammates</a>
+          <a href="screens.html" class="text-primary font-bold border-b-2 border-primary py-2 flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">grid_view</span> Screens (13)
+          </a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="post.html" class="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-white text-xs font-semibold px-4 py-2 rounded-full transition-all shadow-sm">
+          <span class="material-symbols-outlined text-base">add</span> Post Idea
+        </a>
+        <a href="notifications.html" class="p-2 text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-full transition-colors relative" title="Notifications">
+          <span class="material-symbols-outlined text-xl">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500"></span>
+        </a>
+        <a href="profile.html" class="p-1 rounded-full ring-2 ring-primary/20 hover:ring-primary transition-all" title="Profile">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="w-8 h-8 rounded-full object-cover"/>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="flex-1 max-w-7xl mx-auto px-6 py-8 w-full">
+    <div class="bg-gradient-to-r from-[#1e1b4b] to-[#312e81] rounded-3xl p-8 md:p-10 text-white shadow-xl mb-8 relative overflow-hidden">
+      <div class="relative z-10 max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-xs font-semibold mb-4">
+          <span class="material-symbols-outlined text-sm">verified</span> Google Stitch Project Architecture
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">All 13 Stitch Desktop Screens</h1>
+        <p class="text-indigo-200 text-base leading-relaxed mb-6">
+          Every screen designed for the NIE Idea Vault platform is implemented, wired, and verified.
+          Access each screen as a dedicated standalone view, a production interactive app view, or view its original raw Stitch HTML design.
+        </p>
+
+        <!-- Metric Badges -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+          <div class="bg-white/10 backdrop-blur rounded-2xl p-3 border border-white/10">
+            <span class="block text-2xl font-black text-white">13</span>
+            <span class="text-xs text-indigo-200">Total Screens</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-2xl p-3 border border-white/10">
+            <span class="block text-2xl font-black text-emerald-400">100%</span>
+            <span class="text-xs text-indigo-200">Verified & Active</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-2xl p-3 border border-white/10">
+            <span class="block text-2xl font-black text-white">2560px</span>
+            <span class="text-xs text-indigo-200">Desktop Fidelity</span>
+          </div>
+          <div class="bg-white/10 backdrop-blur rounded-2xl p-3 border border-white/10">
+            <span class="block text-2xl font-black text-amber-300">0</span>
+            <span class="text-xs text-indigo-200">Missing Screens</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Pills & Search -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+      <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
+        <button onclick="filterScreens('all')" id="btn-filter-all" class="filter-btn px-4 py-2 rounded-full text-xs font-bold bg-primary text-white shadow-sm transition-all">
+          All Screens (13)
+        </button>
+        <button onclick="filterScreens('core')" id="btn-filter-core" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-on-surface-variant hover:bg-surface-container border border-surface-container transition-all">
+          Core Workflows (Screens 01–06)
+        </button>
+        <button onclick="filterScreens('detail')" id="btn-filter-detail" class="filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-on-surface-variant hover:bg-surface-container border border-surface-container transition-all">
+          Details, Dashboards & States (Screens 07–13)
+        </button>
+      </div>
+
+      <div class="relative w-full sm:w-72">
+        <span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-lg">search</span>
+        <input type="text" id="screen-search" oninput="searchScreens()" placeholder="Search screens..." class="w-full pl-9 pr-4 py-2 text-xs rounded-full bg-white border border-surface-container focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"/>
+      </div>
+    </div>
+
+    <!-- Screen Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="screens-grid">
+
+      <!-- Screen Card #01 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="core" data-title="post idea" data-num="1">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #01
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Post Idea</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 718a09c3...</span>
+            <span>•</span>
+            <span>2560 × 3566</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Project title, problem statement, solution & architecture fields</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Maturity stage selector (Ideation, Prototyping, Testing)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Dynamic BOM item cost estimator with real-time total</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Character counter and real-time pre-flight duplicate checking</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_01_post_idea.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #01
+            </a>
+            <a href="post.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_1.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_1.html
+            </a>
+            <a href="stitch/screen_01_post_idea.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #02 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="core" data-title="profile & settings" data-num="2">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #02
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Profile & Settings</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 884db187...</span>
+            <span>•</span>
+            <span>2560 × 3508</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Student academic credentials (USN, Branch, Graduation Year, CGPA)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Skills chip editor with add/remove tagging</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>GitHub, Google Scholar, and Personal Portfolio integrations</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Simulated PDF resume upload with progress bar</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_02_profile_settings.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #02
+            </a>
+            <a href="profile.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_2.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_2.html
+            </a>
+            <a href="stitch/screen_02_profile_settings.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #03 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="core" data-title="notification center & campus activity" data-num="3">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #03
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Notification Center & Campus Activity</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: d0e54970...</span>
+            <span>•</span>
+            <span>2560 × 4016</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Real-time institutional notifications and activity feed</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Category filters (All, Teammates, Upvotes, System)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Unread toggle and 'Mark all as read' API sync</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Interactive accept/decline action buttons for team invites</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_03_notification_center.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #03
+            </a>
+            <a href="notifications.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_3.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_3.html
+            </a>
+            <a href="stitch/screen_03_notification_center.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #04 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="core" data-title="teammate matching & open roles" data-num="4">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #04
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Teammate Matching & Open Roles</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: b6b27531...</span>
+            <span>•</span>
+            <span>2560 × 3406</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Cross-department talent marketplace for capstone vacancies</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Skill-based filtering (Embedded, AI/ML, Cloud, Hardware)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>One-click 'Express Interest / Apply for Role' action</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Project summary and founder contact attribution</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_04_teammates.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #04
+            </a>
+            <a href="teammates.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_4.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_4.html
+            </a>
+            <a href="stitch/screen_04_teammates.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #05 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="core" data-title="campus leaderboard" data-num="5">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #05
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Campus Leaderboard</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: e037acb0...</span>
+            <span>•</span>
+            <span>2560 × 5160</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Top 3 Gold, Silver, and Bronze podium showcase</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Ranked table with upvote counts, student interest, and department tags</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Institutional engagement progress bars by engineering department</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Top Student Innovator spotlight with verified badges</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_05_leaderboard.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #05
+            </a>
+            <a href="leaderboard.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_5.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_5.html
+            </a>
+            <a href="stitch/screen_05_leaderboard.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #06 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="core" data-title="duplicate warning dialog" data-num="6">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #06
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Duplicate Warning Dialog</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: ee8cb12a...</span>
+            <span>•</span>
+            <span>2560 × 3344</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Semantic collision alert dialog with TF-IDF cosine similarity score (87%)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Direct comparison with existing project (Automated Mess Waste Auditor)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Recommendations to collaborate with founder instead of duplicating effort</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Force override button ('Proceed with separate submission')</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_06_duplicate_warning.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #06
+            </a>
+            <a href="post.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_6.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_6.html
+            </a>
+            <a href="stitch/screen_06_duplicate_warning.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #07 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="detail" data-title="idea detail (food waste auditor)" data-num="7">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #07
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Idea Detail (Food Waste Auditor)</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 17213b20...</span>
+            <span>•</span>
+            <span>2560 × 4490</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Full project specification for Automated Hostel Mess Food Waste Auditor</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>4 structured numbered sections: Problem, Architecture, Tech Stack, Open Help</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Interactive Upvote and Express Interest toggles with live counters</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Interested students sidebar (15 fellow NIE students) and Faculty Mentor card</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_07_idea_detail.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #07
+            </a>
+            <a href="idea.html?id=2" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_7.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_7.html
+            </a>
+            <a href="stitch/screen_07_idea_detail.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #08 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="detail" data-title="my submissions dashboard" data-num="8">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #08
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">My Submissions Dashboard</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 1a8b31fe...</span>
+            <span>•</span>
+            <span>2560 × 3514</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Personal innovation dashboard tracking author's capstone submissions</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Status tabs: All Submissions, Under Review, Active Collaborations, Completed</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Key statistics: 3 Total Projects, 2 Active Collabs, 142 Total Upvotes</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Interactive search, quick edit, and live view actions</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_08_submissions.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #08
+            </a>
+            <a href="submissions.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_8.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_8.html
+            </a>
+            <a href="stitch/screen_08_submissions.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #09 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="detail" data-title="settings & security" data-num="9">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #09
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Settings & Security</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 6e08d89c...</span>
+            <span>•</span>
+            <span>2560 × 3950</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Live Dark/Light/Auto workspace appearance switcher applying .dark to <html></span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Brand accent color theme picker (Electric Indigo, Slate Navy, Eco-Tech)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Account password rotation with client & server validation</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Active campus session manager with device revocation API</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_09_settings_security.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #09
+            </a>
+            <a href="settings.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_9.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_9.html
+            </a>
+            <a href="stitch/screen_09_settings_security.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #10 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="detail" data-title="idea detail - smart campus energy grid" data-num="10">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #10
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Idea Detail - Smart Campus Energy Grid</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 191baead...</span>
+            <span>•</span>
+            <span>2560 × 6794</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Autonomous Smart Campus Microgrid & Energy Dispatcher project layout</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>CREST Laboratory pilot testbed setup diagram and telemetry topology</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>VTU Capstone Milestones (2024-2025) progress roadmap</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Complete Bill of Materials (BOM) & procurement status table</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_10_energy_grid.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #10
+            </a>
+            <a href="idea.html?id=1" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_10.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_10.html
+            </a>
+            <a href="stitch/screen_10_energy_grid.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #11 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="detail" data-title="account menu & profile drawer" data-num="11">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #11
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Account Menu & Profile Drawer</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 6bb9e44b...</span>
+            <span>•</span>
+            <span>2560 × 2186</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Slide-over student profile drawer with avatar, branch, USN, and CGPA</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Rapid links to My Submissions, Bookmarks, and Settings & Security</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>One-click dark mode and light mode appearance toggle</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Sign out and session termination controls</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_11_profile_drawer.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #11
+            </a>
+            <a href="index.html#drawer" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_11.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_11.html
+            </a>
+            <a href="stitch/screen_11_profile_drawer.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #12 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="detail" data-title="home / idea board" data-num="12">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #12
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Home / Idea Board</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: eebfd667...</span>
+            <span>•</span>
+            <span>2560 × 2436</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Primary campus innovation homepage ('Empowering Engineering Ingenuity')</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Search bar with live query debouncing and clear actions</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Department filter pills (All, AI/ML, IoT, CleanTech, Robotics, HealthTech)</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Responsive grid of project cards with live upvote toggling</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_12_home_idea_board.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #12
+            </a>
+            <a href="index.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_12.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_12.html
+            </a>
+            <a href="stitch/screen_12_home_idea_board.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screen Card #13 -->
+      <div class="screen-card bg-white rounded-3xl p-6 border border-surface-container shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-category="detail" data-title="idea detail - loading state" data-num="13">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-mono text-xs font-bold">
+              Screen #13
+            </span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[11px] font-semibold text-emerald-700">Verified</span>
+            </div>
+          </div>
+
+          <h3 class="text-lg font-bold text-on-surface tracking-tight mb-1">Idea Detail - Loading State</h3>
+          <div class="text-[11px] text-outline font-mono mb-4 flex items-center gap-2">
+            <span>Stitch ID: 9f59a8f4...</span>
+            <span>•</span>
+            <span>2560 × 3414</span>
+          </div>
+
+          <ul class="text-xs text-on-surface-variant space-y-1.5 mb-6">
+            <li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>High-fidelity shimmering skeleton loading state with pulse animation</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Smooth UX placeholder for hero banner, specs, and sidebar cards</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Demonstrates graceful degradation while fetching async SQLite data</span></li><li class='flex items-start gap-1.5'><span class='material-symbols-outlined text-primary text-sm mt-0.5'>check_circle</span><span>Includes interactive control to transition into the loaded state</span></li>
+          </ul>
+        </div>
+
+        <div class="pt-4 border-t border-surface-container-low flex flex-col gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <a href="screen_13_loading_skeleton.html" class="w-full py-2 px-3 rounded-xl bg-primary hover:bg-primary-container text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">visibility</span> Standalone #13
+            </a>
+            <a href="idea.html" class="w-full py-2 px-3 rounded-xl bg-secondary hover:bg-[#005236] text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 shadow-xs">
+              <span class="material-symbols-outlined text-sm">bolt</span> Live App
+            </a>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-on-surface-variant pt-1 px-1">
+            <a href="screen_13.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">link</span> screen_13.html
+            </a>
+            <a href="stitch/screen_13_loading_skeleton.html" class="hover:text-primary transition-colors flex items-center gap-0.5">
+              <span class="material-symbols-outlined text-[12px]">code</span> Raw Stitch HTML
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-surface-container py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-on-surface-variant">
+      <p>© 2025 The National Institute of Engineering, Mysuru. Idea Vault Platform.</p>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-primary">Home</a>
+        <a href="screens.html" class="hover:text-primary font-bold text-primary">Screen Directory (13)</a>
+        <a href="settings.html" class="hover:text-primary">Settings</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filterScreens(cat) {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.className = 'filter-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-on-surface-variant hover:bg-surface-container border border-surface-container transition-all';
+      });
+      const activeBtn = document.getElementById('btn-filter-' + cat);
+      if (activeBtn) {
+        activeBtn.className = 'filter-btn px-4 py-2 rounded-full text-xs font-bold bg-primary text-white shadow-sm transition-all';
+      }
+
+      document.querySelectorAll('.screen-card').forEach(card => {
+        if (cat === 'all' || card.dataset.category === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function searchScreens() {
+      const q = document.getElementById('screen-search').value.toLowerCase().trim();
+      document.querySelectorAll('.screen-card').forEach(card => {
+        const title = card.dataset.title;
+        const num = card.dataset.num;
+        if (!q || title.includes(q) || num === q) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -151,6 +151,41 @@ class FullSystemE2ETestCase(unittest.TestCase):
         })
         self.assertEqual(res_put.status_code, 200)
 
+    def test_11_all_13_screens_and_directory(self):
+        # 1. Directory page
+        res = self.client.get("/screens")
+        self.assertEqual(res.status_code, 200)
+        res.close()
+
+        res_html = self.client.get("/screens.html")
+        self.assertEqual(res_html.status_code, 200)
+        res_html.close()
+
+        # 2. All 13 screens via /screen/<num> and standalone screen files
+        for i in range(1, 14):
+            res_num = self.client.get(f"/screen/{i}")
+            self.assertEqual(res_num.status_code, 200, f"/screen/{i} failed with {res_num.status_code}")
+            res_num.close()
+
+            res_alias = self.client.get(f"/screen_{i}.html")
+            self.assertEqual(res_alias.status_code, 200, f"/screen_{i}.html failed with {res_alias.status_code}")
+            res_alias.close()
+
+        # Specifically verify screens 7, 8, 9, 10, 11, 12, 13
+        named_screens = [
+            "/screen_07_idea_detail.html",
+            "/screen_08_submissions.html",
+            "/screen_09_settings_security.html",
+            "/screen_10_energy_grid.html",
+            "/screen_11_profile_drawer.html",
+            "/screen_12_home_idea_board.html",
+            "/screen_13_loading_skeleton.html",
+        ]
+        for ns in named_screens:
+            r = self.client.get(ns)
+            self.assertEqual(r.status_code, 200, f"Named screen {ns} failed with {r.status_code}")
+            r.close()
+
 
 if __name__ == "__main__":
     unittest.main()

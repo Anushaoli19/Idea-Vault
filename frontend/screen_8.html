@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#006c49", "surface-dim": "#cbdbf5", "secondary-container": "#6cf8bb", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "outline-variant": "#c7c4d8", "on-secondary-container": "#00714d", "on-primary-fixed-variant": "#3323cc", "on-surface-variant": "#464555", "primary": "#3525cd", "on-background": "#0b1c30", "on-tertiary-fixed": "#2a1700", "on-secondary-fixed-variant": "#005236", "surface": "#f8f9ff", "surface-container-high": "#dce9ff", "secondary-fixed-dim": "#4edea3", "on-error": "#ffffff", "outline": "#777587", "tertiary-container": "#885500", "surface-container": "#e5eeff", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed": "#6ffbbe", "inverse-surface": "#213145", "on-secondary-fixed": "#002113", "surface-tint": "#4d44e3", "on-primary-container": "#dad7ff", "tertiary-fixed": "#ffddb8", "inverse-on-surface": "#eaf1ff", "background": "#f8f9ff", "on-tertiary-container": "#ffd4a4", "on-secondary": "#ffffff", "primary-fixed": "#e2dfff", "surface-bright": "#f8f9ff", "on-tertiary": "#ffffff", "primary-fixed-dim": "#c3c0ff", "on-primary": "#ffffff", "on-error-container": "#93000a", "inverse-primary": "#c3c0ff", "primary-container": "#4f46e5", "tertiary": "#684000", "error": "#ba1a1a", "surface-container-low": "#eff4ff", "surface-variant": "#d3e4fe", "tertiary-fixed-dim": "#ffb95f", "on-surface": "#0b1c30", "on-primary-fixed": "#0f0069", "surface-container-highest": "#d3e4fe" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "margin-mobile": "1rem" }, "fontFamily": { "label-md": ["Inter"], "display-lg-mobile": ["Inter"], "title-md": ["Inter"], "body-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "display-lg": ["Inter"], "headline-lg": ["Inter"], "headline-sm": ["Inter"], "title-sm": ["Inter"], "body-md": ["Inter"], "label-sm": ["Inter"], "headline-md": ["Inter"], "body-lg": ["Inter"] }, "fontSize": { "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "500" }], "display-lg-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-md": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.005em", "fontWeight": "600" }], "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-sm": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" }], "body-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }], "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.025em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
+
+<!-- STITCH SCREEN SHOWCASE TOP BAR -->
+<div id="stitch-inspector-banner" class="bg-[#1e1b4b] text-white py-2 px-4 shadow-lg sticky top-0 z-[100] border-b border-indigo-500/30 font-sans text-xs flex flex-wrap items-center justify-between gap-2">
+  <div class="flex items-center gap-2 flex-wrap">
+    <span class="bg-[#4f46e5] text-white font-mono px-2 py-0.5 rounded font-bold shadow-sm">Screen #08 / 13</span>
+    <span class="font-semibold text-sm text-indigo-100">My Submissions Dashboard</span>
+    <span class="text-indigo-300 hidden md:inline">• Stitch ID: <code class="font-mono text-[11px] bg-black/30 px-1 py-0.5 rounded">1a8b31fec2b44f02885c8c19e16f4a02</code></span>
+    <span class="text-indigo-300 hidden lg:inline">• Dim: <span class="font-mono font-medium">2560 × 3514</span></span>
+  </div>
+  <div class="flex items-center gap-2 flex-wrap">
+    <a href="screen_07_idea_detail.html" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-indigo-200 hover:text-white transition-colors flex items-center gap-1">
+      <span class="material-symbols-outlined text-[14px]">arrow_back</span> #07
+    </a>
+    <a href="screens.html" class="px-3 py-1 rounded bg-[#4f46e5] hover:bg-[#3525cd] text-white font-bold transition-colors flex items-center gap-1 shadow-sm">
+      <span class="material-symbols-outlined text-[14px]">grid_view</span> All 13 Screens
+    </a>
+    <a href="screen_09_settings_security.html" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-indigo-200 hover:text-white transition-colors flex items-center gap-1">
+      #09 <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+    </a>
+    <a href="submissions.html" class="px-3 py-1 rounded bg-[#006c49] hover:bg-[#005236] text-white font-bold transition-colors flex items-center gap-1 shadow-sm">
+      <span class="material-symbols-outlined text-[14px]">bolt</span> Live App View
+    </a>
+  </div>
+</div>
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-container shadow-[0_1px_8px_rgba(15,23,42,0.04)]"><div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="NIE Idea Vault Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDlf5YaQ-6hajqwj76VGBwisGvFpb9vn9WUb72gbUVryJCvkPs48QBzmORWUZ-jXFv5k6f0lMNNO2f7zGO1aQQFYQ72QYoWrSBMtqSC-N9VOnEn6kgv2lY_gSEnqV2_X85lzF__r1-HNWnxrV1JA4uq4coj0g-GeA_e7aCxN69lm5Gphu1FPK4cxzpltoxdP7sMGQ1BtqoJLklg-tPaXJb0ObSwbYqXIvaMiObINiPaXg"/><span class="font-title-md text-title-md text-on-surface font-bold tracking-tight whitespace-nowrap">Idea Vault</span><span class="px-space-sm py-space-xs rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide">NIE Mysuru</span></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="text-primary font-title-sm border-b-2 border-primary"><a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" data-path="explore-ideas" href="index.html">Explore Ideas</a><a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" data-path="my-submissions" href="#">My Submissions</a><a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" data-path="campus-leaderboard" href="#">Campus Leaderboard</a></nav></div><div class="flex items-center gap-space-md"><button class="inline-flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.25)]" type="button"><span class="material-symbols-outlined text-[1.125rem]">add</span><span>Post Idea</span></button><button aria-label="Campus Notifications" class="relative p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors" type="button"><span class="material-symbols-outlined text-[1.5rem]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><div class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface font-semibold leading-none">Rohan S.</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-space-xs">CSE '25</span></div></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)] max-w-7xl mx-auto px-gutter"><div class="flex flex-col w-full">
+<script>
+    (function activateNavItem() {
+      const activeNav = document.querySelector('header nav a[data-path="my-submissions"]');
+      if (activeNav) {
+        activeNav.classList.remove('text-on-surface-variant');
+        activeNav.classList.add('text-primary', 'font-semibold', 'border-b-2', 'border-primary');
+      }
+    })();
+  </script>
+<div class="py-space-md flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span>Portfolio Workspace</span>
+<span class="material-symbols-outlined text-[1rem]">chevron_right</span>
+<span class="text-primary font-semibold">NIE Student Submissions</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">My Submissions &amp; Project Vault</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Track review workflows, review cross-department collaborator applications, and oversee active NIE capstone proposals.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1.125rem]">download</span>
+<span>Export Portfolio Summary</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-sm rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-[0_4px_12px_rgba(79,70,229,0.25)] transition-all" type="button">
+<span class="material-symbols-outlined text-[1.125rem]">add</span>
+<span>Post New Idea</span>
+</button>
+</div>
+</div>
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md my-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Submissions</span>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[1.25rem]">folder_open</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-sm">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active Capstones</span>
+</div>
+<div class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span>3 published • 1 draft pending</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Campus Endorsements</span>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[1.25rem]">thumb_up</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-sm">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">248</span>
+<span class="inline-flex items-center text-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[0.875rem]">trending_up</span>+18%
+        </span>
+</div>
+<div class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span>Across 6 engineering branches</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Collaborator Inquiries</span>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[1.25rem]">group_add</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-sm">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">32</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">7 Unreviewed</span>
+</div>
+<div class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span>ECE, ISE, and Mechanical applicants</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Teams in Prototyping</span>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[1.25rem]">biotech</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-sm">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Lab Allocated</span>
+</div>
+<div class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<span>C-Block IoT Lab &amp; Robolab 2</span>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest p-space-md rounded-2xl shadow-sm my-space-sm space-y-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[1.25rem]">search</span>
+<input class="w-full pl-11 pr-space-md py-space-sm rounded-xl bg-surface-container-low text-on-surface placeholder:text-on-surface-variant font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest transition-all" id="proposal-search" placeholder="Search my proposals by title, tech stack, or milestone..." type="text"/>
+</div>
+<div class="flex items-center gap-space-sm justify-between lg:justify-end">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[1.125rem]">sort</span>
+<span>Sort by:</span>
+</div>
+<select class="px-space-md py-space-sm rounded-xl bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none">
+<option>Last Updated</option>
+<option>Most Popular (Upvotes)</option>
+<option>Submission Date (Newest)</option>
+<option>Inquiry Count</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-xs">
+<button class="tab-btn px-space-md py-space-xs rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-space-xs transition-colors whitespace-nowrap" data-tab="all" type="button">
+<span>All Submissions</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-lowest/20 font-bold text-[0.7rem]">4</span>
+</button>
+<button class="tab-btn px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors flex items-center gap-space-xs whitespace-nowrap" data-tab="review" type="button">
+<span>Under Review</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-bold text-[0.7rem]">1</span>
+</button>
+<button class="tab-btn px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors flex items-center gap-space-xs whitespace-nowrap" data-tab="approved" type="button">
+<span>Approved &amp; Open</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-bold text-[0.7rem]">2</span>
+</button>
+<button class="tab-btn px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors flex items-center gap-space-xs whitespace-nowrap" data-tab="team" type="button">
+<span>Team Formed</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-bold text-[0.7rem]">1</span>
+</button>
+<button class="tab-btn px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors flex items-center gap-space-xs whitespace-nowrap" data-tab="draft" type="button">
+<span>Drafts &amp; Warnings</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-bold text-[0.7rem]">1</span>
+</button>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg my-space-md">
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<article class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-status="approved">
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Approved &amp; Open for Team
+            </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              IoT &amp; Embedded Systems
+            </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              ECE / CSE Joint
+            </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            #NIE-25-CSE-018
+          </span>
+</div>
+<div class="space-y-space-xs">
+<h2 class="font-title-md text-title-md text-on-surface font-semibold hover:text-primary transition-colors cursor-pointer">
+            Smart Campus EV Shuttle Tracker with Real-Time Crowding Heatmap
+          </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            A low-power ESP32 edge deployment paired with ultrasonic occupancy sensors inside NIE Mysuru campus electric buggies. Feeds student mobile dashboards with live wait times at Diamond Jubilee Building and Golden Jubilee Complex.
+          </p>
+</div>
+<div class="my-space-md p-space-sm rounded-xl bg-surface-container-low flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex items-center gap-1 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[1.125rem]">thumb_up</span>
+<span>84 Upvotes</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="flex -space-x-2 overflow-hidden">
+<img class="inline-block h-6 w-6 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Portrait photo of a young female Indian engineering student smiling outdoors at NIE Mysuru campus, natural bright daylight, authentic student life" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb22cn5IPJMGyGoyB3lqzWgEsRdxBzFxa-c7t8wNN2FyJmL8xTtGmQjxviRBbVraF4SEv8vjKpEIeHH-1gHEeEbnnV-X066QpHcLKtGpAKX0NZOlLIBViTTRKRQXwRWPS9QAV5JY-EM5oZA71ZDYryg5XuCLX4OzlyT4TzcIoclmz39sCAAamD-EJxvkCafRfOxY1QN1i0ZUfuHjDoMOpFL4E2aHe2X50Qf-4mTnbB"/>
+<img class="inline-block h-6 w-6 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Portrait of an Indian male college undergraduate wearing glasses in a university electronics laboratory background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0p0wMucwdRd2WHTOWOOi-KbCgnNcLk0Zi2QqYKTp0myN8gDocVgLG-xDAl12H88ItqStbT8DmSTlDShQ1yUTZh5BbICIaecKTQgTaMbX_RSbTiJP5bOW8p0XesyOK94o0UfhBdxzQqwl6zmwXmtonobOTUsedNRW5Cbude5oE_qgjD1PWnZn6HJveZcjdFWX8-nOgqGmjim_IAgM41qVbeuYHhdP8390fmAAqV0jk"/>
+<img class="inline-block h-6 w-6 rounded-full ring-2 ring-surface-container-lowest object-cover" data-alt="Portrait photo of a young woman computer science student working on a laptop at a modern campus library desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQs73ibgjXa-yalUlkUCyLOdiLQ2D2ok2lyZuC4T0JEXGWQcEKwMgriwhrZd0V19SD4FxJfvuKRuF1jN-br1gR4P4V3w8jZCaMhci9TQERgIWzS_xhnR-3i4ONyTtQNgOLKyhIfcGGMlA2h8OiRqzcsfiT3XI2r2cYgeUHbbkueAUWsb2xSKjgOqwlDgZZPNb-t8nDI89uuwZqHhz8ZgrHXjBvCL62URXj5E5rFZGH"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+                +19 interested (ECE, ISE)
+              </span>
+</div>
+<div class="flex items-center gap-1 text-on-secondary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[1rem]">verified</span>
+<span>Verified by Dr. C. Vidya</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            Updated 2 days ago • Submitted Feb 8, 2025
+          </span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">group</span>
+<span>Manage Team (2/4 Filled)</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">edit</span>
+<span>Edit Proposal</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="View Public Detail Page" type="button">
+<span class="material-symbols-outlined text-[1.25rem]">open_in_new</span>
+</button>
+<button class="p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[1.25rem]">more_vert</span>
+</button>
+</div>
+</div>
+</article>
+<article class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-status="review">
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+              Under Faculty Review
+            </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              Machine Learning &amp; Computer Vision
+            </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              ISE Department
+            </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            #NIE-25-ISE-042
+          </span>
+</div>
+<div class="space-y-space-xs">
+<h2 class="font-title-md text-title-md text-on-surface font-semibold hover:text-primary transition-colors cursor-pointer">
+            Automated Kannada Handwritten Script OCR for Heritage Mysore Gazetteers
+          </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Transformer-based character recognition model benchmarked on historical palm leaf manuscripts and 19th-century regional administrative gazettes in Mysuru district archives.
+          </p>
+</div>
+<div class="my-space-md p-space-sm rounded-xl bg-surface-container-low flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex items-center gap-1 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[1.125rem]">thumb_up</span>
+<span>112 Upvotes</span>
+</div>
+<div class="flex items-center gap-1 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[1rem]">assignment_ind</span>
+<span>Mentor Assigned: Prof. Suresh Kumar B.</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            Review stage 2/3 • Submitted Feb 12, 2025
+          </span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">history_edu</span>
+<span>View Review Remarks</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">edit</span>
+<span>Edit Proposal</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="View Public Detail Page" type="button">
+<span class="material-symbols-outlined text-[1.25rem]">open_in_new</span>
+</button>
+<button class="p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[1.25rem]">more_vert</span>
+</button>
+</div>
+</div>
+</article>
+<article class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-status="team">
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Team Formed • Active Sprint 3
+            </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              Cleantech &amp; Sustainability
+            </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              Civil / Mechanical
+            </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            #NIE-24-MECH-091
+          </span>
+</div>
+<div class="space-y-space-xs">
+<h2 class="font-title-md text-title-md text-on-surface font-semibold hover:text-primary transition-colors cursor-pointer">
+            Automated Hostel Mess Food Waste Auditor with Biogas Yield Predictor
+          </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Scalable weight-sensor hopper integrated with image classification to reduce pre-consumer kitchen preparation scraps and post-consumer plate residue in NIE boys and girls dining halls.
+          </p>
+</div>
+<div class="my-space-md p-space-sm rounded-xl bg-surface-container-low flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md flex-wrap">
+<div class="flex items-center gap-1 text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[1.125rem]">thumb_up</span>
+<span>52 Upvotes</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Team Locked (4 Members)</span>
+<span class="text-on-surface-variant">•</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Lab: Mechanical Dynamics Lab B</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            Milestone 2 Due in 8 Days
+          </span>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">monitoring</span>
+<span>Sprint Workspace</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">edit</span>
+<span>Update Milestones</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="View Public Detail Page" type="button">
+<span class="material-symbols-outlined text-[1.25rem]">open_in_new</span>
+</button>
+<button class="p-space-xs rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="More Options" type="button">
+<span class="material-symbols-outlined text-[1.25rem]">more_vert</span>
+</button>
+</div>
+</div>
+</article>
+<article class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden" data-status="draft">
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[0.875rem]">warning</span>
+              Draft - High Similarity Flagged (74%)
+            </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+              Cybersecurity / Blockchain
+            </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            #DRAFT-25-CSE-004
+          </span>
+</div>
+<div class="space-y-space-xs">
+<h2 class="font-title-md text-title-md text-on-surface font-semibold hover:text-primary transition-colors cursor-pointer">
+            Tamper-Proof Semester Grade Card Verification via Polygon Network
+          </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Decentralized credential ledger for VTU &amp; Autonomous NIE transcripts, preventing fraudulent markscard reproduction.
+          </p>
+</div>
+<div class="my-space-md p-space-md rounded-xl bg-tertiary-fixed/30 flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[1.25rem] mt-0.5">info</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Duplicate Check Detected an Existing Capstone</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Overlaps with <em>#NIE-23-CSE-077 (Decentralized Credential Verification System)</em> submitted in 2023.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<button class="px-space-sm py-space-xs rounded-full bg-surface-container-lowest text-tertiary hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-colors" type="button">
+              Compare Diff
+            </button>
+<button class="px-space-sm py-space-xs rounded-full bg-tertiary text-on-tertiary font-label-sm text-label-sm font-semibold hover:opacity-90 transition-opacity" type="button">
+              Pivot Scope
+            </button>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">arrow_forward</span>
+<span>Resume &amp; Refine Draft</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container hover:bg-surface-container-high text-error font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">delete_outline</span>
+<span>Discard</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">
+            Last autosaved 4 hours ago
+          </span>
+</div>
+</article>
+</div>
+<aside class="lg:col-span-4 flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[1.25rem]">person_add</span>
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold">Collaborator Inquiries</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-bold">3 New</span>
+</div>
+<div class="space-y-space-md">
+<div class="p-space-sm rounded-xl bg-surface-container-low space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<img class="w-7 h-7 rounded-full object-cover" data-alt="Portrait of an Indian male technology student smiling in casual college clothes at Mysore engineering college" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtKkHECTzRS7ewuGBwcFf_Y-PWVPi_HJ2YOUakF0OSdJ8bkdDj_G68VH0ZJh86O3lSesOHNX-AMKsN2RpzHxgtcMW4fgSLtcnl-jYNowH7hCRQnXPyc50hmnITfCM8_7xouG9svfb3MvA5oAgkYcJx777MViWJ9SerpaRMjDuRiUDpoOIOCVKKsHk4Uho9Cp9B2s5L8YdnYM4nuKdLqK4jYWMb5qgC4JpIeWp5cFoo"/>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Darshan Gowda</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ISE • 4th Year</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Wants to join <strong class="text-on-surface">Mess Food Waste Auditor</strong> as Architecture / Cloud sync lead. Built Firebase + Cloudflare workers prototype.
+            </p>
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-1 px-space-sm rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold transition-colors" type="button">
+                Accept
+              </button>
+<button class="py-1 px-space-sm rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Profile
+              </button>
+<button class="py-1 px-space-sm rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">chat</span>
+</button>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<img class="w-7 h-7 rounded-full object-cover" data-alt="Portrait of an ambitious Indian female engineering graduate student with tied hair smiling warmly against campus backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYPybZKicXxVw1ecux0n7kD9f1JFOxze-49CbhgWLdRDFv9Muvk_xkJn8NTOGpWWUBBoPEa9Y2oodiy-rJFyk5lsj6ndRf0gCSld6vgN8CaOqPFLAJx73PzWB1xew5ITPrD-WXKejnSgS_DW9w8iOcDBK7rsDdz2ODUaeSqk3-CoVIKVyyJihnlFaXKiIq5OHyRbtsJoU1WjYkPBFAXkpNx4j-EWVeTW7SdF-YCf85"/>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Ananya P. Rao</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ECE • 3rd Year</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Wants to join <strong class="text-on-surface">Smart Campus EV Shuttle Tracker</strong> to assist with PCB CAD layout and antenna tuning.
+            </p>
+<div class="flex items-center gap-space-xs pt-space-xs">
+<button class="flex-1 py-1 px-space-sm rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold transition-colors" type="button">
+                Accept
+              </button>
+<button class="py-1 px-space-sm rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+                Profile
+              </button>
+<button class="py-1 px-space-sm rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[1rem]">chat</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full py-space-xs rounded-xl text-center text-primary hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-colors" type="button">
+          View All 32 Inquiries →
+        </button>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[1.25rem]">fact_check</span>
+<h3 class="font-title-sm text-title-sm text-on-surface font-bold">Faculty Review &amp; Grants</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">NIE Research Cell</span>
+</div>
+<div class="space-y-space-sm">
+<div class="flex items-start gap-space-sm p-space-xs rounded-xl hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-secondary text-[1.25rem] mt-0.5">check_circle</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-label-md text-label-md text-on-surface font-semibold">IP &amp; Ethics Clearance</p>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">No patent infringement or sensitive student data liability.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-xs rounded-xl hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-tertiary text-[1.25rem] mt-0.5">pending_actions</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Department Lab Allocation</p>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Signoff Pending</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Awaiting HoD CSE formal bench slot allotment for edge test kits.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm p-space-xs rounded-xl hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-primary text-[1.25rem] mt-0.5">monetization_on</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Seed Grant Eligibility</p>
+<span class="font-label-sm text-label-sm text-primary font-semibold">₹25,000 Tier 1</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Recommended by Dr. C. Vidya for IEEE student branch hardware prototyping fund.</p>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-low space-y-space-xs">
+<div class="flex items-center justify-between text-on-surface font-label-sm text-label-sm font-semibold">
+<span>Overall Review Progress</span>
+<span>82%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 82%"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-right">Final approval cycle: Feb 28, 2025</p>
+</div>
+</div>
+<div class="p-space-md rounded-2xl bg-surface-container-low flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[1.5rem]">help</span>
+</div>
+<div class="space-y-space-xs">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Need Capstone Mentor Guidance?</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Office hours with faculty research coordinators happen every Wednesday from 3:30 PM at Sir M.V. Seminar Hall.
+          </p>
+</div>
+</div>
+</aside>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.tab-btn');
+      const cards = document.querySelectorAll('article[data-status]');
+      const searchInput = document.getElementById('proposal-search');
+
+      function filterCards() {
+        const activeTab = document.querySelector('.tab-btn.bg-primary-container')?.dataset.tab || 'all';
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        cards.forEach(card => {
+          const status = card.dataset.status;
+          const text = card.innerText.toLowerCase();
+
+          const matchesTab = (activeTab === 'all') || (status === activeTab);
+          const matchesQuery = !query || text.includes(query);
+
+          if (matchesTab && matchesQuery) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('bg-primary-container', 'text-on-primary', 'font-semibold');
+            t.classList.add('bg-surface-container', 'text-on-surface-variant');
+          });
+          tab.classList.remove('bg-surface-container', 'text-on-surface-variant');
+          tab.classList.add('bg-primary-container', 'text-on-primary', 'font-semibold');
+          filterCards();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterCards);
+      }
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-low border-t border-surface-container py-space-lg"><div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm"><p>© 2025 The National Institute of Engineering, Mysuru. Idea Vault Innovation Hub.</p><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" href="#">Faculty Guidelines</a><a class="hover:text-on-surface transition-colors" href="#">IP &amp; Ethics</a><a class="hover:text-on-surface transition-colors" href="#">NIE Research Cell</a></div></div></footer></body></html>

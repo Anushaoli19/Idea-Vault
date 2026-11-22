@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary": "#006c49", "surface-dim": "#cbdbf5", "secondary-container": "#6cf8bb", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "outline-variant": "#c7c4d8", "on-secondary-container": "#00714d", "on-primary-fixed-variant": "#3323cc", "on-surface-variant": "#464555", "primary": "#3525cd", "on-background": "#0b1c30", "on-tertiary-fixed": "#2a1700", "on-secondary-fixed-variant": "#005236", "surface": "#f8f9ff", "surface-container-high": "#dce9ff", "secondary-fixed-dim": "#4edea3", "on-error": "#ffffff", "outline": "#777587", "tertiary-container": "#885500", "surface-container": "#e5eeff", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed": "#6ffbbe", "inverse-surface": "#213145", "on-secondary-fixed": "#002113", "surface-tint": "#4d44e3", "on-primary-container": "#dad7ff", "tertiary-fixed": "#ffddb8", "inverse-on-surface": "#eaf1ff", "background": "#f8f9ff", "on-tertiary-container": "#ffd4a4", "on-secondary": "#ffffff", "primary-fixed": "#e2dfff", "surface-bright": "#f8f9ff", "on-tertiary": "#ffffff", "primary-fixed-dim": "#c3c0ff", "on-primary": "#ffffff", "on-error-container": "#93000a", "inverse-primary": "#c3c0ff", "primary-container": "#4f46e5", "tertiary": "#684000", "error": "#ba1a1a", "surface-container-low": "#eff4ff", "surface-variant": "#d3e4fe", "tertiary-fixed-dim": "#ffb95f", "on-surface": "#0b1c30", "on-primary-fixed": "#0f0069", "surface-container-highest": "#d3e4fe" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "margin-mobile": "1rem" }, "fontFamily": { "label-md": ["Inter"], "display-lg-mobile": ["Inter"], "title-md": ["Inter"], "body-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "display-lg": ["Inter"], "headline-lg": ["Inter"], "headline-sm": ["Inter"], "title-sm": ["Inter"], "body-md": ["Inter"], "label-sm": ["Inter"], "headline-md": ["Inter"], "body-lg": ["Inter"] }, "fontSize": { "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "500" }], "display-lg-mobile": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "title-md": ["1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.005em", "fontWeight": "600" }], "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "display-lg": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" }], "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-sm": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" }], "body-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }], "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.025em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "0em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-container shadow-[0_1px_8px_rgba(15,23,42,0.04)]"><div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="NIE Idea Vault Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrDlf5YaQ-6hajqwj76VGBwisGvFpb9vn9WUb72gbUVryJCvkPs48QBzmORWUZ-jXFv5k6f0lMNNO2f7zGO1aQQFYQ72QYoWrSBMtqSC-N9VOnEn6kgv2lY_gSEnqV2_X85lzF__r1-HNWnxrV1JA4uq4coj0g-GeA_e7aCxN69lm5Gphu1FPK4cxzpltoxdP7sMGQ1BtqoJLklg-tPaXJb0ObSwbYqXIvaMiObINiPaXg"/><span class="font-title-md text-title-md text-on-surface font-bold tracking-tight whitespace-nowrap">Idea Vault</span><span class="px-space-sm py-space-xs rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide">NIE Mysuru</span></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="text-primary font-title-sm border-b-2 border-primary"><a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" data-path="explore-ideas" href="#">Explore Ideas</a><a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" data-path="my-submissions" href="#">My Submissions</a><a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" data-path="campus-leaderboard" href="#">Campus Leaderboard</a><a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" data-path="profile-settings" href="#">Settings</a></nav></div><div class="flex items-center gap-space-md"><button class="inline-flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-colors shadow-[0_4px_12px_rgba(79,70,229,0.25)]" type="button"><span class="material-symbols-outlined text-[1.125rem]">add</span><span>Post Idea</span></button><button aria-label="Campus Notifications" class="relative p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors" type="button"><span class="material-symbols-outlined text-[1.5rem]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span></button><a class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container rounded-full hover:bg-surface-container-low py-space-xs pr-space-sm transition-colors group cursor-pointer" data-path="profile-settings" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-container group-hover:ring-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"/><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface font-semibold leading-none group-hover:text-primary transition-colors">Rohan S.</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-space-xs">CSE '25</span></div></a></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)] max-w-7xl mx-auto px-gutter"><div class="flex flex-col w-full pb-space-xl">
+<!-- Top Breadcrumb & Header Section -->
+<div class="w-full pt-space-lg pb-space-md">
+<!-- Breadcrumb Hierarchy -->
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mb-space-xs">
+<span class="hover:text-primary transition-colors cursor-pointer">NIE Idea Vault</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Account Settings</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Security &amp; Preferences</span>
+</div>
+<!-- Title and Purpose Statement -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Settings &amp; Security</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mt-space-xs">
+          Manage your authentication credentials, interface appearance, notification delivery channels, and connected NIE campus single sign-on accounts.
+        </p>
+</div>
+<!-- Institutional Security Badge -->
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm self-start md:self-auto shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span>USN 4NI21CS089 • Verified CSE Account</span>
+</div>
+</div>
+<!-- Quick Anchor Tabs -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar pt-space-lg pb-space-xs">
+<a class="px-space-md py-2 rounded-full bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm flex items-center gap-1.5 whitespace-nowrap" href="#appearance">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+<span>Appearance &amp; Theme</span>
+</a>
+<a class="px-space-md py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5 whitespace-nowrap" href="#security">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+<span>Security &amp; Password</span>
+</a>
+<a class="px-space-md py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5 whitespace-nowrap" href="#notifications">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+<span>Notification Rules</span>
+</a>
+<a class="px-space-md py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5 whitespace-nowrap" href="#integrations">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+<span>Connected Campus Accounts</span>
+</a>
+<a class="px-space-md py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1.5 whitespace-nowrap" href="#sessions">
+<span class="material-symbols-outlined text-[18px]">devices</span>
+<span>Sessions &amp; Privacy</span>
+</a>
+</div>
+</div>
+<!-- Main Asymmetric 2-Column Balanced Settings Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mt-space-md">
+<!-- LEFT COLUMN (Span 7) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- CARD 1: Appearance & Display -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-lg relative overflow-hidden" id="appearance">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">palette</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Appearance &amp; Display</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Customize your visual workflow for bright lab benches or low-light study halls.</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-medium">Workspace Theme</span>
+</div>
+<!-- Mode Selectors (Light / Dark / System) -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Color Mode</label>
+<div class="grid grid-cols-3 gap-space-sm pt-space-xs">
+<!-- Light Mode Selected -->
+<button class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-all text-center shadow-sm" type="button">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+</div>
+<span class="font-title-sm text-title-sm font-semibold">Light Mode</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">Active (Default)</span>
+<div class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></div>
+</button>
+<!-- Dark Mode -->
+<button class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center" type="button">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-inverse-surface group-hover:text-surface">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</div>
+<span class="font-title-sm text-title-sm font-semibold">Dark Mode</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">OLED Pitch</span>
+</button>
+<!-- System Auto -->
+<button class="group relative flex flex-col items-center justify-center gap-2 p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-all text-center" type="button">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">laptop_mac</span>
+</div>
+<span class="font-title-sm text-title-sm font-semibold">Auto Sync</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">OS Schedule</span>
+</button>
+</div>
+</div>
+<!-- Accent Tone Preference -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Campus Accent Brand</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
+<div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface-container-low cursor-pointer shadow-sm">
+<div class="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Electric Indigo</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">NIE Signature #4f46e5</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="w-6 h-6 rounded-full bg-inverse-surface"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Slate Navy</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Deep Academic</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm p-space-sm rounded-xl bg-surface hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="w-6 h-6 rounded-full bg-secondary"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Eco-Tech</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Bio &amp; Renewable</span>
+</div>
+</div>
+</div>
+</div>
+<!-- High Contrast Accessibility Switch -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low/60">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">contrast</span>
+<div>
+<p class="font-title-sm text-title-sm text-on-surface font-semibold">High Contrast Projector View</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Increases line contrast and typography weight for auditorium defenses and labs.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</section>
+<!-- CARD 2: Password & Authentication -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-lg" id="security">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">shield_lock</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Password &amp; Authentication</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Protect intellectual property, capstone patent submissions, and student votes.</p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-full whitespace-nowrap">Changed 42d ago</span>
+</div>
+<!-- 2FA Institutional Banner Callout -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md p-space-md rounded-xl bg-secondary-container/20">
+<div class="flex items-start sm:items-center gap-space-sm">
+<div class="p-2 rounded-full bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">phonelink_lock</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Two-Factor Authentication Active</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-secondary text-on-secondary">TOTP</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Protected via NIE Authenticator App and hardware security keys.</p>
+</div>
+</div>
+<button class="px-space-md py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md shadow-sm transition-all whitespace-nowrap" type="button">
+            Manage 2FA
+          </button>
+</div>
+<!-- Password Inputs Form -->
+<form class="flex flex-col gap-space-md" onsubmit="event.preventDefault();">
+<!-- Current Password -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Current NIE Password</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" type="password" value="••••••••••••••••"/>
+<button class="absolute right-3 text-on-surface-variant hover:text-on-surface p-1" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- New Password -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold">New Safe Password</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" placeholder="Minimum 12 characters, uppercase &amp; symbols" type="password"/>
+<button class="absolute right-3 text-on-surface-variant hover:text-on-surface p-1" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<!-- 4-Step Strength Meter -->
+<div class="mt-space-xs flex flex-col gap-1.5">
+<div class="grid grid-cols-4 gap-1.5 w-full">
+<div class="h-1.5 rounded-full bg-secondary"></div>
+<div class="h-1.5 rounded-full bg-secondary"></div>
+<div class="h-1.5 rounded-full bg-secondary"></div>
+<div class="h-1.5 rounded-full bg-surface-container-highest"></div>
+</div>
+<div class="flex justify-between items-center text-label-sm font-label-sm">
+<span class="text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                  Strong: 12+ chars, mixed case, symbols
+                </span>
+<span class="text-on-surface-variant">Campus standard met</span>
+</div>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-semibold">Confirm New Password</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 px-space-md pr-11 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container text-body-md font-body-md" placeholder="Re-type your safe password" type="password"/>
+<span class="material-symbols-outlined absolute right-3 text-secondary text-[20px]">done_all</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Synchronizes with Contineo student portal</span>
+<button class="px-space-lg py-2.5 rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-md transition-colors flex items-center gap-1.5" type="submit">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Update Credentials</span>
+</button>
+</div>
+</form>
+</section>
+<!-- CARD 5: Active Sessions & Security Log -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-md" id="sessions">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">devices_other</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Active Sessions &amp; Device Trust</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Devices currently authorized to access your Idea Vault workspace and code artifacts.</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm mt-space-xs">
+<!-- Session Item 1: Active Current -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">laptop_mac</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Chrome on macOS 14.5</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-bold">Current Device</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">NIE South Campus Wi-Fi (VLAN 4 • 172.16.48.102) • Mysore, IN</p>
+</div>
+</div>
+<div class="hidden sm:flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-secondary font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span> Online Now
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Authenticated via SSO</span>
+</div>
+</div>
+<!-- Session Item 2: Mobile PWA -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest hover:bg-surface-container-low transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[22px]">smartphone</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Idea Vault Mobile PWA</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pixel 8 • Android 14</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Airtel 5G Mysuru • Last active 3 hours ago</p>
+</div>
+</div>
+<button class="p-2 text-error hover:bg-error-container/40 rounded-full transition-colors" title="Revoke Device" type="button">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+</button>
+</div>
+</div>
+<div class="pt-space-xs flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">All session tokens expire after 14 days of inactivity.</span>
+<button class="px-space-md py-2 rounded-full bg-error-container text-on-error-container hover:bg-error/20 font-label-md text-label-md transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">power_settings_new</span>
+<span>Sign Out All Other Sessions</span>
+</button>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN (Span 5) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- CARD 3: Notification Preferences -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-lg" id="notifications">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">mark_email_unread</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Notification Rules</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Granular delivery for capstone reviews and team formation.</p>
+</div>
+</div>
+</div>
+<!-- Categorized Toggle List -->
+<div class="flex flex-col gap-space-md">
+<!-- Toggle 1 -->
+<div class="flex items-start justify-between gap-space-sm pb-space-sm">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Teammate Applications</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">When engineering students request to join your capstone idea.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-start justify-between gap-space-sm pb-space-sm">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Faculty Reviews &amp; Grants</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Instant alerts for CREST / NIE Research Cell seed funding decisions.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 3 -->
+<div class="flex items-start justify-between gap-space-sm pb-space-sm">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Duplicate &amp; Similarity Alerts</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary-container">warning</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">When newly submitted ideas show &gt;70% similarity overlap.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle 4 -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface">Weekly Campus Digest</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Curated recap of trending NIE research and department leaders.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Notification Channels Multi-check -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-bold">Enabled Dispatch Channels</span>
+<div class="flex flex-col gap-2.5">
+<label class="flex items-center gap-space-sm cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Desktop Web Push notifications</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface truncate">Institutional Email (rohan.s.cse21@nie.ac.in)</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-0" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">SMS for emergency viva defense updates</span>
+</label>
+</div>
+</div>
+</section>
+<!-- CARD 4: Connected Campus Accounts -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm flex flex-col gap-space-lg" id="integrations">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">link</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-bold">Connected Campus &amp; Git</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">SSO federations and academic repositories.</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- NIE LDAP -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-sm flex-shrink-0">
+                NIE
+              </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface truncate">Contineo Portal SSO</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">USN: 4NI21CS089 • Verified</span>
+</div>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px] flex-shrink-0">Managed by Dean</span>
+</div>
+<!-- GitHub Academic -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-inverse-surface text-surface flex items-center justify-center font-bold text-label-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface truncate">GitHub Academic</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">@rohansharma-nie • 14 repos</span>
+</div>
+</div>
+<button class="px-space-sm py-1.5 rounded-full bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm shadow-sm transition-colors flex-shrink-0" type="button">
+              Manage
+            </button>
+</div>
+<!-- Google Scholar -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-bold text-label-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">school</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface truncate">ORCID / Scholar</span>
+<span class="material-symbols-outlined text-[16px] text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">0009-0004-9122-481X</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-error p-1 transition-colors flex-shrink-0" title="Unlink profile" type="button">
+<span class="material-symbols-outlined text-[18px]">link_off</span>
+</button>
+</div>
+<!-- IEEE Student Branch (Unconnected) -->
+<div class="p-space-md rounded-xl bg-surface-container-low/50 flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container text-outline flex items-center justify-center font-bold text-label-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-sm text-title-sm font-semibold text-on-surface truncate">IEEE Student Branch</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Not linked • Unlock conference credits</span>
+</div>
+</div>
+<button class="px-space-md py-1.5 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm hover:bg-primary transition-colors flex-shrink-0 shadow-sm" type="button">
+              Connect
+            </button>
+</div>
+</div>
+</section>
+<!-- Innovation Cell Info Tile -->
+<div class="p-space-md rounded-2xl bg-surface-container-high/60 flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">contact_support</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm font-bold text-on-surface">Need Help with Credentials?</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Contact NIE Center for Innovation &amp; Technology (CIT) at <span class="text-primary font-medium">helpdesk@nie.ac.in</span> or visit Admin Block Room 204.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Floating Sticky Action Bar -->
+<div class="sticky bottom-4 mt-space-xl z-40">
+<div class="bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-space-md shadow-xl flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">history_toggle_off</span>
+<span>All preference modifications are logged to the NIE Central Security Audit registry.</span>
+</div>
+<div class="flex items-center gap-space-md w-full sm:w-auto justify-end">
+<button class="px-space-lg py-2.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">
+          Discard Changes
+        </button>
+<button class="px-space-xl py-2.5 rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md shadow-md transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Preferences</span>
+</button>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low border-t border-surface-container py-space-lg"><div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-body-sm text-body-sm"><p>© 2025 The National Institute of Engineering, Mysuru. Idea Vault Innovation Hub.</p><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" href="#">Faculty Guidelines</a><a class="hover:text-on-surface transition-colors" href="#">IP &amp; Ethics</a><a class="hover:text-on-surface transition-colors" href="#">NIE Research Cell</a></div></div></footer></body></html>
