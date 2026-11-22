@@ -459,7 +459,7 @@
         description,
         architecture,
         tags,
-        roles: rolesRaw ? [{ title: rolesRaw, description: "Collaborate on core project modules." }] : []
+        roles: rolesRaw ? [{ title: rolesRaw, description: 'Collaborate on core project modules.' }] : []
       };
 
       // Set UI to loading state
@@ -471,24 +471,24 @@
       btn.disabled = true;
       spinner.classList.remove('hidden');
       icon.classList.add('hidden');
-      text.textContent = 'Running IP Similarity Engine...';
+      text.textContent = 'Auditing Innovation Registry...';
 
       try {
-        // Step 1: Call /check-duplicate
-        const checkResult = await window.IdeaVault.checkDuplicate(title, description, category);
-
-        if (checkResult.isDuplicate && checkResult.matchedIdea) {
-          // Show Duplicate Warning Banner
-          currentMatchedIdea = checkResult.matchedIdea;
-          displayDuplicateWarning(checkResult.similarity, checkResult.matchedIdea);
-          window.IdeaVault.showToast(`Found ${checkResult.similarity}% match in NIE Archives`, "warning");
-        } else {
-          // Direct Post
-          await executePost(pendingPayload);
-        }
+        const res = await window.IdeaVault.createIdea(pendingPayload);
+        window.IdeaVault.showToast('Idea registered successfully in Idea Vault!', 'success');
+        setTimeout(() => {
+          window.location.href = idea.html?id=;
+        }, 800);
       } catch (err) {
-        console.error("Duplicate check or submit error:", err);
-        window.IdeaVault.showToast("Error processing proposal", "error");
+        if (err.isDuplicate && (err.matchedIdea || err.similar_idea)) {
+          const matched = err.matchedIdea || err.similar_idea;
+          const score = err.similarity || err.similarity_score;
+          currentMatchedIdea = matched;
+          displayDuplicateWarning(score, matched);
+          window.IdeaVault.showToast(Duplicate Detected: % match in archives, 'warning');
+        } else {
+          window.IdeaVault.showToast(err.message || 'Error processing proposal', 'error');
+        }
       } finally {
         btn.disabled = false;
         spinner.classList.add('hidden');

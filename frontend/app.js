@@ -6,8 +6,60 @@
  */
 
 // Global Configuration
-const API_BASE = 'http://localhost:5000';
-const USE_MOCK = true;
+const API_BASE = 'http://127.0.0.1:5000';
+const USE_MOCK = false;
+
+/**
+ * Backend Data Adapter
+ * ============================================================================
+ * Normalizes backend SQLite model to frontend UI contract:
+ * - Maps `interested_students` -> `interests`
+ * - Fallbacks for fields not stored in backend DB (department, tags, author, BOM, team slots)
+ * - Computes upvoted and interested boolean flags from localStorage
+ */
+function adaptBackendIdea(raw) {
+  if (!raw) return null;
+  const upvotedSet = getStoredSet(STORAGE_KEYS.UPVOTES);
+  const interestedSet = getStoredSet(STORAGE_KEYS.INTERESTS);
+  const isUpvoted = upvotedSet.has(raw.id);
+  const isInterested = interestedSet.has(raw.id);
+
+  return {
+    id: raw.id,
+    title: raw.title || "Untitled Innovation",
+    description: raw.description || "",
+    category: raw.category || "General",
+    department: raw.department || raw.category || "Computer Science & Engineering (CSE)",
+    departmentShort: (raw.category || "CSE").slice(0, 4).toUpperCase(),
+    categoriesBadge: raw.category || "Technology",
+    createdAt: raw.created_at || new Date().toISOString(),
+    timeAgo: "Recently active",
+    upvotes: typeof raw.upvotes === "number" ? raw.upvotes : 0,
+    interests: typeof raw.interested_students === "number" ? raw.interested_students : (raw.interests || 0),
+    isUpvoted: isUpvoted,
+    isInterested: isInterested,
+    tags: raw.tags || [raw.category || "Innovation", "Capstone"],
+    authorName: raw.authorName || "NIE Student",
+    authorBatch: raw.authorBatch || "Class of 2025",
+    authorAvatar: raw.authorAvatar || "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
+    problemStatement: raw.problemStatement || raw.description || "",
+    proposedSolution: raw.proposedSolution || raw.description || "",
+    architecture: raw.architecture || "Cloud & Edge Architecture",
+    bom: raw.bom || [
+      { item: "Compute Core", spec: "Edge Gateway / Cloud VM", qty: 1, cost: "₹4,500" },
+      { item: "Sensor Suite", spec: "Multi-parameter telemetry", qty: 2, cost: "₹1,800" }
+    ],
+    teamSlots: raw.teamSlots || [
+      { role: "Backend Developer", status: "Available" },
+      { role: "Frontend / UI Lead", status: "Available" }
+    ],
+    interestedUsers: [
+      { name: "Pooja Hegde", batch: "ISE '25", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDFW21bJ0r1x2GgN0E_3x4y5z6" },
+      { name: "Aditya Verma", batch: "ECE '25", avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC1_q2w3e4r5t6y7u8" }
+    ]
+  };
+}
+
 
 // LocalStorage Keys for State Management
 const STORAGE_KEYS = {

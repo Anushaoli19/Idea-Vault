@@ -30,3 +30,11 @@ Legend:
 - [x] 4.2 Build `profile.html` (Profile & Academic Settings page with USN 4NI21CS089, CGPA, developer links, dynamic skill chips, resume upload, teaming controls, public preview modal, JSON export) [Verified: 2026-11-22 link & structure test]
 - [x] 4.3 Build `submissions.html` (My Submissions & Project Vault dashboard with 4 KPI summary cards, filter tabs, proposal search, dynamic custom submissions injection, collaborator inquiry triage) [Verified: 2026-11-22 link & structure test]
 - [x] 4.4 Header navigation synchronization across all 5 pages (`index.html`, `post.html`, `idea.html`, `profile.html`, `submissions.html`) [Verified: 2026-11-22 automated link integrity check]
+
+## Phase 5: Teammate Backend Integration & Verification
+- [x] 5.1 Backend Inspection & Route Specification mapping [Verified: 2026-11-22 via code review & documentation table]
+- [x] 5.2 Add minimal CORS fix to `app.py` (lines 2, 7) and `requirements.txt` (`flask-cors`) [Verified: 2026-11-22 client test]
+- [x] 5.3 Implement `adaptBackendIdea()` adapter and update `API_BASE` / `USE_MOCK = false` in `frontend/app.js` [Verified: 2026-11-22 Node VM test]
+- [x] 5.4 Reorganize frontend into `/frontend` folder [Verified: 2026-11-22 directory check]
+- [x] 5.5 End-to-end integration tests (Post idea, List ideas, Upvote, Express Interest, Duplicate Warning, Anti-double actions) [Verified: 2026-11-22 10/10 automated tests passed]
+- [x] 5.6 Add "How to run" guide to `README.md` [Verified: 2026-11-22 file inspection]
