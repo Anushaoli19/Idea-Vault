@@ -38,3 +38,7 @@ Legend:
 - [x] 5.4 Reorganize frontend into `/frontend` folder [Verified: 2026-11-22 directory check]
 - [x] 5.5 End-to-end integration tests (Post idea, List ideas, Upvote, Express Interest, Duplicate Warning, Anti-double actions) [Verified: 2026-11-22 10/10 automated tests passed]
 - [x] 5.6 Add "How to run" guide to `README.md` [Verified: 2026-11-22 file inspection]
+
+## Phase 6: Symmetrical Directory Structure
+- [x] 6.1 Create `backend/` directory and organize backend files (`app.py`, `database.py`, `duplicate_detection.py`, `requirements.txt`, `API_DOCUMENTATION.md`) [Verified: 2026-11-22 file move & import test]
+- [x] 6.2 Update documentation and run scripts for `backend/` and `frontend/` [Verified: 2026-11-22 README & docs update]

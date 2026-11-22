@@ -6,25 +6,28 @@ Empowering engineering ingenuity at NIE Mysuru. **Idea Vault** is a campus proje
 
 ## 🏗️ System Architecture
 
-The platform combines a lightweight, high-performance Python Flask backend with an accessible, high-fidelity vanilla frontend designed with Google's Material Stitch design tokens.
+The platform is cleanly organized into dedicated `/backend` and `/frontend` directories:
 
 ```text
 idea-vault/
-├── app.py                  # Flask REST API server with CORS integration
-├── database.py             # SQLite connection & schema management (ideas, upvotes, interests)
-├── duplicate_detection.py  # Scikit-learn TF-IDF + Cosine Similarity engine (40% threshold)
-├── requirements.txt        # Python backend dependencies
-├── API_DOCUMENTATION.md    # Detailed API endpoint reference
-├── README.md               # Project documentation & run guide
-├── docs/                   # 10 living documentation harness files
-└── frontend/               # Modular frontend application
-    ├── index.html          # Idea Board (Search, Category Filters, Segmented Sorting)
-    ├── post.html           # Post Idea Form & Duplicate Warning Screen
-    ├── idea.html           # Deep-Dive Proposal Detail View & BOM Registry
-    ├── profile.html        # Verified Student Profile & Academic Settings
-    ├── submissions.html    # My Submissions & Project Vault Dashboard
-    ├── app.js              # Vanilla JS Engine, Backend Adapter & Local State
-    └── styles.css          # Stitch theme tokens, animations & toast styles
+├── backend/                # Python Flask REST API & Machine Learning engine
+│   ├── app.py              # Flask server with CORS integration
+│   ├── database.py         # SQLite connection & schema management (ideas, upvotes, interests)
+│   ├── duplicate_detection.py  # Scikit-learn TF-IDF + Cosine Similarity engine (40% threshold)
+│   ├── requirements.txt    # Python backend dependencies
+│   └── API_DOCUMENTATION.md# Detailed API endpoint reference
+├── frontend/               # Vanilla HTML5/CSS/JavaScript client with Google Stitch design tokens
+│   ├── index.html          # Idea Board (Search, Category Filters, Segmented Sorting)
+│   ├── post.html           # Post Idea Form & Duplicate Warning Screen
+│   ├── idea.html           # Deep-Dive Proposal Detail View & BOM Registry
+│   ├── profile.html        # Verified Student Profile & Academic Settings
+│   ├── submissions.html    # My Submissions & Project Vault Dashboard
+│   ├── app.js              # Vanilla JS Engine, Backend Adapter & Local State
+│   └── styles.css          # Stitch theme tokens, animations & toast styles
+├── docs/                   # Fullstack living documentation harness (10 docs)
+├── .gitignore              # Git ignore rules (DB files, caches, environments)
+├── .env.example            # Environment variables template
+└── README.md               # Project documentation & run guide
 ```
 
 ---
@@ -42,8 +45,8 @@ idea-vault/
 
 ## 🔍 How Duplicate Detection Works
 
-The backend utilizes `scikit-learn` in `duplicate_detection.py`:
-1. **TF-IDF Vectorization**: Transforms existing proposal descriptions and the newly submitted proposal into numerical term-frequency inverse-document-frequency vectors (`stop_words="english"`).
+The backend utilizes `scikit-learn` in [backend/duplicate_detection.py](file:///d:/idea%20vault/backend/duplicate_detection.py):
+1. **TF-IDF Vectorization**: Transforms existing proposal descriptions and candidate submissions into numerical term-frequency inverse-document-frequency vectors (`stop_words="english"`).
 2. **Cosine Similarity**: Measures the angular cosine distance between the candidate proposal vector and all archived proposals.
 3. **Threshold Gate (40%)**: If the highest similarity score $\ge 0.40$ (40%), the backend flags the proposal as a duplicate and returns HTTP 409 with the match percentage and existing proposal data.
 4. **Duplicate Warning UI**: The frontend catches this response and reveals the **Duplicate Warning Banner**, displaying the match score, matched title, excerpt, and link to the existing idea.
@@ -57,20 +60,11 @@ The backend utilizes `scikit-learn` in `duplicate_detection.py`:
 cd "d:\idea vault"
 ```
 
-### Step 2: Install Backend Dependencies
-Make sure Python 3.8+ is installed. Install the required Python packages:
+### Step 2: Start the Backend (Terminal 1)
 ```bash
+cd backend
 pip install -r requirements.txt
-```
-
-### Step 3: Initialize the SQLite Database
-Create the database tables (`ideas`, `upvotes`, `interests`):
-```bash
 python database.py
-```
-
-### Step 4: Start the Flask Backend Server
-```bash
 python app.py
 ```
 The backend API server will start on:
@@ -78,21 +72,21 @@ The backend API server will start on:
 http://127.0.0.1:5000
 ```
 
-### Step 5: Run / View the Frontend
-You can run the frontend using either option:
+### Step 3: Start the Frontend (Terminal 2)
+In a second terminal window, run a local web server from `frontend/` or root:
+```bash
+# Option A: From root directory
+python -m http.server 8000 --directory frontend
 
-* **Option A: Serve via Python HTTP Server (Recommended)**
-  Open a new terminal window in the project root and run:
-  ```bash
-  python -m http.server 8000 --directory frontend
-  ```
-  Then open your web browser and navigate to:
-  ```text
-  http://localhost:8000
-  ```
-
-* **Option B: Open Directly in Browser**
-  Simply double-click or open `frontend/index.html` in Google Chrome, Microsoft Edge, Firefox, or Safari.
+# Option B: From inside the frontend folder
+cd frontend
+python -m http.server 8000
+```
+Then open your web browser and navigate to:
+```text
+http://localhost:8000
+```
+*(You can also simply open `frontend/index.html` directly in your browser).*
 
 ---
 
@@ -103,7 +97,7 @@ You can run the frontend using either option:
    * **Title**: `Automated Hostel Mess Food Waste Auditor with Computer Vision`
    * **Description**: `An automated food waste auditing platform using edge computer vision cameras and load cell weight sensors installed above campus mess disposal bins to track dining food waste.`
    * **Category**: `AI/ML`
-   * Click **Check & Submit Proposal** -> Proposal is registered (HTTP 201).
+   * Click **Check & Submit Proposal** $\rightarrow$ Proposal is registered (`HTTP 201`).
 3. Attempt to submit a near-identical proposal:
    * **Title**: `Smart Hostel Dining Waste Analytics & Tracking Platform`
    * **Description**: `An automated food waste auditing platform using edge computer vision cameras and load cell weight sensors installed above hostel mess disposal bins to track dining food waste.`
