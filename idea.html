@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Idea Detail — NIE Idea Vault</title>
+  
+  <!-- Google Fonts: Inter & Material Symbols Outlined -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Stitch Design System Tailwind Config -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#3525cd",
+            "primary-container": "#4f46e5",
+            "on-primary": "#ffffff",
+            "primary-fixed": "#e2dfff",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-primary-fixed": "#0f0069",
+            "on-primary-fixed-variant": "#3323cc",
+            "on-primary-container": "#dad7ff",
+
+            "secondary": "#006c49",
+            "secondary-container": "#6cf8bb",
+            "secondary-fixed": "#6ffbbe",
+            "secondary-fixed-dim": "#4edea3",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#00714d",
+            "on-secondary-fixed": "#002113",
+            "on-secondary-fixed-variant": "#005236",
+
+            "tertiary": "#684000",
+            "tertiary-container": "#885500",
+            "tertiary-fixed": "#ffddb8",
+            "tertiary-fixed-dim": "#ffb95f",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#ffd4a4",
+            "on-tertiary-fixed": "#2a1700",
+            "on-tertiary-fixed-variant": "#653e00",
+
+            "surface": "#f8f9ff",
+            "surface-dim": "#cbdbf5",
+            "surface-bright": "#f8f9ff",
+            "surface-variant": "#d3e4fe",
+            "surface-container": "#e5eeff",
+            "surface-container-low": "#eff4ff",
+            "surface-container-high": "#dce9ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container-lowest": "#ffffff",
+
+            "on-surface": "#0b1c30",
+            "on-surface-variant": "#464555",
+            "outline": "#777587",
+            "outline-variant": "#c7c4d8",
+
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "margin": "2rem",
+            "margin-mobile": "1rem"
+          },
+          fontFamily: {
+            "body-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "title-sm": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          fontSize: {
+            "label-sm": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.025em", fontWeight: "600" }],
+            "label-md": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0.01em", fontWeight: "500" }],
+            "body-sm": ["0.875rem", { lineHeight: "1.25rem", letterSpacing: "0em", fontWeight: "400" }],
+            "body-md": ["1rem", { lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "400" }],
+            "body-lg": ["1.125rem", { lineHeight: "1.75rem", letterSpacing: "0em", fontWeight: "400" }],
+            "title-sm": ["1rem", { lineHeight: "1.5rem", letterSpacing: "0em", fontWeight: "600" }],
+            "title-md": ["1.125rem", { lineHeight: "1.625rem", letterSpacing: "-0.005em", fontWeight: "600" }],
+            "headline-sm": ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "headline-md": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "headline-lg": ["2rem", { lineHeight: "2.5rem", letterSpacing: "-0.02em", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Project Stylesheet -->
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen">
+  <!-- Fixed Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-container shadow-[0_1px_8px_rgba(15,23,42,0.04)]">
+    <div class="h-16 max-w-7xl mx-auto px-gutter flex items-center justify-between gap-space-md">
+      <!-- Left: Logo & Nav -->
+      <div class="flex items-center gap-space-lg">
+        <a href="index.html" class="flex items-center gap-space-sm">
+          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold shadow-sm">
+            <span class="material-symbols-outlined text-[20px]">lightbulb</span>
+          </div>
+          <span class="font-title-md text-title-md text-on-surface font-bold tracking-tight whitespace-nowrap">Idea Vault</span>
+          <span class="px-space-sm py-space-xs rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wide">NIE Mysuru</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-space-md">
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="index.html">Explore Ideas</a>
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="index.html">My Submissions</a>
+          <a class="font-title-sm text-title-sm text-on-surface-variant hover:text-on-surface py-space-sm transition-colors" href="#" onclick="showToast('Campus Leaderboard coming soon in next milestone!', 'info')">Campus Leaderboard</a>
+        </nav>
+      </div>
+
+      <!-- Right: Action Buttons & Profile -->
+      <div class="flex items-center gap-space-md">
+        <a href="post.html" class="inline-flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-space-md py-space-sm rounded-full transition-colors shadow-sm">
+          <span class="material-symbols-outlined text-[1.125rem]">add</span>
+          <span>Post Idea</span>
+        </a>
+        <button aria-label="Campus Notifications" class="relative p-space-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low rounded-full transition-colors" type="button" onclick="showToast('No new notifications today', 'info')">
+          <span class="material-symbols-outlined text-[1.5rem]">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+        </button>
+        <div class="flex items-center gap-space-sm pl-space-sm border-l border-surface-container">
+          <img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR"/>
+          <div class="hidden lg:flex flex-col text-left">
+            <span class="font-label-md text-label-md text-on-surface font-semibold leading-none">Rohan S.</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-space-xs">CSE '25</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)] max-w-7xl mx-auto px-gutter">
+    <div class="flex flex-col w-full pb-margin">
+      
+      <!-- Ambient Back-Glow -->
+      <div class="relative w-full">
+        <div class="absolute -top-12 left-1/4 w-96 h-96 bg-primary-fixed-dim/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+        <div class="absolute top-48 right-10 w-80 h-80 bg-secondary-fixed/40 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+        <!-- Breadcrumbs Navigation -->
+        <nav aria-label="Breadcrumb" class="flex items-center gap-space-sm pt-space-lg pb-space-md text-on-surface-variant font-label-md text-label-md">
+          <a class="hover:text-primary transition-colors flex items-center gap-1" href="index.html">
+            <span class="material-symbols-outlined text-[1rem]">explore</span>
+            <span>Explore Ideas</span>
+          </a>
+          <span class="text-outline text-[0.75rem]">/</span>
+          <span id="breadcrumb-category" class="text-on-surface-variant">IoT &amp; Embedded</span>
+          <span class="text-outline text-[0.75rem]">/</span>
+          <span id="breadcrumb-title" class="text-on-surface font-semibold truncate max-w-xs md:max-w-md">Automated Hostel Mess Food Waste Auditor</span>
+        </nav>
+
+        <!-- REALISTIC LOADING SKELETON (Screen from Stitch: idea_detail_loading) -->
+        <div id="detail-loading-skeleton" class="flex flex-col w-full pb-24">
+          <!-- Realtime Network Ingestion Floating Bar -->
+          <div class="w-full bg-surface-container-lowest rounded-DEFAULT p-space-md shadow-md mb-space-lg relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-surface-container overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-primary-container via-secondary to-primary-container animate-shimmer w-2/3"></div>
+            </div>
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md pt-1">
+              <div class="flex items-center gap-space-md">
+                <div class="relative flex items-center justify-center w-10 h-10 rounded-full bg-primary-fixed text-primary shrink-0">
+                  <span class="material-symbols-outlined text-[1.25rem] animate-spin">sync</span>
+                  <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-secondary rounded-full ring-2 ring-surface-container-lowest"></span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-space-xs">
+                    <span class="font-title-sm text-title-sm text-on-surface font-semibold">Retrieving NIE Vault Ledger Records</span>
+                    <span class="px-1.5 py-0.5 rounded text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed font-mono">v2.4-sync</span>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                    Querying node cluster for repository assets, edge model artifacts, and verified collaborator manifests...
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-center gap-space-sm shrink-0 self-end md:self-auto">
+                <div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container text-label-sm font-label-sm text-on-surface-variant font-mono">
+                  <span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+                  <span>RPC 18ms</span>
+                </div>
+                <div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-high text-label-sm font-label-sm text-primary font-semibold">
+                  <span class="material-symbols-outlined text-[1rem] animate-pulse">lock</span>
+                  <span>Verified IP Safe</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skeleton 12-Col Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+            <div class="lg:col-span-8 flex flex-col gap-space-lg">
+              <div class="bg-surface-container-lowest rounded-DEFAULT p-space-lg shadow-sm animate-pulse">
+                <div class="flex gap-2 mb-4">
+                  <div class="h-6 w-24 bg-surface-container rounded-full"></div>
+                  <div class="h-6 w-20 bg-surface-container rounded-full"></div>
+                </div>
+                <div class="h-8 w-11/12 bg-surface-container rounded mb-3"></div>
+                <div class="h-8 w-3/4 bg-surface-container rounded mb-6"></div>
+                <div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-DEFAULT">
+                  <div class="w-12 h-12 rounded-full bg-surface-container-high"></div>
+                  <div class="space-y-2 flex-1">
+                    <div class="h-4 w-40 bg-surface-container rounded"></div>
+                    <div class="h-3 w-56 bg-surface-container rounded"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Metrics Skeleton -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+                <div class="p-space-md bg-surface-container-lowest rounded-DEFAULT shadow-sm h-24 animate-pulse">
+                  <div class="h-4 w-28 bg-surface-container rounded mb-2"></div>
+                  <div class="h-7 w-20 bg-surface-container rounded"></div>
+                </div>
+                <div class="p-space-md bg-surface-container-lowest rounded-DEFAULT shadow-sm h-24 animate-pulse">
+                  <div class="h-4 w-28 bg-surface-container rounded mb-2"></div>
+                  <div class="h-7 w-20 bg-surface-container rounded"></div>
+                </div>
+                <div class="p-space-md bg-surface-container-lowest rounded-DEFAULT shadow-sm h-24 animate-pulse">
+                  <div class="h-4 w-28 bg-surface-container rounded mb-2"></div>
+                  <div class="h-7 w-20 bg-surface-container rounded"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sidebar Skeleton -->
+            <div class="lg:col-span-4">
+              <div class="p-space-lg bg-surface-container-lowest rounded-DEFAULT shadow-sm animate-pulse space-y-4">
+                <div class="h-6 w-36 bg-surface-container rounded"></div>
+                <div class="h-4 w-full bg-surface-container rounded"></div>
+                <div class="h-12 w-full bg-surface-container rounded"></div>
+                <div class="h-12 w-full bg-surface-container rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN LOADED DETAIL VIEW (Hidden initially) -->
+        <div id="detail-loaded-view" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+          
+          <!-- LEFT COLUMN: Main Content (8 cols) -->
+          <div class="lg:col-span-8 flex flex-col gap-space-lg">
+            
+            <!-- Header Hero Tile -->
+            <article class="bg-surface-container-lowest rounded-DEFAULT p-space-lg md:p-space-xl shadow-sm relative overflow-hidden">
+              <div class="flex flex-wrap items-center gap-space-sm mb-space-md">
+                <span id="detail-category-badge" class="px-3 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-semibold tracking-wide">
+                  IoT &amp; Embedded
+                </span>
+                <span id="detail-stage-badge" class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold tracking-wide">
+                  Prototype
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/50 text-on-secondary-container font-label-sm text-label-sm font-medium">
+                  <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                  Active Collaboration Open
+                </span>
+                <span class="ml-auto font-label-sm text-label-sm text-outline flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[0.95rem]">verified_user</span>
+                  <span id="detail-nie-id">NIE ID: #NIE-25-MECH-042</span>
+                </span>
+              </div>
+
+              <h1 id="detail-title" class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight mb-space-lg">
+                Automated Hostel Mess Food Waste Auditor with Computer Vision
+              </h1>
+
+              <!-- Author Attribution Block -->
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md bg-surface-container-low p-space-md rounded-DEFAULT">
+                <div class="flex items-center gap-space-md">
+                  <img id="detail-author-avatar" class="w-12 h-12 rounded-full object-cover shadow-sm ring-2 ring-surface-container-lowest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8BIDPilrvdunirzpmkrPuSDoGxhC1GXtrzgSHR3xV-BIKlAbJ8zDBLsUQP11ACjy51mHCnOMkUVijCFIFCpGAzVKMunJbW_WyiJKDt43R7yp2BJGhBmtcbPMJ-aaLY7gxsHEev3ODT7cpKnfkEbRsjhAIYe0prPHfp_9NoSGrIltcHsFr6A-qRD9eCUHgAPDElwu_ZfEup3tz-YXUkjR9vCyg6Wwt644NC7fMkrv_" alt="Author"/>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-space-xs">
+                      <span id="detail-author-name" class="font-title-sm text-title-sm text-on-surface font-semibold">Ananya Deshmukh</span>
+                      <span class="material-symbols-outlined text-secondary text-[1rem]" title="Verified NIE Student">check_circle</span>
+                    </div>
+                    <span id="detail-author-dept" class="font-body-sm text-body-sm text-on-surface-variant">Mechanical Engineering, 6th Sem • NIE South Campus</span>
+                  </div>
+                </div>
+                <div class="flex flex-row sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-1 text-on-surface-variant">
+                  <span class="font-label-sm text-label-sm flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[0.9rem]">schedule</span>
+                    <span id="detail-created-at">Posted Feb 12, 2025</span>
+                  </span>
+                  <span id="detail-team-slots" class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-semibold">
+                    4 team slots open
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Deep-Dive Content Sections -->
+            <div class="bg-surface-container-lowest rounded-DEFAULT p-space-lg md:p-space-xl shadow-sm flex flex-col gap-space-xl">
+              
+              <!-- Key Metrics Preview Banner -->
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-space-md p-space-md rounded-DEFAULT bg-surface-container" id="detail-metrics-banner">
+                <div class="flex flex-col">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Estimated Campus Impact</span>
+                  <span id="metric-1-value" class="font-headline-sm text-headline-sm text-error font-bold tracking-tight">~120 kg/day</span>
+                  <span id="metric-1-sub" class="font-body-sm text-[0.75rem] text-on-surface-variant">Hostel Block 1 &amp; 2</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Model Inference Target</span>
+                  <span id="metric-2-value" class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">&lt; 140ms</span>
+                  <span id="metric-2-sub" class="font-body-sm text-[0.75rem] text-on-surface-variant">Edge device processing</span>
+                </div>
+                <div class="col-span-2 sm:col-span-1 flex flex-col">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Projected Cost Savings</span>
+                  <span id="metric-3-value" class="font-headline-sm text-headline-sm text-secondary font-bold tracking-tight">₹ 42,000 /mo</span>
+                  <span id="metric-3-sub" class="font-body-sm text-[0.75rem] text-on-surface-variant">Procurement optimization</span>
+                </div>
+              </div>
+
+              <!-- Section 1: The Problem -->
+              <section class="flex flex-col gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <span class="w-8 h-8 rounded-full bg-error-container text-error flex items-center justify-center font-bold text-label-md">01</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface">The Problem</h2>
+                </div>
+                <div class="pl-11 flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  <p id="detail-problem-statement">
+                    In the NIE South Campus dining halls, an estimated 120 kg of prepared food is discarded daily. Kitchen management currently relies on static spreadsheet logs recorded at the end of each week, offering zero actionable correlation between day-to-day menu options and actual plate remnants.
+                  </p>
+                </div>
+              </section>
+
+              <!-- Section 2: Architecture & System Design -->
+              <section class="flex flex-col gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <span class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-md">02</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface">Proposed Architecture &amp; System Design</h2>
+                </div>
+                <div class="pl-11 flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  <p id="detail-architecture">
+                    Dual stereoscopic RGB cameras positioned over tray conveyor belts stream 1080p frames to an edge NVIDIA Jetson / Raspberry Pi 4 compute node. Frames are processed using a fine-tuned MobileNetV3 model to segment plate remnants into 4 classes (rice, bread, curry, dry waste).
+                  </p>
+                </div>
+              </section>
+
+              <!-- Section 3: Hardware / BOM & Edge Specs -->
+              <section class="flex flex-col gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <span class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-label-md">03</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface">Hardware / BOM &amp; Edge Specs</h2>
+                </div>
+                <div class="pl-11 flex flex-col gap-space-sm font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  <p id="detail-hardware">
+                    Raspberry Pi 4 (8GB), Raspberry Pi High Quality Camera Module (12.3MP), HX711 Load Cell Tare Amplifier, 50kg Strain Gauge Load Sensors, 10.1 inch Ruggedized Capacitive Touch Display.
+                  </p>
+                </div>
+              </section>
+
+              <!-- Section 4: Open Collaboration Roles -->
+              <section class="flex flex-col gap-space-sm">
+                <div class="flex items-center gap-space-sm">
+                  <span class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center font-bold text-label-md">04</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface">Open Collaboration &amp; Teammate Roles</h2>
+                </div>
+                <div class="pl-11 flex flex-col gap-space-sm" id="detail-roles-list">
+                  <!-- Rendered dynamically -->
+                </div>
+              </section>
+
+              <!-- Call-to-Action Bar (Interactive) -->
+              <div class="pt-space-md border-t border-surface-container flex flex-wrap items-center justify-between gap-space-md">
+                <div class="flex items-center gap-space-sm flex-wrap">
+                  <!-- Upvote Button -->
+                  <button id="btn-upvote" class="inline-flex items-center gap-2 px-space-md py-2.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-high transition-all active:scale-95" type="button" onclick="handleDetailUpvote()">
+                    <span class="material-symbols-outlined text-[1.2rem] text-primary">arrow_upward</span>
+                    <span id="upvote-text">Upvote Idea (71)</span>
+                  </button>
+
+                  <!-- Interested Button -->
+                  <button id="btn-interest" class="inline-flex items-center gap-2 px-space-md py-2.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-md text-label-md shadow-sm hover:bg-secondary-container/60 transition-all active:scale-95" type="button" onclick="handleDetailInterest()">
+                    <span class="material-symbols-outlined text-[1.2rem]">handshake</span>
+                    <span id="interest-text">I'm Interested (15 total)</span>
+                  </button>
+                </div>
+
+                <!-- Share & Bookmark Controls -->
+                <div class="flex items-center gap-space-xs">
+                  <button aria-label="Share Project" class="p-2.5 rounded-full bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" onclick="copyProjectLink()" title="Share Project" type="button">
+                    <span class="material-symbols-outlined text-[1.25rem]">share</span>
+                  </button>
+                  <button id="btn-bookmark" aria-label="Bookmark Idea" class="p-2.5 rounded-full bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" onclick="handleDetailBookmark()" title="Bookmark Idea" type="button">
+                    <span class="material-symbols-outlined text-[1.25rem]">bookmark</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- RIGHT SIDEBAR: Interested Students & Connect (4 cols) -->
+          <aside class="lg:col-span-4 flex flex-col gap-space-lg">
+            
+            <!-- Interested Students Card -->
+            <section class="bg-surface-container-lowest rounded-DEFAULT p-space-lg shadow-sm flex flex-col gap-space-md">
+              <div class="flex flex-col">
+                <div class="flex items-center justify-between">
+                  <h2 class="font-title-md text-title-md text-on-surface font-bold">Interested Students</h2>
+                  <span id="sidebar-interest-badge" class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-semibold">15</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Fellow NIE students looking to join or support this project
+                </p>
+              </div>
+
+              <!-- Student Roster List -->
+              <ul class="flex flex-col gap-space-md" id="sidebar-students-list">
+                <!-- Rendered dynamically -->
+              </ul>
+
+              <!-- Connect Button -->
+              <a id="btn-connect-lead" class="w-full text-center py-2.5 px-space-md rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-colors shadow-sm flex items-center justify-center gap-2 mt-2" href="mailto:lead@nie.ac.in">
+                <span class="material-symbols-outlined text-[1.1rem]">mail</span>
+                <span>Connect with Project Lead</span>
+              </a>
+            </section>
+
+            <!-- Faculty / NIE Guidelines Information Card -->
+            <section class="bg-surface-container-lowest rounded-DEFAULT p-space-lg shadow-sm flex flex-col gap-space-sm border-l-4 border-primary">
+              <span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">NIE Guidelines</span>
+              <h3 class="font-title-sm text-title-sm text-on-surface font-bold">Capstone Approval Timeline</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant">
+                Interdepartmental projects submitted before Sem 6 Phase-1 intake receive priority access to the Center for IoT &amp; Embedded Lab resources.
+              </p>
+            </section>
+
+          </aside>
+        </div>
+
+        <!-- Error State (If ID not found) -->
+        <div id="detail-error-state" class="hidden flex-col items-center justify-center py-24 px-4 text-center">
+          <div class="w-16 h-16 rounded-full bg-error-container text-error flex items-center justify-center mb-space-sm">
+            <span class="material-symbols-outlined text-[32px]">error</span>
+          </div>
+          <h2 class="font-headline-md text-headline-md text-on-surface font-bold">Idea Not Found</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mt-1">
+            The requested project idea could not be located in the NIE Idea Vault repository.
+          </p>
+          <a href="index.html" class="mt-space-md px-space-lg py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm">
+            Return to Idea Board
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Application Engine Script -->
+  <script src="app.js"></script>
+
+  <!-- Page Controller Script -->
+  <script>
+    let currentIdea = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const ideaId = urlParams.get('id') || '1'; // Default to sample idea 1 if none provided
+
+      await loadIdeaDetail(ideaId);
+    });
+
+    async function loadIdeaDetail(id) {
+      const skeleton = document.getElementById('detail-loading-skeleton');
+      const loadedView = document.getElementById('detail-loaded-view');
+      const errorState = document.getElementById('detail-error-state');
+
+      try {
+        // Fetch idea
+        currentIdea = await window.IdeaVault.fetchIdeaById(id);
+
+        if (!currentIdea) {
+          skeleton.classList.add('hidden');
+          errorState.classList.remove('hidden');
+          errorState.classList.add('flex');
+          return;
+        }
+
+        // Render fields
+        renderDetail(currentIdea);
+
+        // Hide skeleton and reveal loaded view
+        skeleton.classList.add('hidden');
+        loadedView.classList.remove('hidden');
+      } catch (err) {
+        console.error("Failed to load idea detail:", err);
+        skeleton.classList.add('hidden');
+        errorState.classList.remove('hidden');
+        errorState.classList.add('flex');
+      }
+    }
+
+    function renderDetail(idea) {
+      document.title = `${idea.title} — NIE Idea Vault`;
+
+      document.getElementById('breadcrumb-category').textContent = idea.category;
+      document.getElementById('breadcrumb-title').textContent = idea.title;
+
+      document.getElementById('detail-category-badge').textContent = idea.categoriesBadge || idea.category;
+      document.getElementById('detail-stage-badge').textContent = idea.stage || 'Prototype';
+      document.getElementById('detail-nie-id').textContent = `NIE ID: #${idea.nieId || 'NIE-25-ENG-001'}`;
+      document.getElementById('detail-title').textContent = idea.title;
+
+      if (idea.authorAvatar) {
+        document.getElementById('detail-author-avatar').src = idea.authorAvatar;
+      }
+      document.getElementById('detail-author-name').textContent = idea.authorName;
+      document.getElementById('detail-author-dept').textContent = `${idea.department}, ${idea.authorBatch || "Final Year"} • NIE Mysuru`;
+      document.getElementById('detail-created-at').textContent = `Posted ${idea.timeAgo || idea.createdAt}`;
+      document.getElementById('detail-team-slots').textContent = `${idea.teamSlots || 2} team slots open`;
+
+      // Metrics
+      if (idea.metrics) {
+        document.getElementById('metric-1-value').textContent = idea.metrics.campusWaste || 'N/A';
+        document.getElementById('metric-1-sub').textContent = idea.metrics.campusWasteSub || 'Estimated Impact';
+        document.getElementById('metric-2-value').textContent = idea.metrics.latency || '< 150ms';
+        document.getElementById('metric-2-sub').textContent = idea.metrics.latencySub || 'System Throughput';
+        document.getElementById('metric-3-value').textContent = idea.metrics.savings || 'High ROI';
+        document.getElementById('metric-3-sub').textContent = idea.metrics.savingsSub || 'Campus Value Add';
+      }
+
+      // Sections
+      document.getElementById('detail-problem-statement').textContent = idea.problemStatement || idea.description;
+      document.getElementById('detail-architecture').textContent = idea.architecture || "Modular distributed services architecture.";
+      document.getElementById('detail-hardware').textContent = idea.hardware || "Standard campus laboratory components and development boards.";
+
+      // Roles
+      const rolesContainer = document.getElementById('detail-roles-list');
+      if (idea.roles && idea.roles.length > 0) {
+        rolesContainer.innerHTML = idea.roles.map(r => `
+          <div class="p-space-md rounded-DEFAULT bg-surface-container flex items-start gap-space-sm">
+            <span class="material-symbols-outlined text-secondary text-[1.25rem] mt-0.5">person_add</span>
+            <div class="flex flex-col font-body-md text-body-md text-on-surface">
+              <span class="font-semibold text-secondary">${r.title}</span>
+              <span class="text-on-surface-variant">${r.description}</span>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        rolesContainer.innerHTML = `
+          <div class="p-space-md rounded-DEFAULT bg-surface-container flex items-start gap-space-sm">
+            <span class="material-symbols-outlined text-secondary text-[1.25rem] mt-0.5">person_add</span>
+            <div class="flex flex-col font-body-md text-body-md text-on-surface">
+              <span class="font-semibold text-secondary">General Collaborator Roles Open</span>
+              <span class="text-on-surface-variant">Reach out to the project lead to discuss technical modules and research roles.</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // Action Buttons State
+      updateActionButtonsState(idea);
+
+      // Sidebar
+      document.getElementById('sidebar-interest-badge').textContent = idea.interests;
+      const studentsList = document.getElementById('sidebar-students-list');
+      if (idea.interestedStudents && idea.interestedStudents.length > 0) {
+        studentsList.innerHTML = idea.interestedStudents.map(s => `
+          <li class="flex items-start gap-space-sm p-2 rounded-DEFAULT hover:bg-surface-container-low transition-colors">
+            <img class="w-10 h-10 rounded-full object-cover shadow-xs" src="${s.avatar}" alt="${s.name}"/>
+            <div class="flex flex-col flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-1">
+                <span class="font-title-sm text-title-sm text-on-surface font-semibold truncate">${s.name}</span>
+                <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-[0.65rem] font-semibold tracking-tight whitespace-nowrap">${s.role}</span>
+              </div>
+              <span class="font-body-sm text-[0.8rem] text-on-surface-variant">${s.branch}</span>
+            </div>
+          </li>
+        `).join('');
+      } else {
+        studentsList.innerHTML = `
+          <li class="flex items-center gap-space-sm px-3 py-2 bg-surface-container rounded-DEFAULT">
+            <div class="w-8 h-8 rounded-full bg-secondary-container text-secondary flex items-center justify-center font-bold text-label-sm">
+              <span class="material-symbols-outlined text-[16px]">groups</span>
+            </div>
+            <span class="font-body-sm text-body-sm text-on-surface-variant">
+              Be the first to express collaboration interest in this project!
+            </span>
+          </li>
+        `;
+      }
+
+      // Connect button email
+      const connectBtn = document.getElementById('btn-connect-lead');
+      const subject = encodeURIComponent(`NIE Idea Vault: Joining ${idea.title}`);
+      connectBtn.href = `mailto:${idea.authorEmail || 'lead@nie.ac.in'}?subject=${subject}`;
+    }
+
+    function updateActionButtonsState(idea) {
+      const btnUpvote = document.getElementById('btn-upvote');
+      const textUpvote = document.getElementById('upvote-text');
+      const iconUpvote = btnUpvote.querySelector('.material-symbols-outlined');
+
+      const btnInterest = document.getElementById('btn-interest');
+      const textInterest = document.getElementById('interest-text');
+
+      if (idea.isUpvoted) {
+        btnUpvote.className = "inline-flex items-center gap-2 px-space-md py-2.5 rounded-full btn-upvoted bg-primary text-on-primary font-label-md text-label-md shadow-md transition-all active:scale-95";
+        iconUpvote.className = "material-symbols-outlined text-[1.2rem] text-on-primary";
+        textUpvote.textContent = `Upvoted (${idea.upvotes})`;
+      } else {
+        btnUpvote.className = "inline-flex items-center gap-2 px-space-md py-2.5 rounded-full bg-surface-container text-on-surface font-label-md text-label-md shadow-sm hover:bg-surface-container-high transition-all active:scale-95";
+        iconUpvote.className = "material-symbols-outlined text-[1.2rem] text-primary";
+        textUpvote.textContent = `Upvote Idea (${idea.upvotes})`;
+      }
+
+      if (idea.isInterested) {
+        btnInterest.className = "inline-flex items-center gap-2 px-space-md py-2.5 rounded-full btn-interested bg-secondary text-on-secondary font-label-md text-label-md shadow-md transition-all active:scale-95";
+        textInterest.textContent = `You are Interested (${idea.interests} total)`;
+      } else {
+        btnInterest.className = "inline-flex items-center gap-2 px-space-md py-2.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-md text-label-md shadow-sm hover:bg-secondary-container/60 transition-all active:scale-95";
+        textInterest.textContent = `I'm Interested (${idea.interests} total)`;
+      }
+    }
+
+    async function handleDetailUpvote() {
+      if (!currentIdea) return;
+      const upvotes = window.IdeaVault.getStoredSet(window.IdeaVault.STORAGE_KEYS.UPVOTES);
+      const isCurrentlyVoted = upvotes.has(currentIdea.id);
+
+      if (isCurrentlyVoted) {
+        upvotes.delete(currentIdea.id);
+        currentIdea.upvotes = Math.max(0, currentIdea.upvotes - 1);
+        currentIdea.isUpvoted = false;
+      } else {
+        upvotes.add(currentIdea.id);
+        currentIdea.upvotes += 1;
+        currentIdea.isUpvoted = true;
+      }
+
+      window.IdeaVault.saveStoredSet(window.IdeaVault.STORAGE_KEYS.UPVOTES, upvotes);
+      updateActionButtonsState(currentIdea);
+      window.IdeaVault.showToast(currentIdea.isUpvoted ? "Upvoted project!" : "Vote removed", "info");
+
+      if (!window.IdeaVault.USE_MOCK) {
+        try {
+          await fetch(`${window.IdeaVault.API_BASE}/ideas/${currentIdea.id}/upvote`, { method: 'POST' });
+        } catch (e) {
+          console.warn("Backend upvote failed:", e);
+        }
+      }
+    }
+
+    async function handleDetailInterest() {
+      if (!currentIdea) return;
+      const interests = window.IdeaVault.getStoredSet(window.IdeaVault.STORAGE_KEYS.INTERESTS);
+      const isCurrentlyInterested = interests.has(currentIdea.id);
+
+      if (isCurrentlyInterested) {
+        interests.delete(currentIdea.id);
+        currentIdea.interests = Math.max(0, currentIdea.interests - 1);
+        currentIdea.isInterested = false;
+      } else {
+        interests.add(currentIdea.id);
+        currentIdea.interests += 1;
+        currentIdea.isInterested = true;
+      }
+
+      window.IdeaVault.saveStoredSet(window.IdeaVault.STORAGE_KEYS.INTERESTS, interests);
+      updateActionButtonsState(currentIdea);
+      document.getElementById('sidebar-interest-badge').textContent = currentIdea.interests;
+      window.IdeaVault.showToast(currentIdea.isInterested ? "Project lead notified of your interest!" : "Interest withdrawn", "info");
+
+      if (!window.IdeaVault.USE_MOCK) {
+        try {
+          await fetch(`${window.IdeaVault.API_BASE}/ideas/${currentIdea.id}/interest`, { method: 'POST' });
+        } catch (e) {
+          console.warn("Backend interest failed:", e);
+        }
+      }
+    }
+
+    function handleDetailBookmark() {
+      if (!currentIdea) return;
+      const btn = document.getElementById('btn-bookmark');
+      window.IdeaVault.toggleBookmark(currentIdea.id, btn);
+    }
+
+    function copyProjectLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        window.IdeaVault.showToast("Project link copied to clipboard!", "success");
+      }).catch(() => {
+        window.IdeaVault.showToast("Link: " + window.location.href, "info");
+      });
+    }
+  </script>
+</body>
+</html>

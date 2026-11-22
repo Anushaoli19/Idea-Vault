@@ -1,0 +1,707 @@
+/**
+ * NIE Idea Vault - Core Application Engine
+ * ============================================================================
+ * Provides client-side data management, REST API integration, duplicate detection,
+ * optimistic voting with localStorage persistence, search, filtering, and sorting.
+ */
+
+// Global Configuration
+const API_BASE = 'http://localhost:5000';
+const USE_MOCK = true;
+
+// LocalStorage Keys for Vote Tracking & Custom Submissions
+const STORAGE_KEYS = {
+  UPVOTES: 'idea_vault_upvotes',
+  INTERESTS: 'idea_vault_interests',
+  BOOKMARKS: 'idea_vault_bookmarks',
+  CUSTOM_IDEAS: 'idea_vault_custom_ideas'
+};
+
+/**
+ * 6 Built-in Mock Ideas
+ * Note: Ideas with ID 1 and ID 2 are near-duplicates for duplicate detection testing.
+ */
+const SAMPLE_IDEAS = [
+  {
+    id: "1",
+    nieId: "NIE-25-MECH-042",
+    title: "Automated Hostel Mess Food Waste Auditor with Computer Vision",
+    category: "IoT",
+    categoriesBadge: "IoT • AI/ML",
+    department: "Mechanical Engineering",
+    departmentShort: "Mech Dept",
+    authorName: "Ananya Deshmukh",
+    authorBatch: "Mech '25",
+    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuA8BIDPilrvdunirzpmkrPuSDoGxhC1GXtrzgSHR3xV-BIKlAbJ8zDBLsUQP11ACjy51mHCnOMkUVijCFIFCpGAzVKMunJbW_WyiJKDt43R7yp2BJGhBmtcbPMJ-aaLY7gxsHEev3ODT7cpKnfkEbRsjhAIYe0prPHfp_9NoSGrIltcHsFr6A-qRD9eCUHgAPDElwu_ZfEup3tz-YXUkjR9vCyg6Wwt644NC7fMkrv_",
+    authorEmail: "ananya.22me014@nie.ac.in",
+    description: "Overhead camera tracking tray returns at Mysuru campus hostel mess to quantify daily wastage, categorizing food types through edge OpenCV modules and recommending dynamic mess contractor recipe scaling.",
+    problemStatement: "In the NIE South Campus dining halls, an estimated 120 kg of prepared food is discarded daily. Kitchen management currently relies on static spreadsheet logs recorded at the end of each week, offering zero actionable correlation between day-to-day menu options and actual plate remnants. Without a rapid feedback loop, kitchen procurement teams repeatedly over-purchase perishable staples like sambar vegetables, rice, and fresh dairy.",
+    architecture: "Dual stereoscopic RGB cameras positioned over tray conveyor belts stream 1080p frames to an edge NVIDIA Jetson / Raspberry Pi 4 compute node. Frames are processed using a fine-tuned MobileNetV3 model to segment plate remnants into 4 classes (rice, bread, curry, dry waste). Load cells beneath the tray return chute register gross weight deltas at 10Hz to correlate volumetric estimates with empirical weight.",
+    hardware: "Raspberry Pi 4 (8GB), Raspberry Pi High Quality Camera Module (12.3MP), HX711 Load Cell Tare Amplifier, 50kg Strain Gauge Load Sensors, 10.1 inch Ruggedized Capacitive Touch Display.",
+    tags: ["IoT", "AI/ML", "OpenCV", "RaspberryPi"],
+    upvotes: 71,
+    interests: 15,
+    teamSlots: 4,
+    stage: "Prototype",
+    createdAt: "2025-02-12",
+    timeAgo: "2 weeks ago",
+    metrics: {
+      campusWaste: "~120 kg/day",
+      campusWasteSub: "Hostel Block 1 & 2",
+      latency: "< 140ms",
+      latencySub: "Edge device processing",
+      savings: "₹ 42,000 /mo",
+      savingsSub: "Procurement optimization"
+    },
+    roles: [
+      {
+        title: "Seeking 1 ECE Student",
+        description: "Assist with load cell tare calibration, high-vibration damping on the mechanical collection ramp, and I2C signal shielding."
+      },
+      {
+        title: "Seeking 1 CSE/AIML Student",
+        description: "Optimize MobileNet food remnant segmentation model for low-latency edge inference on Raspberry Pi."
+      }
+    ],
+    interestedStudents: [
+      {
+        name: "Rohan Sharma",
+        role: "Backend / Cloud",
+        branch: "CSE, 3rd Year (B.Tech)",
+        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5eVXxn04nuxNzMUS5xny0NJ1rTCHHvCpWBREgSGGy1TPHUwyy8HUyNmToUkHvbRV9imb5iHrSKN3-VhqvzT-C5bUdvDtVq_--4scaCkYGKJFdRG9_rz7L6qHJ7Z9ZF-i9Z-QokEIq-zYAexynLAar_nH2X4-eLvNVsytHu26ymABB2ggX5AtjRmalNGSsVboCy5PSnO6U7BzTdykl-zSfr3wMNO1GPsi-AGzJKQFx"
+      },
+      {
+        name: "Kavya N. Rao",
+        role: "Embedded / Sensors",
+        branch: "ECE, 3rd Year (B.Tech)",
+        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCcu7gqjJ-xSHPI5eY2O-PwJ7Aj6umw1pjTPjGTEENXxIcoggjWbssxLZF_BRS-QNJ6RH3mJyw0SKUdIXVriGH4kC-tmTErhwEX8B_0JkTEGAIOhAWrlMishNbv8gm8PC2VZP31yRWcdA-asoB-JOW_EVUDHv5wvf-pgbvJlqMEkFydPaM5xv2bh0BaFxYSQnGG3kLVdOHk8UANA8hAg8mMn0EVvb_N5obubKFOo549"
+      },
+      {
+        name: "Aditya Kulkarni",
+        role: "Model Opt.",
+        branch: "AIML, 2nd Year (B.Tech)",
+        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7nipV0oZtPOK22a9hQBlMgZyz9LKoBhybrnRz-jWrJdMLkvMRYWDR6dnPxY4uY1x6hqnreF4YThoTaomcPrbBtCwgu7z4UMgyyqGMpvvxOXMbxdtpFReRuJ_DOuwYQUgzMI_sdsHH9v_c_0zlRGj_sQmdFQSdPVVBFdqt7oy2aFCbdAiNxLyKZEBa8xV-QuoTh3wqUWvDD9jPPb5m2Jms4LHH5-U-bH_kiD50Pvyg"
+      },
+      {
+        name: "Darshan Gowda",
+        role: "Architecture",
+        branch: "ISE, 4th Year (B.Tech)",
+        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCsBMamRbCF7WsWlFw9_xOStF7vgDOCJqsfIFJnq4BhH9IiNL_qLmpnnZOtwKQ-wRq6URYAgx8o9WzhRRQ5S7kRf11JIZXpjITXXbZyyU7BYdfYPEJ1M3EaeNlq2RnohXbSNf5_MggwneQqtYs6g_yuSD456_nJbySiD9LMR497oHdYRzCLKzJfLs1eleOQepqYX_0m8wnbJnUdzexhdzsabYws14cHAOF5Fesks5ee"
+      }
+    ]
+  },
+  {
+    id: "2",
+    nieId: "NIE-25-CSE-018",
+    title: "Smart Hostel Dining Waste Analytics & Tracking Platform",
+    category: "IoT",
+    categoriesBadge: "IoT • Web",
+    department: "Computer Science & Engineering",
+    departmentShort: "CSE Dept",
+    authorName: "Vikram Shenoy",
+    authorBatch: "CSE '25",
+    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5eVXxn04nuxNzMUS5xny0NJ1rTCHHvCpWBREgSGGy1TPHUwyy8HUyNmToUkHvbRV9imb5iHrSKN3-VhqvzT-C5bUdvDtVq_--4scaCkYGKJFdRG9_rz7L6qHJ7Z9ZF-i9Z-QokEIq-zYAexynLAar_nH2X4-eLvNVsytHu26ymABB2ggX5AtjRmalNGSsVboCy5PSnO6U7BzTdykl-zSfr3wMNO1GPsi-AGzJKQFx",
+    authorEmail: "vikram.22cs089@nie.ac.in",
+    description: "Smart tray scale and overhead image scanner for hostel dining halls to monitor student food waste, analyze daily food waste trends, and provide analytics dashboard for canteen managers.",
+    problemStatement: "Massive volume of food discarded at hostel canteens during dinner service without transparent metrics for catering staff or hostel wardens.",
+    architecture: "ESP32-CAM and HX711 weight sensors connected to Node.js backend reporting daily discarded food mass to a cloud dashboard.",
+    hardware: "ESP32, HX711 Module, Load Cells, ESP32-CAM.",
+    tags: ["IoT", "Web", "Analytics", "ESP32"],
+    upvotes: 34,
+    interests: 8,
+    teamSlots: 2,
+    stage: "Concept",
+    createdAt: "2025-02-14",
+    timeAgo: "1 week ago",
+    metrics: {
+      campusWaste: "~100 kg/day",
+      campusWasteSub: "Hostel Block 3",
+      latency: "< 250ms",
+      latencySub: "Wi-Fi Telemetry",
+      savings: "₹ 35,000 /mo",
+      savingsSub: "Estimated catering reduction"
+    },
+    roles: [
+      {
+        title: "Seeking 1 Frontend Developer",
+        description: "Build clean reporting charts using Chart.js or Tailwind for canteen management."
+      }
+    ],
+    interestedStudents: []
+  },
+  {
+    id: "3",
+    nieId: "NIE-25-ECE-105",
+    title: "Smart Campus EV Shuttle Tracker with Crowding Heatmap",
+    category: "IoT",
+    categoriesBadge: "IoT • Web",
+    department: "Electronics & Communication Engineering",
+    departmentShort: "ECE Dept",
+    authorName: "Arjun Gowda",
+    authorBatch: "ECE '25",
+    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7nipV0oZtPOK22a9hQBlMgZyz9LKoBhybrnRz-jWrJdMLkvMRYWDR6dnPxY4uY1x6hqnreF4YThoTaomcPrbBtCwgu7z4UMgyyqGMpvvxOXMbxdtpFReRuJ_DOuwYQUgzMI_sdsHH9v_c_0zlRGj_sQmdFQSdPVVBFdqt7oy2aFCbdAiNxLyKZEBa8xV-QuoTh3wqUWvDD9jPPb5m2Jms4LHH5-U-bH_kiD50Pvyg",
+    authorEmail: "arjun.22ec012@nie.ac.in",
+    description: "Real-time GPS tracking of NIE south-campus shuttles using ESP32 with predictive seat occupancy and ETA alerts for students.",
+    problemStatement: "Students waste 15-20 minutes waiting for campus shuttle buses between north and south campuses with no ETA visibility or crowding indicators.",
+    architecture: "GPS NEO-6M module transmitting telemetry over 4G LTE SIM7600 to a Firebase Realtime Database and React PWA with passenger break-beam counting.",
+    hardware: "ESP32 WROOM, SIM7600 4G Module, NEO-6M GPS, IR Break-beam passenger counter.",
+    tags: ["IoT", "Web", "ESP32", "React"],
+    upvotes: 84,
+    interests: 19,
+    teamSlots: 3,
+    stage: "Prototype",
+    createdAt: "2025-02-10",
+    timeAgo: "2 weeks ago",
+    metrics: {
+      campusWaste: "0 min",
+      campusWasteSub: "Schedule Disruption",
+      latency: "< 2.0s",
+      latencySub: "Cellular GPS telemetry",
+      savings: "15 min/trip",
+      savingsSub: "Student waiting time saved"
+    },
+    roles: [
+      {
+        title: "Seeking 1 Flutter App Dev",
+        description: "Develop lightweight Android student alert app for real-time bus arrivals."
+      }
+    ],
+    interestedStudents: []
+  },
+  {
+    id: "4",
+    nieId: "NIE-24-ISE-077",
+    title: "Automated VTU CGPA & Placement Eligibility Predictor",
+    category: "Web",
+    categoriesBadge: "Web • AI/ML",
+    department: "Information Science & Engineering",
+    departmentShort: "ISE Dept",
+    authorName: "Priya Sharma",
+    authorBatch: "ISE '24",
+    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCcu7gqjJ-xSHPI5eY2O-PwJ7Aj6umw1pjTPjGTEENXxIcoggjWbssxLZF_BRS-QNJ6RH3mJyw0SKUdIXVriGH4kC-tmTErhwEX8B_0JkTEGAIOhAWrlMishNbv8gm8PC2VZP31yRWcdA-asoB-JOW_EVUDHv5wvf-pgbvJlqMEkFydPaM5xv2bh0BaFxYSQnGG3kLVdOHk8UANA8hAg8mMn0EVvb_N5obubKFOo549",
+    authorEmail: "priya.21is045@nie.ac.in",
+    description: "Web portal aggregating internal marks and VTU schemas to forecast semester GPA and match eligible Tier-1 placement drives.",
+    problemStatement: "Students miss Tier-1 placement eligibility criteria due to inaccurate GPA conversions and shifting VTU 2021/2022 scheme credit requirements.",
+    architecture: "FastAPI REST API with credit conversion algorithms and scikit-learn models matching student CGPA to hiring drive cutoffs.",
+    hardware: "Cloud Hosted (GCP Cloud Run).",
+    tags: ["Web", "AI/ML", "Python", "FastAPI"],
+    upvotes: 126,
+    interests: 38,
+    teamSlots: 2,
+    stage: "Validation",
+    createdAt: "2025-01-28",
+    timeAgo: "3 weeks ago",
+    metrics: {
+      campusWaste: "98.4%",
+      campusWasteSub: "Forecast Accuracy",
+      latency: "< 80ms",
+      latencySub: "API Response",
+      savings: "500+ Students",
+      savingsSub: "Benefited in 2024 Drives"
+    },
+    roles: [
+      {
+        title: "Seeking 1 Fullstack Engineer",
+        description: "Integrate student portal with single sign-on (SSO) and exportable PDF report cards."
+      }
+    ],
+    interestedStudents: []
+  },
+  {
+    id: "5",
+    nieId: "NIE-26-AIML-031",
+    title: "AI-Powered Kannada to English Speech Translator for Classroom Labs",
+    category: "AI/ML",
+    categoriesBadge: "AI/ML • Edge AI",
+    department: "Artificial Intelligence & Machine Learning",
+    departmentShort: "AIML Dept",
+    authorName: "Karthik Rao",
+    authorBatch: "AIML '26",
+    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuCsBMamRbCF7WsWlFw9_xOStF7vgDOCJqsfIFJnq4BhH9IiNL_qLmpnnZOtwKQ-wRq6URYAgx8o9WzhRRQ5S7kRf11JIZXpjITXXbZyyU7BYdfYPEJ1M3EaeNlq2RnohXbSNf5_MggwneQqtYs6g_yuSD456_nJbySiD9LMR497oHdYRzCLKzJfLs1eleOQepqYX_0m8wnbJnUdzexhdzsabYws14cHAOF5Fesks5ee",
+    authorEmail: "karthik.23ai019@nie.ac.in",
+    description: "Edge-based Whisper fine-tuned model running on Raspberry Pi for multilingual laboratory viva and instruction transcription.",
+    problemStatement: "First-year engineering students from rural regional medium backgrounds encounter language friction during lab viva sessions and verbal grading.",
+    architecture: "Quantized ONNX Whisper model streaming audio via WebRTC to local classroom workstation with customized Kannada-English technical glossaries.",
+    hardware: "Raspberry Pi 5, USB Condenser Mic Array, Google Coral USB Accelerator.",
+    tags: ["AI/ML", "Edge AI", "PyTorch", "Whisper"],
+    upvotes: 95,
+    interests: 24,
+    teamSlots: 3,
+    stage: "Prototype",
+    createdAt: "2025-02-05",
+    timeAgo: "2 weeks ago",
+    metrics: {
+      campusWaste: "91%",
+      campusWasteSub: "Kannada BLEU Score",
+      latency: "< 350ms",
+      latencySub: "Real-time edge transcription",
+      savings: "4 Dept Labs",
+      savingsSub: "Pilot deployment ready"
+    },
+    roles: [
+      {
+        title: "Seeking 1 NLP Researcher",
+        description: "Expand acoustic corpus with colloquial engineering technical terminology in Kannada."
+      }
+    ],
+    interestedStudents: []
+  },
+  {
+    id: "6",
+    nieId: "NIE-25-CSE-094",
+    title: "CampusPeer: Micro-Tutoring & Peer Notes Marketplace",
+    category: "App",
+    categoriesBadge: "App • EdTech",
+    department: "Computer Science & Engineering",
+    departmentShort: "CSE Dept",
+    authorName: "Rohan Patil",
+    authorBatch: "CSE '25",
+    authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5eVXxn04nuxNzMUS5xny0NJ1rTCHHvCpWBREgSGGy1TPHUwyy8HUyNmToUkHvbRV9imb5iHrSKN3-VhqvzT-C5bUdvDtVq_--4scaCkYGKJFdRG9_rz7L6qHJ7Z9ZF-i9Z-QokEIq-zYAexynLAar_nH2X4-eLvNVsytHu26ymABB2ggX5AtjRmalNGSsVboCy5PSnO6U7BzTdykl-zSfr3wMNO1GPsi-AGzJKQFx",
+    authorEmail: "rohan.22cs102@nie.ac.in",
+    description: "Decentralized study exchange app for NIE students to find verified previous semester handwritten lab records and tutor sessions.",
+    problemStatement: "Students scramble across informal WhatsApp groups for reliable previous years' lab manuals, assignment solutions, and peer tutoring before exams.",
+    architecture: "Flutter cross-platform app backed by Firebase Cloud Firestore, featuring cryptographic student identity verification and peer rating.",
+    hardware: "Mobile (Android / iOS).",
+    tags: ["App", "Flutter", "Firebase", "EdTech"],
+    upvotes: 110,
+    interests: 42,
+    teamSlots: 3,
+    stage: "Validation",
+    createdAt: "2025-02-01",
+    timeAgo: "3 weeks ago",
+    metrics: {
+      campusWaste: "4.8 / 5.0",
+      campusWasteSub: "Student Tutor Rating",
+      latency: "< 100ms",
+      latencySub: "P2P Query Response",
+      savings: "1,200+ Notes",
+      savingsSub: "Archived & Verified"
+    },
+    roles: [
+      {
+        title: "Seeking 1 UI/UX Designer",
+        description: "Design accessible mobile onboarding flow and interactive tutoring scheduler."
+      }
+    ],
+    interestedStudents: []
+  }
+];
+
+// Helper: Get Stored Set from LocalStorage
+function getStoredSet(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    return new Set(raw ? JSON.parse(raw) : []);
+  } catch (e) {
+    console.error(`Error reading ${key} from localStorage:`, e);
+    return new Set();
+  }
+}
+
+// Helper: Save Set to LocalStorage
+function saveStoredSet(key, set) {
+  try {
+    localStorage.setItem(key, JSON.stringify(Array.from(set)));
+  } catch (e) {
+    console.error(`Error saving ${key} to localStorage:`, e);
+  }
+}
+
+// Helper: Get locally created custom ideas
+function getCustomIdeas() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.CUSTOM_IDEAS);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    console.error("Error reading custom ideas:", e);
+    return [];
+  }
+}
+
+// Helper: Save custom idea locally in mock mode
+function saveCustomIdea(idea) {
+  try {
+    const current = getCustomIdeas();
+    current.unshift(idea);
+    localStorage.setItem(STORAGE_KEYS.CUSTOM_IDEAS, JSON.stringify(current));
+  } catch (e) {
+    console.error("Error saving custom idea:", e);
+  }
+}
+
+/**
+ * Toast Notification System
+ */
+function showToast(message, type = 'info') {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  
+  let iconName = 'info';
+  if (type === 'success') iconName = 'check_circle';
+  if (type === 'error') iconName = 'error';
+  if (type === 'warning') iconName = 'warning';
+
+  toast.innerHTML = `
+    <span class="material-symbols-outlined text-[1.25rem]">${iconName}</span>
+    <span>${message}</span>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(8px)';
+    toast.style.transition = 'all 0.3s ease';
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
+}
+
+/**
+ * API Client Functions
+ */
+
+/**
+ * Fetch all ideas (GET /ideas)
+ */
+async function fetchIdeas() {
+  if (USE_MOCK) {
+    // Combine base samples with any newly created custom ideas
+    const custom = getCustomIdeas();
+    const all = [...custom, ...SAMPLE_IDEAS];
+    
+    // Apply localStorage vote increments
+    const upvotedSet = getStoredSet(STORAGE_KEYS.UPVOTES);
+    const interestedSet = getStoredSet(STORAGE_KEYS.INTERESTS);
+
+    return all.map(idea => {
+      const isUpvoted = upvotedSet.has(idea.id);
+      const isInterested = interestedSet.has(idea.id);
+      return {
+        ...idea,
+        isUpvoted,
+        isInterested,
+        upvotes: idea.upvotes + (isUpvoted ? 1 : 0),
+        interests: idea.interests + (isInterested ? 1 : 0)
+      };
+    });
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/ideas`);
+    if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.warn("Backend API unavailable, falling back to mock mode:", err);
+    showToast("Backend unavailable. Loaded offline campus registry.", "warning");
+    return SAMPLE_IDEAS;
+  }
+}
+
+/**
+ * Fetch a single idea by ID
+ */
+async function fetchIdeaById(id) {
+  if (USE_MOCK) {
+    const all = [...getCustomIdeas(), ...SAMPLE_IDEAS];
+    const idea = all.find(item => String(item.id) === String(id));
+    if (!idea) return null;
+
+    const upvotedSet = getStoredSet(STORAGE_KEYS.UPVOTES);
+    const interestedSet = getStoredSet(STORAGE_KEYS.INTERESTS);
+    const isUpvoted = upvotedSet.has(idea.id);
+    const isInterested = interestedSet.has(idea.id);
+
+    return {
+      ...idea,
+      isUpvoted,
+      isInterested,
+      upvotes: idea.upvotes + (isUpvoted ? 1 : 0),
+      interests: idea.interests + (isInterested ? 1 : 0)
+    };
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/ideas/${id}`);
+    if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
+    return await response.json();
+  } catch (err) {
+    console.warn("Backend API fetchIdeaById failed:", err);
+    return SAMPLE_IDEAS.find(item => String(item.id) === String(id)) || null;
+  }
+}
+
+/**
+ * Duplicate Checker (POST /check-duplicate)
+ * Computes token similarity between proposed idea and existing archive.
+ */
+async function checkDuplicate(title, description, category) {
+  if (USE_MOCK) {
+    // Artificial small delay to show similarity engine pulse
+    await new Promise(r => setTimeout(r, 600));
+
+    const all = [...getCustomIdeas(), ...SAMPLE_IDEAS];
+    const incomingText = `${title} ${description}`.toLowerCase();
+    const incomingTokens = new Set(incomingText.split(/\W+/).filter(w => w.length > 3));
+
+    let bestMatch = null;
+    let highestScore = 0;
+
+    for (const existing of all) {
+      const existingText = `${existing.title} ${existing.description}`.toLowerCase();
+      const existingTokens = new Set(existingText.split(/\W+/).filter(w => w.length > 3));
+
+      // Token intersection count
+      let common = 0;
+      incomingTokens.forEach(t => {
+        if (existingTokens.has(t)) common++;
+      });
+
+      const union = new Set([...incomingTokens, ...existingTokens]).size;
+      const jaccard = union > 0 ? (common / union) : 0;
+
+      // Special rule: Food waste / mess auditor ideas trigger the 88% high match from Stitch
+      const isMessFoodWaste = (incomingText.includes('mess') || incomingText.includes('food') || incomingText.includes('waste')) &&
+                             (existing.id === "1" || existing.id === "2");
+
+      let score = Math.round(jaccard * 100);
+      if (isMessFoodWaste) {
+        score = Math.max(score, 88);
+      }
+
+      if (score > highestScore) {
+        highestScore = score;
+        bestMatch = existing;
+      }
+    }
+
+    if (highestScore >= 60 && bestMatch) {
+      return {
+        isDuplicate: true,
+        similarity: highestScore,
+        matchedIdea: bestMatch
+      };
+    }
+
+    return { isDuplicate: false, similarity: highestScore, matchedIdea: null };
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/check-duplicate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, description, category })
+    });
+    if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+    return await response.json();
+  } catch (err) {
+    console.warn("Backend check-duplicate failed, using mock check:", err);
+    return { isDuplicate: false, similarity: 0, matchedIdea: null };
+  }
+}
+
+/**
+ * Publish New Idea (POST /ideas)
+ */
+async function createIdea(ideaPayload) {
+  if (USE_MOCK) {
+    const newId = `nie-${Date.now().toString().slice(-5)}`;
+    const newIdea = {
+      id: newId,
+      nieId: `NIE-25-${ideaPayload.departmentShort?.replace(/\s+/g, '').toUpperCase() || 'ENG'}-${Math.floor(100 + Math.random() * 900)}`,
+      title: ideaPayload.title,
+      category: ideaPayload.category || 'Other',
+      categoriesBadge: `${ideaPayload.category} • Capstone`,
+      department: ideaPayload.department || 'Engineering',
+      departmentShort: ideaPayload.departmentShort || 'Eng Dept',
+      authorName: ideaPayload.authorName || 'Rohan S.',
+      authorBatch: ideaPayload.authorBatch || "CSE '25",
+      authorAvatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuA1M-x0Xbs19Dcwefnan3kFqXSnnF1h8ygV2_P4aXmYRz69ZBfbXMQEENG6bc4NEZp54shirMuNwQKqy2CzGKhk0qUcpefW9Qu0tEufSVzgVefd4YmIAO6vpxHx0h-3k0GlUC2gmL0KnwOG0TWrCZXu3cgK54yRdDJGQ0VehCZy7ojDIde8Ekm90e839lFK6kjacOiOJCFMSPRCf1eu4B0rOnSjDyIfhlN0XqPTQ9FR",
+      authorEmail: "rohan.22cs102@nie.ac.in",
+      description: ideaPayload.description,
+      problemStatement: ideaPayload.problemStatement || ideaPayload.description,
+      architecture: ideaPayload.architecture || "Modular microservices architecture with edge telemetry.",
+      hardware: ideaPayload.hardware || "Standard laboratory development boards.",
+      tags: ideaPayload.tags && ideaPayload.tags.length ? ideaPayload.tags : [ideaPayload.category, "NIE"],
+      upvotes: 1,
+      interests: 0,
+      teamSlots: 3,
+      stage: ideaPayload.stage || "Concept",
+      createdAt: new Date().toISOString().split('T')[0],
+      timeAgo: "Just now",
+      metrics: {
+        campusWaste: "Pending",
+        campusWasteSub: "Baseline evaluation",
+        latency: "< 200ms",
+        latencySub: "Target runtime",
+        savings: "Active",
+        savingsSub: "Research underway"
+      },
+      roles: [
+        {
+          title: "Seeking 1 Technical Collaborator",
+          description: "Assist with implementation, testing, and hardware interfacing."
+        }
+      ],
+      interestedStudents: []
+    };
+
+    saveCustomIdea(newIdea);
+    // Auto-upvote author's own idea
+    const upvotes = getStoredSet(STORAGE_KEYS.UPVOTES);
+    upvotes.add(newId);
+    saveStoredSet(STORAGE_KEYS.UPVOTES, upvotes);
+
+    return { success: true, idea: newIdea };
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/ideas`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(ideaPayload)
+    });
+    if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
+    return await response.json();
+  } catch (err) {
+    console.error("Failed to post idea to backend:", err);
+    throw err;
+  }
+}
+
+/**
+ * Upvote Idea (POST /ideas/:id/upvote)
+ * Anti-Double Vote via localStorage
+ */
+async function upvoteIdea(ideaId, buttonElement) {
+  const upvotedSet = getStoredSet(STORAGE_KEYS.UPVOTES);
+  const alreadyUpvoted = upvotedSet.has(ideaId);
+
+  // Optimistic UI updates
+  const countSpan = buttonElement ? buttonElement.querySelector('.vote-count') : null;
+  let currentCount = countSpan ? parseInt(countSpan.textContent, 10) : 0;
+
+  if (alreadyUpvoted) {
+    // Unvote
+    upvotedSet.delete(ideaId);
+    saveStoredSet(STORAGE_KEYS.UPVOTES, upvotedSet);
+    if (countSpan) countSpan.textContent = Math.max(0, currentCount - 1);
+    if (buttonElement) {
+      buttonElement.classList.remove('btn-upvoted', 'bg-primary', 'text-on-primary');
+      buttonElement.classList.add('bg-surface-container', 'text-on-surface');
+      const icon = buttonElement.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.classList.remove('text-on-primary');
+        icon.classList.add('text-primary');
+      }
+    }
+    showToast("Vote removed", "info");
+  } else {
+    // Upvote
+    upvotedSet.add(ideaId);
+    saveStoredSet(STORAGE_KEYS.UPVOTES, upvotedSet);
+    if (countSpan) countSpan.textContent = currentCount + 1;
+    if (buttonElement) {
+      buttonElement.classList.add('btn-upvoted', 'bg-primary', 'text-on-primary');
+      buttonElement.classList.remove('bg-surface-container', 'text-on-surface');
+      const icon = buttonElement.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.classList.remove('text-primary');
+        icon.classList.add('text-on-primary');
+      }
+    }
+    showToast("Upvoted idea! Stored in your profile.", "success");
+  }
+
+  // Network call
+  if (!USE_MOCK) {
+    try {
+      await fetch(`${API_BASE}/ideas/${ideaId}/upvote`, { method: 'POST' });
+    } catch (e) {
+      console.warn("Backend upvote failed:", e);
+    }
+  }
+}
+
+/**
+ * Express Collaboration Interest (POST /ideas/:id/interest)
+ * Anti-Double Click via localStorage
+ */
+async function interestIdea(ideaId, buttonElement) {
+  const interestSet = getStoredSet(STORAGE_KEYS.INTERESTS);
+  const alreadyInterested = interestSet.has(ideaId);
+
+  const countSpan = buttonElement ? buttonElement.querySelector('.interest-count') : null;
+  let currentCount = countSpan ? parseInt(countSpan.textContent, 10) : 0;
+
+  if (alreadyInterested) {
+    interestSet.delete(ideaId);
+    saveStoredSet(STORAGE_KEYS.INTERESTS, interestSet);
+    if (countSpan) countSpan.textContent = Math.max(0, currentCount - 1);
+    if (buttonElement) {
+      buttonElement.classList.remove('btn-interested', 'bg-secondary', 'text-on-secondary');
+      buttonElement.classList.add('bg-secondary-container/30', 'text-on-secondary-container');
+    }
+    showToast("Collaboration interest withdrawn", "info");
+  } else {
+    interestSet.add(ideaId);
+    saveStoredSet(STORAGE_KEYS.INTERESTS, interestSet);
+    if (countSpan) countSpan.textContent = currentCount + 1;
+    if (buttonElement) {
+      buttonElement.classList.add('btn-interested', 'bg-secondary', 'text-on-secondary');
+      buttonElement.classList.remove('bg-secondary-container/30', 'text-on-secondary-container');
+    }
+    showToast("Lead notified of your collaboration interest!", "success");
+  }
+
+  if (!USE_MOCK) {
+    try {
+      await fetch(`${API_BASE}/ideas/${ideaId}/interest`, { method: 'POST' });
+    } catch (e) {
+      console.warn("Backend interest request failed:", e);
+    }
+  }
+}
+
+/**
+ * Bookmark Idea Toggle
+ */
+function toggleBookmark(ideaId, buttonElement) {
+  const bookmarkSet = getStoredSet(STORAGE_KEYS.BOOKMARKS);
+  const isBookmarked = bookmarkSet.has(ideaId);
+
+  if (isBookmarked) {
+    bookmarkSet.delete(ideaId);
+    saveStoredSet(STORAGE_KEYS.BOOKMARKS, bookmarkSet);
+    if (buttonElement) buttonElement.classList.remove('text-primary');
+    showToast("Bookmark removed", "info");
+  } else {
+    bookmarkSet.add(ideaId);
+    saveStoredSet(STORAGE_KEYS.BOOKMARKS, bookmarkSet);
+    if (buttonElement) buttonElement.classList.add('text-primary');
+    showToast("Idea bookmarked to your vault!", "success");
+  }
+}
+
+// Global Export for inline script tags
+window.IdeaVault = {
+  API_BASE,
+  USE_MOCK,
+  STORAGE_KEYS,
+  fetchIdeas,
+  fetchIdeaById,
+  checkDuplicate,
+  createIdea,
+  upvoteIdea,
+  interestIdea,
+  toggleBookmark,
+  showToast,
+  getStoredSet
+};

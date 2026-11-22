@@ -1,0 +1,28 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Dependencies & Package Managers
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Build Outputs & Caches
+dist/
+build/
+.turbo/
+.next/
+coverage/
+.pytest_cache/
+.mypy_cache/
+
+# System & IDE
+.DS_Store
+Thumbs.db
+*.db
+*.sqlite3
